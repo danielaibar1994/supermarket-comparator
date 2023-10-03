@@ -15,12 +15,11 @@
                     >{{ product.offers[0].minDescription }}
                   </span> -->
 
-                  <picture class="image-component"
-                    ><img
-                      class="image-component__image"
-                      alt="picto oferta"
-                      src="{{ product.offers[0].image }}"
-                  /></picture>
+                  <img
+                    class="image-component__image"
+                    alt="picto oferta"
+                    src="{{ product.offers[0].image }}"
+                  />
                 </div>
               </div>
               <div
@@ -28,9 +27,14 @@
                 id="infoproduct-offers--chequecrece"
                 class="pannel--check pannel--check__deferred u-width--50"
               >
-                <span class="u-size--11"
-                  >+&nbsp;{{ product.offers[0].amount }}&nbsp;€</span
+                <div
+                  class="discount"
+                  *ngIf="!product.offers[0].minDescription.includes('Ahora')"
                 >
+                  <span class="u-size--11"
+                    >+&nbsp;{{ product.offers[0].amount }}&nbsp;€</span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -39,7 +43,6 @@
             <a class="" href="/es/p/lentejas-a-la-riojana-bote/41087">
               <picture class="image-component"
                 ><img
-                  loading="lazy"
                   class="image-component__image"
                   alt="{{ product.productData.description }}"
                   src="{{
@@ -72,14 +75,6 @@
             >{{ product.productData.description }}</a
           >
         </h3>
-        <!-- <div class="widget-prod__minim-unit">
-          <p id="grid-widget--unitprice" class=" ">
-            <span translate="" class="">Pedido mínimo</span>: 1 1 Kg
-          </p>
-        </div>
-        <div class="widget-prod__info-unitprice">
-          <p id="grid-widget--unitprice" class=" ">4,21&nbsp;€ / 1 Kg</p>
-        </div> -->
       </div>
       <div
         class="widget-prod__price d-flex flex-column flex-nowrap justify-content-end"
@@ -102,17 +97,6 @@
           >
         </div>
       </div>
-      <!-- <div class="widget-prod__selector">
-        <span class="unit-selector__hidden-quantity ng-tns-c216-20"></span>
-        <div id="essential-unitselector" class="unit-selector ng-tns-c216-20">
-          <button
-            translate=""
-            class="btn btn-primary btn-custom u-height--48 u-rounded-60 essential-unitselector__btn-add ng-tns-c216-20"
-          >
-            Añadir
-          </button>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>
