@@ -1,0 +1,179 @@
+div#infoproduct-content--offers {
+  position: absolute;
+  z-index: 10;
+}
+
+.mini-grid__widget-prod {
+  position: relative;
+  flex: 0 0 16.7rem;
+  width: 16.7rem;
+  margin: 0;
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  padding-left: 0;
+}
+
+.u-rounded, .mini-grid__button, .add-user-shop .modal__box-search .input, .add-user-shop .btn, .address--form .form-control, .address--form .btn, .dynamicForm-base .step-button-main, .cart-product-component .promotions-line, .grid__order, .widget-prod, .cart-validate__delivery-progress-bar .cmp-progress-bar, .product-remark--textarea, .product-remark--actions__undo, .product-remark--actions__trash, .product-remark--actions__trash--label, .product-remark--actions__remove, .product-remark--actions__accept, .add-user-shop .smart-searcher .close, .smart-searcher .add-user-shop .close, .address--form .smart-searcher .close, .smart-searcher .address--form .close, .add-user-shop .smart-searcher-grid__header.headerWithIcons .view-all, .smart-searcher-grid__header.headerWithIcons .add-user-shop .view-all, .address--form .smart-searcher-grid__header.headerWithIcons .view-all, .smart-searcher-grid__header.headerWithIcons .address--form .view-all, .smart-searcher-grid__header.headerWithOutIcons .view-all, .smart-searcher-grid__footer.headerWithIcons .view-all, .elements-queries__items--selected, .page-selector-modal--list, .grid__footer-btn button {
+    border-radius: 0.5rem;
+}
+
+.widget-prod {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.w-100 {
+  width: 100%!important;
+}
+
+.flex-grow-1 {
+  flex-grow: 1!important;
+}
+.flex-column {
+  flex-direction: column!important;
+}
+.d-flex {
+  display: flex!important;
+}
+
+.u-pointer { cursor: pointer;}
+
+.widget-prod__boximage {
+  max-height: 19rem;
+  text-align: center;
+}
+
+.u-cursor--auto, .widget-prod__boximage {
+  cursor: auto;
+}
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+.widget-prod__boximage--size {
+  position: relative;
+  min-height: 8rem;
+}
+
+a:hover, a:visited, a:link, a:active {
+  text-decoration: none;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.widget-prod__boximage-pictos {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.widget-prod__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.widget-prod__info-brand {
+  min-height: 1rem;
+}
+
+.u-text--truncate-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+.widget-prod__info-description {
+  font-size: 1rem;
+  font-family: roboto;
+  line-height: 1.25rem;
+}
+
+.u-text--truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  min-height: 40px;
+}
+
+.widget-prod__price {
+  flex: 1 1 0;
+  margin-top: 1rem;
+  font-size: 1.3125rem;
+  font-family: roboto;
+  text-align: right;
+}
+
+.justify-content-end {
+  justify-content: flex-end!important;
+}
+.flex-nowrap {
+  flex-wrap: nowrap!important;
+}
+.flex-column {
+  flex-direction: column!important;
+}
+.d-flex {
+  display: flex!important;
+}
+
+.widget-prod__price--row {
+  flex-direction: row;
+}
+.justify-content-end {
+  justify-content: flex-end!important;
+}
+.d-flex {
+  display: flex!important;
+}
+
+.widget-prod {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+}
+
+.u-no-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.u-width--50 {
+  width: 3.125rem;
+}
+.pannel--check__deferred {
+  color: #ff5019;
+  border: 2px solid #FF5019;
+}
+.pannel--check {
+  font-size: .75rem;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 1.5rem;
+}
+
+.widget-prod:hover {
+  box-shadow: 0 5px 11px #dcdce0;
+}
+
+h3.widget-prod__info-description.u-text--truncate-2 {
+  margin: 0;
+  margin-top: 0.3rem;
+}
