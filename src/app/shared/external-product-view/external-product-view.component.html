@@ -1,0 +1,58 @@
+<div class="mini-grid__widget-prod">
+  <div
+    class="widget-prod d-flex flex-column align-items-center widget-prod__not_highlighted"
+  >
+    <div class="d-flex flex-column flex-grow-1 w-100 widget-prod__body">
+      <div class="u-pointer">
+        <div class="widget-prod__boximage">
+          <div class="widget-prod__boximage--size">
+            <a class="" href="/es/p/lentejas-a-la-riojana-bote/41087">
+              <picture class="image-component"
+                ><img
+                  loading="lazy"
+                  class="image-component__image"
+                  alt="{{ product.display_name }}"
+                  src="{{ product.thumbnail }}"
+              /></picture>
+            </a>
+          </div>
+          <div
+            id="widget-prod--infoPictograms"
+            class="widget-prod__boximage-pictos"
+          ></div>
+        </div>
+      </div>
+      <div class="widget-prod__info u-pointer">
+        <div class="widget-prod__info-brand u-text--truncate-1">
+          <a class="u-no-link" href="/es/p/lentejas-a-la-riojana-bote/41087"
+            ><span id="grid-widget--brand" class="">{{
+              product.brand
+            }}</span></a
+          >
+        </div>
+        <h3 class="widget-prod__info-description u-text--truncate-2">
+          <a
+            id="grid-widget--descr"
+            class="u-no-link"
+            href="/es/p/lentejas-a-la-riojana-bote/41087"
+            >{{ product.display_name }}</a
+          >
+        </h3>
+      </div>
+      <div
+        class="widget-prod__price d-flex flex-column flex-nowrap justify-content-end"
+      >
+        <div
+          class="widget-prod__price--with-offer d-flex justify-content-end widget-prod__price--row"
+        >
+          <span id="grid-widget--price" class="widget-prod__price--bold"
+            >{{ product.price_instructions.unit_price }}&nbsp;€
+            <span class="packaging" style="color: gray; font-size: 0.8rem">{{
+              product.packaging.includes("Pack") ? " /pack" : " /ud"
+            }}</span></span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
