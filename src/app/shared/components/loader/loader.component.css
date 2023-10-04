@@ -1,0 +1,27 @@
+.spinner {
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    border-radius: 50%;
+    background: conic-gradient(#0000 10%,#5dbce1);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+    animation: spinner-zp9dbg 1s infinite linear;
+ }
+ 
+ @keyframes spinner-zp9dbg {
+    to {
+       transform: rotate(1turn);
+    }
+ }
+
+ .spinner-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
+  }

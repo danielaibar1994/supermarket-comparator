@@ -22,6 +22,10 @@ export class ProductListComponent implements OnInit {
     return this.productService.state.externalProducts;
   }
 
+  get carrefourProducts() {
+    return this.productService.state.carrefourProducts;
+  }
+
   @ViewChild('editor') editor!: ElementRef;
   searchSubscription!: Subscription;
   private readonly searchSubject = new Subject<string | undefined>();
@@ -29,15 +33,12 @@ export class ProductListComponent implements OnInit {
   constructor(private readonly productService: ProductState) {}
 
   ngOnInit(): void {
-    // this.productService.loadProductsAction();
-
     this.searchSubscription = this.searchSubject
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
         tap((searchQuery) => {
-          this.productService.loadProductsAction(searchQuery);
-          this.productService.loadExternalSupermarkets(searchQuery);
+          this.productService.loadESupermarkets(searchQuery);
         })
       )
       .subscribe();

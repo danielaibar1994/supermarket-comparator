@@ -158,9 +158,14 @@ img {
 .u-width--50 {
   width: 3.125rem;
 }
-.pannel--check__deferred {
-  color: #ff5019;
+.discount {
   border: 2px solid #FF5019;
+}
+.pannel--check {
+ font-size: .75rem;
+ text-align: center;
+ background-color: #fff;
+ border-radius: 1.5rem;
 }
 .pannel--check {
   font-size: .75rem;
@@ -176,4 +181,36 @@ img {
 h3.widget-prod__info-description.u-text--truncate-2 {
   margin: 0;
   margin-top: 0.3rem;
+}
+
+
+.u-line--through-diagonal, .promotions-line__item--final-price, .hatted-amount-component .hat-component__top, .widget-prod__price--line-through {
+  background-image: none;
+  text-decoration: line-through;
+}
+
+.widget-prod__price--line-through {
+  align-self: flex-end;
+  min-width: 38px;
+  margin-bottom: 3px;
+  font-family: roboto;
+}
+.u-size--16, cmp-actions-button .dropdown-toggle .tol-icon-component, cmp-support .dropdown-toggle .tol-icon-component, cmp-language .dropdown-toggle .tol-icon-component {
+  font-size: 1rem;
+}
+.u-line--through-diagonal, .widget-prod__price--line-through, .hatted-amount-component .hat-component__top, .promotions-line__item--final-price {
+  background-image: linear-gradient(to top left,rgba(255,255,255,.0392156863) 48%,#ff003b,rgba(255,255,255,.0392156863) 52%);
+}
+.u-danger {
+  color: #ff003b;
+  font-family: inherit;
+}
+
+.widget-prod__price--bold {
+  margin-left: 0.5rem;
+}
+
+.u-line--through-diagonal, .promotions-line__item--final-price, .hatted-amount-component .hat-component__top, .widget-prod__price--line-through {
+  background-image: none;
+  text-decoration: line-through;
 }
