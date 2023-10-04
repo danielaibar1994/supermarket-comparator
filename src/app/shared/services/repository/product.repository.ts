@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, combineLatest, first, map, mergeMap, tap } from 'rxjs';
-import { Product } from 'src/app/pages/main/store/product.store';
+import {
+  Observable,
+  catchError,
+  combineLatest,
+  first,
+  map,
+  mergeMap,
+  of,
+  tap,
+} from 'rxjs';
+import { Product } from '../../interfaces/products.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ProductRepository {
-  title = 'json-read-example';
-  studentData: any;
-  url: string = 'assets/data/store-data.json';
-  private baseUrl = 'https://tienda.consum.es/api/rest/V1.0/catalog/product';
   limitCount = 100;
-  private marketUri =
+
+  private baseUrl = 'https://tienda.consum.es/api/rest/V1.0/catalog/product';
+  private marketMercadonaUri =
     'https://7uzjkl1dj0-dsn.algolia.net/1/indexes/products_prod_4315_es/query?x-algolia-application-id=7UZJKL1DJ0&x-algolia-api-key=9d8f2e39e90df472b4f2e559a116fe17';
+  private marketCarrefourUri =
+    'https://www.carrefour.es/search-api/query/v1/search';
 
   constructor(private http: HttpClient) {}
 
@@ -21,21 +30,35 @@ export class ProductRepository {
         this.baseUrl
       }?limit=${100}&offset=${offset}&showRecommendations=false` +
       (query ? `&q=${query}` : '');
+
     return this.http.get(url).pipe(
       first(),
+      catchError(() => of({ products: [] })),
       map((data: any) => data.products)
     );
   }
 
   getExternalData(query?: string): Observable<any[]> {
     return this.http
-      .post(this.marketUri, {
+      .post(this.marketMercadonaUri, {
         params: `query=${query}&clickAnalytics=true&analyticsTags=%5B%22web%22%5D&getRankingInfo=true`,
       })
       .pipe(
         first(),
+        catchError(() => of({ hits: [] })),
         map((data: any) => data.hits)
       );
+  }
+
+  getCarrefourData(query?: string): Observable<any[]> {
+    const url =
+      `${this.marketCarrefourUri}?query=${query}&scope=desktop&lang=es&rows=50&start=0&origin=default&f.op=OR` +
+      (query ? `&q=${query}` : '');
+    return this.http.get(url).pipe(
+      first(),
+      catchError(() => of({ content: { docs: [] } })),
+      map((data: any) => data.content.docs)
+    );
   }
 
   //

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/pages/main/store/product.store';
+import { Product } from '../../interfaces/products.interface';
 
 @Component({
   selector: 'app-product-view',
@@ -8,4 +8,8 @@ import { Product } from 'src/app/pages/main/store/product.store';
 })
 export class ProductViewComponent {
   @Input() product!: Product;
+
+  get href(): string {
+    return this.product.productData.url;
+  }
 }
