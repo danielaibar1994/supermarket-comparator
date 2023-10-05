@@ -10,7 +10,8 @@ import {
   of,
   tap,
 } from 'rxjs';
-import { Product } from '../../interfaces/products.interface';
+import { ExternalProduct, Product } from '../../interfaces/products.interface';
+import { ProductMapper } from '../mappers/product.mapper';
 
 @Injectable({ providedIn: 'root' })
 export class ProductRepository {
@@ -38,7 +39,7 @@ export class ProductRepository {
     );
   }
 
-  getExternalData(query?: string): Observable<any[]> {
+  getExternalData(query?: string): Observable<ExternalProduct[]> {
     return this.http
       .post(this.marketMercadonaUri, {
         params: `query=${query}&clickAnalytics=true&analyticsTags=%5B%22web%22%5D&getRankingInfo=true`,
@@ -46,18 +47,24 @@ export class ProductRepository {
       .pipe(
         first(),
         catchError(() => of({ hits: [] })),
-        map((data: any) => data.hits)
+        map((data: any) =>
+          data.hits.map((hit: any) => ProductMapper.toDomain(hit, 'MERCADONA'))
+        )
       );
   }
 
-  getCarrefourData(query?: string): Observable<any[]> {
+  getCarrefourData(query?: string): Observable<ExternalProduct[]> {
     const url =
       `${this.marketCarrefourUri}?query=${query}&scope=desktop&lang=es&rows=50&start=0&origin=default&f.op=OR` +
       (query ? `&q=${query}` : '');
     return this.http.get(url).pipe(
       first(),
       catchError(() => of({ content: { docs: [] } })),
-      map((data: any) => data.content.docs)
+      map((data: any) =>
+        data.content.docs.map((hit: any) =>
+          ProductMapper.toDomain(hit, 'CARREFOUR')
+        )
+      )
     );
   }
 
