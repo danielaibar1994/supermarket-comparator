@@ -33,7 +33,7 @@ export class ProductListComponent implements OnInit {
     return this.productService.externalProductsSelector;
   }
 
-  filterProductsByType(type: string): ExternalProduct[] {
+  filter(type: string): ExternalProduct[] {
     return this.externalProducts.filter((d) => d.type === type);
   }
 
