@@ -39,7 +39,7 @@
 </div>
 
 <ng-container *ngFor="let item of supermarkets">
-  <div class="list-container" *ngIf="filter(item.name).length">
+  <div class="list-container" *ngIf="filterProductsByType(item.name).length">
     <h3
       class="sticky-brand external"
       [style.background-color]="item.background"
@@ -52,7 +52,7 @@
     </h3>
 
     <div class="mini-grid__container">
-      <ng-container *ngFor="let product of filter(item.name)">
+      <ng-container *ngFor="let product of filterProductsByType(item.name)">
         <app-external-product-view
           [type]="item.name"
           [product]="product"
