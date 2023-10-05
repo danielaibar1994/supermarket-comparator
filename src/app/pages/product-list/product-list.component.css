@@ -6,13 +6,13 @@
 }
 
 .search-input {
-    width: 96vw;
+    width: 85vw;
     margin: 0 auto;
-    height: 2rem;
+    height: 2.5rem;
     border-radius: 14px;
     border: 2px solid #005271;
     padding-left: 1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     display: block;
     color: #005271;
 }
@@ -25,7 +25,6 @@
     position: sticky;
     top: 0;
     z-index: 200;
-    background: #5dbce1;
 }
 
 .balance-container {
@@ -35,7 +34,7 @@
 
 .sticky-brand {
     position: sticky;
-    top: 4.35rem;
+    top: 4.9rem;
     z-index: 100;
     padding: 0.3rem 1rem;
     display: flex;
@@ -54,13 +53,45 @@
 
 .list-container h3 {
     margin-top: 0;
-    border-radius: 10px 10px 0 0;
+    -webkit-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
 }
 
 .list-container {
     border: 1px solid lightgray;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     margin: 1rem 3rem 3rem 3rem;
+    -webkit-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    background: #f7f7f7;
+}
+
+.home-container {
+    background: #acdcff;
+    height: 24rem;
+    border-radius: 0 0 25px 25px;
+    -webkit-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+}
+
+.header-container {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 7rem 0 1rem 0;
+    text-transform: uppercase;
+    color: #104169;
+}
+
+.container-sticky.sticky {
+    background: #acdcff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
     -webkit-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
     box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);

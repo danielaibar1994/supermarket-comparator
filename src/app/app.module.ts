@@ -3,12 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './shared/components/product-list/product-list.component';
+import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductViewComponent } from './shared/components/product-view/product-view.component';
-import { MainComponent } from './pages/main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ExternalProductViewComponent } from './shared/components/external-product-view/external-product-view.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     ProductListComponent,
     ProductViewComponent,
     ExternalProductViewComponent,
-    MainComponent,
     LoaderComponent,
+    FooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
