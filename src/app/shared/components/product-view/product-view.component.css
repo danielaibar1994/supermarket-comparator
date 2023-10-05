@@ -214,3 +214,10 @@ h3.widget-prod__info-description.u-text--truncate-2 {
   background-image: none;
   text-decoration: line-through;
 }
+
+@media (max-width: 1000px) {
+  .mini-grid__widget-prod {
+
+    width: 10.6rem;
+}
+}
