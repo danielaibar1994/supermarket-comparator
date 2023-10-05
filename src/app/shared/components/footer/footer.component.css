@@ -1,0 +1,22 @@
+.footer {
+    padding: 1rem;
+    text-align: center;
+    height: 5rem;
+    margin-top: 1rem;
+  }
+  
+  .brand-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .brand-logos img {
+    width: 45px; 
+    margin: 0 10px; 
+  }
+
+  .footer-title {
+    text-align: center;
+  }

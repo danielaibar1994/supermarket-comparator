@@ -3,7 +3,7 @@ import { WritableSignal, signal } from '@angular/core';
 export class SignalService<T> {
   private signal: WritableSignal<T>;
 
-  get state(): T {
+  protected get state(): T {
     return this.signal();
   }
 
@@ -11,7 +11,7 @@ export class SignalService<T> {
     this.signal = signal<T>(initialState);
   }
 
-  setState(newState: Partial<T>) {
+  protected setState(newState: Partial<T>) {
     this.signal.set({
       ...this.state,
       ...newState,
