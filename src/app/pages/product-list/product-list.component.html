@@ -4,7 +4,7 @@
 >
   <div class="header-container">
     <h1>Super más barato</h1>
-    <h3 style="color: #145487">
+    <h3 style="color: #145487; margin: 1rem">
       Comparador de precios entre los supermercados más habituales en la
       Comunidad Valenciana.
     </h3>
@@ -20,13 +20,13 @@
           (input)="onSearchQueryInput($event)"
           placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
         />
-        <div
+        <!-- <div
           *ngIf="inputSearch.length"
           class="clear-button"
           (click)="clearInput()"
         >
           X
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
