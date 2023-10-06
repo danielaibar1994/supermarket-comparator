@@ -66,6 +66,7 @@ a:hover, a:visited, a:link, a:active {
 img {
   vertical-align: middle;
   border-style: none;
+  height: 135px;
 }
 
 .widget-prod__boximage-pictos {
