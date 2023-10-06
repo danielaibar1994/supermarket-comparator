@@ -37,6 +37,8 @@ export class ProductListComponent implements OnInit {
     return this.externalProducts.filter((d) => d.type === type);
   }
 
+  opened = true;
+
   supermarkets = [
     // {
     //   id: 1,
@@ -55,6 +57,7 @@ export class ProductListComponent implements OnInit {
       srcWidth: 'fit-content',
       variable: 'externalProducts',
       background: '#a1e3c8',
+      opened: true,
     },
     {
       id: 3,
@@ -64,6 +67,7 @@ export class ProductListComponent implements OnInit {
       srcWidth: '12rem',
       variable: 'carrefourProducts',
       background: '#a1b9e3',
+      opened: true,
     },
   ];
 
@@ -94,5 +98,13 @@ export class ProductListComponent implements OnInit {
   onSearchQueryInput(event: Event): void {
     const searchQuery = (event.target as HTMLInputElement).value;
     this.searchSubject.next(searchQuery?.trim());
+  }
+
+  visibilityContainer(index: number) {
+    this.supermarkets[index].opened = !this.supermarkets[index].opened;
+  }
+
+  openedBar(): void {
+    this.opened = !this.opened;
   }
 }
