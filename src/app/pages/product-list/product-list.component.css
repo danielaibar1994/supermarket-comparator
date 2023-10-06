@@ -38,7 +38,7 @@
 
 .sticky-brand {
     position: sticky;
-    top: 5.9rem;
+    top: 4.9rem;
     z-index: 100;
     padding: 0.3rem 1rem;
     display: flex;
@@ -135,7 +135,6 @@
 }
 
 .input-container {
-    width: 86vw;
     margin: 0 auto;
 }
 
