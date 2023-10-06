@@ -22,36 +22,49 @@
   </div>
 </div>
 
-<div class="list-container" *ngIf="products.length">
-  <h3 class="sticky-brand consum">
+<div
+  class="list-container"
+  *ngIf="products.length"
+  [ngClass]="{ 'container-closed': !opened }"
+>
+  <h3 class="sticky-brand consum" (click)="openedBar()">
     <img
       src="../../../assets/images/logo-consum.png"
       alt=""
       style="width: 30px"
     />
-    CONSUM
+    CONSUM ({{ products.length }})
+    <span class="closed-icon">{{ opened ? "-" : "+" }}</span>
   </h3>
-  <div class="mini-grid__container">
+  <div class="mini-grid__container" [ngClass]="{ closed: !opened }">
     <ng-container *ngFor="let item of products">
       <app-product-view [product]="item"></app-product-view>
     </ng-container>
   </div>
 </div>
 
-<ng-container *ngFor="let item of supermarkets">
-  <div class="list-container" *ngIf="filterProductsByType(item.name).length">
+<ng-container *ngFor="let item of supermarkets; let i = index">
+  <div
+    class="list-container"
+    *ngIf="filterProductsByType(item.name).length"
+    [ngClass]="{ 'container-closed': !item.opened }"
+  >
     <h3
       class="sticky-brand external"
       [style.background-color]="item.background"
+      (click)="visibilityContainer(i)"
     >
       <img
+        class="logo-image"
         src="{{ item.src }}"
         alt="{{ item.name }}"
         [style.width]="item.srcWidth"
       />
+      ({{ filterProductsByType(item.name).length }})
+      <span class="closed-icon">{{ item.opened ? "-" : "+" }}</span>
     </h3>
 
-    <div class="mini-grid__container">
+    <div class="mini-grid__container" [ngClass]="{ closed: !item.opened }">
       <ng-container *ngFor="let product of filterProductsByType(item.name)">
         <app-external-product-view
           [type]="item.name"
