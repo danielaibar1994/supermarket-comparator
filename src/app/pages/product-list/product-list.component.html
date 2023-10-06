@@ -11,13 +11,23 @@
   </div>
   <div class="container-sticky" [ngClass]="{ sticky: isSticky }">
     <div class="search-container">
-      <input
-        type="text"
-        class="search-input"
-        id="searchQuery"
-        (input)="onSearchQueryInput($event)"
-        placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
-      />
+      <div class="input-container">
+        <input
+          type="text"
+          class="search-input"
+          id="searchQuery"
+          [(ngModel)]="inputSearch"
+          (input)="onSearchQueryInput($event)"
+          placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
+        />
+        <div
+          *ngIf="inputSearch.length"
+          class="clear-button"
+          (click)="clearInput()"
+        >
+          X
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -27,16 +37,36 @@
   *ngIf="products.length"
   [ngClass]="{ 'container-closed': !opened }"
 >
-  <h3 class="sticky-brand consum" (click)="openedBar()">
+  <div class="sticky-brand consum" (click)="openedBar()">
     <img
       src="../../../assets/images/logo-consum.png"
       alt=""
       style="width: 30px"
     />
-    CONSUM ({{ products.length }})
+    <span class="element-content"> CONSUM ({{ products.length }}) </span>
     <span class="closed-icon">{{ opened ? "-" : "+" }}</span>
-  </h3>
+  </div>
+
   <div class="mini-grid__container" [ngClass]="{ closed: !opened }">
+    <div class="filter-container">
+      <div
+        class="filter-icon"
+        *ngIf="filterByPrice === 'DES'"
+        [ngClass]="{ active: filterByPrice === 'DES' }"
+        (click)="setFilterPriceConsum()"
+      >
+        <img src="../../../assets/images/sort-price-a.png" alt="" />
+      </div>
+      <div
+        class="filter-icon"
+        *ngIf="filterByPrice === 'ASC' || filterByPrice === 'OFF'"
+        [ngClass]="{ active: filterByPrice === 'ASC' }"
+        (click)="setFilterPriceConsum()"
+      >
+        <img src="../../../assets/images/sort-price-b.png" alt="" />
+      </div>
+    </div>
+
     <ng-container *ngFor="let item of products">
       <app-product-view [product]="item"></app-product-view>
     </ng-container>
@@ -46,10 +76,10 @@
 <ng-container *ngFor="let item of supermarkets; let i = index">
   <div
     class="list-container"
-    *ngIf="filterProductsByType(item.name).length"
+    *ngIf="filterProductsByType(item.name, i).length"
     [ngClass]="{ 'container-closed': !item.opened }"
   >
-    <h3
+    <div
       class="sticky-brand external"
       [style.background-color]="item.background"
       (click)="visibilityContainer(i)"
@@ -60,12 +90,32 @@
         alt="{{ item.name }}"
         [style.width]="item.srcWidth"
       />
-      ({{ filterProductsByType(item.name).length }})
+      <span class="element-content">
+        ({{ filterProductsByType(item.name, i).length }})
+      </span>
       <span class="closed-icon">{{ item.opened ? "-" : "+" }}</span>
-    </h3>
+    </div>
 
     <div class="mini-grid__container" [ngClass]="{ closed: !item.opened }">
-      <ng-container *ngFor="let product of filterProductsByType(item.name)">
+      <div class="filter-container">
+        <div
+          class="filter-icon"
+          *ngIf="item.filter === 'DES'"
+          [ngClass]="{ active: item.filter === 'DES' }"
+          (click)="setFilterPrice(i)"
+        >
+          <img src="../../../assets/images/sort-price-a.png" alt="" />
+        </div>
+        <div
+          class="filter-icon"
+          *ngIf="item.filter === 'ASC' || item.filter === 'OFF'"
+          [ngClass]="{ active: item.filter === 'ASC' }"
+          (click)="setFilterPrice(i)"
+        >
+          <img src="../../../assets/images/sort-price-b.png" alt="" />
+        </div>
+      </div>
+      <ng-container *ngFor="let product of filterProductsByType(item.name, i)">
         <app-external-product-view
           [type]="item.name"
           [product]="product"

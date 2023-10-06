@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExternalProductViewComponent } from './shared/components/external-product-view/external-product-view.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     LoaderComponent,
     FooterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
