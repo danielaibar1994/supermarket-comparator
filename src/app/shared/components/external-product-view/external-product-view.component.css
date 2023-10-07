@@ -13,8 +13,37 @@ div#infoproduct-content--offers {
   padding-left: 0;
 }
 
-.u-rounded, .mini-grid__button, .add-user-shop .modal__box-search .input, .add-user-shop .btn, .address--form .form-control, .address--form .btn, .dynamicForm-base .step-button-main, .cart-product-component .promotions-line, .grid__order, .widget-prod, .cart-validate__delivery-progress-bar .cmp-progress-bar, .product-remark--textarea, .product-remark--actions__undo, .product-remark--actions__trash, .product-remark--actions__trash--label, .product-remark--actions__remove, .product-remark--actions__accept, .add-user-shop .smart-searcher .close, .smart-searcher .add-user-shop .close, .address--form .smart-searcher .close, .smart-searcher .address--form .close, .add-user-shop .smart-searcher-grid__header.headerWithIcons .view-all, .smart-searcher-grid__header.headerWithIcons .add-user-shop .view-all, .address--form .smart-searcher-grid__header.headerWithIcons .view-all, .smart-searcher-grid__header.headerWithIcons .address--form .view-all, .smart-searcher-grid__header.headerWithOutIcons .view-all, .smart-searcher-grid__footer.headerWithIcons .view-all, .elements-queries__items--selected, .page-selector-modal--list, .grid__footer-btn button {
-    border-radius: 0.5rem;
+.u-rounded,
+.mini-grid__button,
+.add-user-shop .modal__box-search .input,
+.add-user-shop .btn,
+.address--form .form-control,
+.address--form .btn,
+.dynamicForm-base .step-button-main,
+.cart-product-component .promotions-line,
+.grid__order,
+.widget-prod,
+.cart-validate__delivery-progress-bar .cmp-progress-bar,
+.product-remark--textarea,
+.product-remark--actions__undo,
+.product-remark--actions__trash,
+.product-remark--actions__trash--label,
+.product-remark--actions__remove,
+.product-remark--actions__accept,
+.add-user-shop .smart-searcher .close,
+.smart-searcher .add-user-shop .close,
+.address--form .smart-searcher .close,
+.smart-searcher .address--form .close,
+.add-user-shop .smart-searcher-grid__header.headerWithIcons .view-all,
+.smart-searcher-grid__header.headerWithIcons .add-user-shop .view-all,
+.address--form .smart-searcher-grid__header.headerWithIcons .view-all,
+.smart-searcher-grid__header.headerWithIcons .address--form .view-all,
+.smart-searcher-grid__header.headerWithOutIcons .view-all,
+.smart-searcher-grid__footer.headerWithIcons .view-all,
+.elements-queries__items--selected,
+.page-selector-modal--list,
+.grid__footer-btn button {
+  border-radius: 0.5rem;
 }
 
 .widget-prod {
@@ -27,30 +56,35 @@ div#infoproduct-content--offers {
 }
 
 .w-100 {
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .flex-grow-1 {
-  flex-grow: 1!important;
+  flex-grow: 1 !important;
 }
 .flex-column {
-  flex-direction: column!important;
+  flex-direction: column !important;
 }
 .d-flex {
-  display: flex!important;
+  display: flex !important;
 }
 
-.u-pointer { cursor: pointer;}
+.u-pointer {
+  cursor: pointer;
+}
 
 .widget-prod__boximage {
   max-height: 19rem;
   text-align: center;
 }
 
-.u-cursor--auto, .widget-prod__boximage {
+.u-cursor--auto,
+.widget-prod__boximage {
   cursor: auto;
 }
-*, :after, :before {
+*,
+:after,
+:before {
   box-sizing: border-box;
 }
 
@@ -59,7 +93,10 @@ div#infoproduct-content--offers {
   min-height: 8rem;
 }
 
-a:hover, a:visited, a:link, a:active {
+a:hover,
+a:visited,
+a:link,
+a:active {
   text-decoration: none;
 }
 
@@ -119,26 +156,26 @@ img {
 }
 
 .justify-content-end {
-  justify-content: flex-end!important;
+  justify-content: flex-end !important;
 }
 .flex-nowrap {
-  flex-wrap: nowrap!important;
+  flex-wrap: nowrap !important;
 }
 .flex-column {
-  flex-direction: column!important;
+  flex-direction: column !important;
 }
 .d-flex {
-  display: flex!important;
+  display: flex !important;
 }
 
 .widget-prod__price--row {
   flex-direction: row;
 }
 .justify-content-end {
-  justify-content: flex-end!important;
+  justify-content: flex-end !important;
 }
 .d-flex {
-  display: flex!important;
+  display: flex !important;
 }
 
 .widget-prod {
@@ -160,16 +197,16 @@ img {
   width: 3.125rem;
 }
 .discount {
-  border: 2px solid #FF5019;
+  border: 2px solid #ff5019;
 }
 .pannel--check {
- font-size: .75rem;
- text-align: center;
- background-color: #fff;
- border-radius: 1.5rem;
+  font-size: 0.75rem;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 1.5rem;
 }
 .pannel--check {
-  font-size: .75rem;
+  font-size: 0.75rem;
   text-align: center;
   background-color: #fff;
   border-radius: 1.5rem;
@@ -184,8 +221,10 @@ h3.widget-prod__info-description.u-text--truncate-2 {
   margin-top: 0.3rem;
 }
 
-
-.u-line--through-diagonal, .promotions-line__item--final-price, .hatted-amount-component .hat-component__top, .widget-prod__price--line-through {
+.u-line--through-diagonal,
+.promotions-line__item--final-price,
+.hatted-amount-component .hat-component__top,
+.widget-prod__price--line-through {
   background-image: none;
   text-decoration: line-through;
 }
@@ -196,11 +235,22 @@ h3.widget-prod__info-description.u-text--truncate-2 {
   margin-bottom: 3px;
   font-family: roboto;
 }
-.u-size--16, cmp-actions-button .dropdown-toggle .tol-icon-component, cmp-support .dropdown-toggle .tol-icon-component, cmp-language .dropdown-toggle .tol-icon-component {
+.u-size--16,
+cmp-actions-button .dropdown-toggle .tol-icon-component,
+cmp-support .dropdown-toggle .tol-icon-component,
+cmp-language .dropdown-toggle .tol-icon-component {
   font-size: 1rem;
 }
-.u-line--through-diagonal, .widget-prod__price--line-through, .hatted-amount-component .hat-component__top, .promotions-line__item--final-price {
-  background-image: linear-gradient(to top left,rgba(255,255,255,.0392156863) 48%,#ff003b,rgba(255,255,255,.0392156863) 52%);
+.u-line--through-diagonal,
+.widget-prod__price--line-through,
+.hatted-amount-component .hat-component__top,
+.promotions-line__item--final-price {
+  background-image: linear-gradient(
+    to top left,
+    rgba(255, 255, 255, 0.0392156863) 48%,
+    #ff003b,
+    rgba(255, 255, 255, 0.0392156863) 52%
+  );
 }
 .u-danger {
   color: #ff003b;
@@ -211,14 +261,20 @@ h3.widget-prod__info-description.u-text--truncate-2 {
   margin-left: 0.5rem;
 }
 
-.u-line--through-diagonal, .promotions-line__item--final-price, .hatted-amount-component .hat-component__top, .widget-prod__price--line-through {
+.u-line--through-diagonal,
+.promotions-line__item--final-price,
+.hatted-amount-component .hat-component__top,
+.widget-prod__price--line-through {
   background-image: none;
   text-decoration: line-through;
 }
 
 @media (max-width: 1000px) {
   .mini-grid__widget-prod {
-
     width: 10.6rem;
-}
+  }
+
+  .widget-prod__price--line-through {
+    font-size: 12px;
+  }
 }
