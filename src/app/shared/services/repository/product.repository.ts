@@ -55,7 +55,7 @@ export class ProductRepository {
 
   getCarrefourData(query?: string): Observable<ExternalProduct[]> {
     const url =
-      `${this.marketCarrefourUri}?query=${query}&scope=desktop&lang=es&rows=50&start=0&origin=default&f.op=OR` +
+      `${this.marketCarrefourUri}?query=${query}&scope=desktop&lang=es&rows=40&start=0&origin=default&f.op=OR` +
       (query ? `&q=${query}` : '');
     return this.http.get(url).pipe(
       first(),

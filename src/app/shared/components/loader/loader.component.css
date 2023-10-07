@@ -2,7 +2,7 @@
     width: 56px;
     height: 56px;
     position: absolute;
-    left: 49%;
+    left: calc(50vw - 28px);
     top: 40%;
     border-radius: 50%;
     background: conic-gradient(#0000 10%,#5dbce1);
