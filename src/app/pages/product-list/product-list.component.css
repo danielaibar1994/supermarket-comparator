@@ -82,11 +82,12 @@
 
 .home-container {
     background: #acdcff;
-    height: 450px;
+
     border-radius: 0 0 25px 25px;
     -webkit-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
     box-shadow: 1px 3px 5px -3px rgba(0,0,0,0.75);
+    padding-bottom: 1rem;
 }
 
 .header-container {
