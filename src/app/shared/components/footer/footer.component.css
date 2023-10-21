@@ -1,22 +1,31 @@
 .footer {
-    padding: 1rem;
-    text-align: center;
-    height: 5rem;
-    margin-top: 1rem;
-  }
-  
-  .brand-logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-  }
-  
-  .brand-logos img {
-    width: 45px; 
-    margin: 0 10px; 
-  }
+  padding: 0.5rem;
+  text-align: center;
+  height: 5rem;
+}
 
-  .footer-title {
-    text-align: center;
-  }
+.brand-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.brand-logos img {
+  width: 45px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.footer-title {
+  text-align: center;
+}
+
+.market-no-selected {
+  -webkit-filter: grayscale(1) invert(0);
+  filter: grayscale(1) invert(0);
+}
+
+.market-support {
+  font-size: 1.2rem;
+}

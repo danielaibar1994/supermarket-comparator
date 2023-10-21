@@ -102,7 +102,7 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  opened = true;
+  opened = false;
 
   supermarkets = [
     // {
@@ -122,7 +122,7 @@ export class ProductListComponent implements OnInit {
       srcWidth: 'fit-content',
       variable: 'externalProducts',
       background: '#a1e3c8',
-      opened: true,
+      opened: false,
       filter: 'OFF',
     },
     {
@@ -133,10 +133,28 @@ export class ProductListComponent implements OnInit {
       srcWidth: '12rem',
       variable: 'carrefourProducts',
       background: '#a1b9e3',
-      opened: true,
+      opened: false,
+      filter: 'OFF',
+    },
+    {
+      id: 4,
+      name: 'ALDI',
+      title: 'ALDI',
+      src: '../../../assets/images/logo-aldi.svg',
+      srcWidth: '',
+      variable: 'aldiProducts',
+      background: '#40c8f2',
+      opened: false,
       filter: 'OFF',
     },
   ];
+
+  supermarketsSelected: { [key: string]: boolean } = {
+    consum: true,
+    mercadona: true,
+    carrefour: true,
+    aldi: true,
+  };
 
   filterByPrice: 'DES' | 'ASC' | 'OFF' = 'OFF';
 
@@ -159,7 +177,10 @@ export class ProductListComponent implements OnInit {
         debounceTime(700),
         distinctUntilChanged(),
         tap((searchQuery) => {
-          this.productService.loadESupermarkets(searchQuery);
+          this.productService.loadSupermarkets(
+            this.supermarketsSelected,
+            searchQuery
+          );
         })
       )
       .subscribe();
@@ -188,11 +209,9 @@ export class ProductListComponent implements OnInit {
       case 'OFF':
         this.filterByPrice = 'ASC';
         break;
-
       case 'ASC':
         this.filterByPrice = 'DES';
         break;
-
       case 'DES':
         this.filterByPrice = 'OFF';
         break;
@@ -204,14 +223,16 @@ export class ProductListComponent implements OnInit {
       case 'OFF':
         this.supermarkets[index].filter = 'ASC';
         break;
-
       case 'ASC':
         this.supermarkets[index].filter = 'DES';
         break;
-
       case 'DES':
         this.supermarkets[index].filter = 'OFF';
         break;
     }
+  }
+
+  clickSupermarket(name: string) {
+    this.supermarketsSelected[name] = !this.supermarketsSelected[name];
   }
 }
