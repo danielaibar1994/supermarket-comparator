@@ -17,18 +17,21 @@ import { ProductMapper } from '../mappers/product.mapper';
 export class ProductRepository {
   limitCount = 100;
 
-  private baseUrl = 'https://tienda.consum.es/api/rest/V1.0/catalog/product';
-  private marketMercadonaUri =
-    'https://7uzjkl1dj0-dsn.algolia.net/1/indexes/products_prod_4315_es/query?x-algolia-application-id=7UZJKL1DJ0&x-algolia-api-key=9d8f2e39e90df472b4f2e559a116fe17';
-  private marketCarrefourUri =
-    'https://www.carrefour.es/search-api/query/v1/search';
+  private basesURL = {
+    consumUrl: 'https://tienda.consum.es/api/rest/V1.0/catalog/product',
+    mercadonaUrl:
+      'https://7uzjkl1dj0-dsn.algolia.net/1/indexes/products_prod_4315_es/query?x-algolia-application-id=7UZJKL1DJ0&x-algolia-api-key=9d8f2e39e90df472b4f2e559a116fe17',
+    carrefourUrl: 'https://www.carrefour.es/search-api/query/v1/search',
+    aldiUrl:
+      'https://l9knu74io7-dsn.algolia.net/1/indexes/*/queries?X-Algolia-Api-Key=19b0e28f08344395447c7bdeea32da58&X-Algolia-Application-Id=L9KNU74IO7',
+  };
 
   constructor(private http: HttpClient) {}
 
   getData(offset = 0, query?: string): Observable<Product[]> {
     const url =
       `${
-        this.baseUrl
+        this.basesURL.consumUrl
       }?limit=${100}&offset=${offset}&showRecommendations=false` +
       (query ? `&q=${query}` : '');
 
@@ -41,7 +44,7 @@ export class ProductRepository {
 
   getExternalData(query?: string): Observable<ExternalProduct[]> {
     return this.http
-      .post(this.marketMercadonaUri, {
+      .post(this.basesURL.mercadonaUrl, {
         params: `query=${query}&clickAnalytics=true&analyticsTags=%5B%22web%22%5D&getRankingInfo=true`,
       })
       .pipe(
@@ -55,7 +58,7 @@ export class ProductRepository {
 
   getCarrefourData(query?: string): Observable<ExternalProduct[]> {
     const url =
-      `${this.marketCarrefourUri}?query=${query}&scope=desktop&lang=es&rows=40&start=0&origin=default&f.op=OR` +
+      `${this.basesURL.carrefourUrl}?query=${query}&scope=desktop&lang=es&rows=40&start=0&origin=default&f.op=OR` +
       (query ? `&q=${query}` : '');
     return this.http.get(url).pipe(
       first(),
@@ -66,6 +69,33 @@ export class ProductRepository {
         )
       )
     );
+  }
+
+  getAldiData(query?: string): Observable<ExternalProduct[]> {
+    return this.http
+      .post(
+        this.basesURL.aldiUrl,
+        '{"requests":[{"indexName":"prod_es_es_es_offers","params":"clickAnalytics=true&facets=%5B%5D&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=12&page=0&query=' +
+          query +
+          '&tagFilters="},{"indexName":"prod_es_es_es_assortment","params":"clickAnalytics=true&facets=%5B%5D&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=12&page=0&query=' +
+          query +
+          '&tagFilters="}]}'
+      )
+      .pipe(
+        first(),
+        catchError(() => of({ results: [] })),
+        map((data: any) => {
+          let elements: ExternalProduct[] = [];
+          data.results.map((result: any) =>
+            elements.push(
+              ...result.hits.map((hit: any) =>
+                ProductMapper.toDomain(hit, 'ALDI')
+              )
+            )
+          );
+          return elements;
+        })
+      );
   }
 
   //
@@ -93,7 +123,7 @@ export class ProductRepository {
 
   getProductsWithLimit(limit: number): Observable<any> {
     const url = `${
-      this.baseUrl
+      this.basesURL.consumUrl
     }?limit=${100}&offset=${limit}&showRecommendations=false`;
     return this.http.get(url);
   }
