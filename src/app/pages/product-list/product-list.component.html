@@ -30,6 +30,10 @@
       </div>
     </div>
   </div>
+  <app-footer
+    [supermarketsSelected]="supermarketsSelected"
+    (supermarketChange)="clickSupermarket($event)"
+  ></app-footer>
 </div>
 
 <div
@@ -41,7 +45,7 @@
     <img
       src="../../../assets/images/logo-consum.png"
       alt=""
-      style="width: 30px"
+      style="width: 30px; margin-right: 1rem"
     />
     <span class="element-content"> CONSUM ({{ products.length }}) </span>
     <span class="closed-icon">{{ opened ? "-" : "+" }}</span>
@@ -90,7 +94,9 @@
         alt="{{ item.name }}"
         [style.width]="item.srcWidth"
       />
+
       <span class="element-content">
+        {{ item.title }}
         ({{ filterProductsByType(item.name, i).length }})
       </span>
       <span class="closed-icon">{{ item.opened ? "-" : "+" }}</span>
@@ -124,5 +130,3 @@
     </div>
   </div>
 </ng-container>
-
-<app-footer></app-footer>

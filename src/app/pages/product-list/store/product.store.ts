@@ -35,17 +35,25 @@ export class ProductState extends SignalService<initialProductState> {
   }
 
   // Actions - public
-  loadESupermarkets(query?: string) {
+  loadSupermarkets(selected: { [key: string]: boolean }, query?: string) {
     if (query) {
-      forkJoin([...this.loadExternalProductEffect(query)])
+      forkJoin([...this.loadExternalProductEffect(query, selected)])
         .pipe(
-          tap(([consumProducts, mercadonaProducts, carrefourProducts]) => {
-            this.setProductReducer(consumProducts);
-            this.setExternalProductReducer([
-              ...mercadonaProducts,
-              ...carrefourProducts,
-            ]);
-          })
+          tap(
+            ([
+              consumProducts,
+              mercadonaProducts,
+              carrefourProducts,
+              aldiProducts,
+            ]) => {
+              this.setProductReducer(consumProducts);
+              this.setExternalProductReducer([
+                ...mercadonaProducts,
+                ...carrefourProducts,
+                ...aldiProducts,
+              ]);
+            }
+          )
         )
         .subscribe();
     } else {
@@ -55,11 +63,21 @@ export class ProductState extends SignalService<initialProductState> {
   }
 
   // EFFECTS - private
-  private loadExternalProductEffect(query: string): Observable<any[]>[] {
+  private loadExternalProductEffect(
+    query: string,
+    selected: { [key: string]: boolean }
+  ): Observable<any[]>[] {
     return [
-      this.productRepository.getData(undefined, query),
-      this.productRepository.getExternalData(query),
-      this.productRepository.getCarrefourData(query),
+      selected['consum']
+        ? this.productRepository.getData(undefined, query)
+        : of([]),
+      selected['mercadona']
+        ? this.productRepository.getExternalData(query)
+        : of([]),
+      selected['carrefour']
+        ? this.productRepository.getCarrefourData(query)
+        : of([]),
+      selected['aldi'] ? this.productRepository.getAldiData(query) : of([]),
     ];
   }
 

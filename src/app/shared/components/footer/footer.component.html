@@ -1,17 +1,33 @@
 <div class="footer">
   <div class="footer-title">
-    <span class="market-support">Supermercados soportados:</span>
+    <span class="market-support">Selecciona tus supermercados:</span>
   </div>
   <div class="brand-logos">
-    <img src="../../../../assets/images/logo-peque-consum.png" alt="Consum" />
     <img
+      (click)="clickSupermarket('consum')"
+      [ngClass]="{ 'market-no-selected': !supermarketsSelected['consum'] }"
+      src="../../../../assets/images/logo-peque-consum.png"
+      alt="Consum"
+    />
+    <img
+      (click)="clickSupermarket('mercadona')"
+      [ngClass]="{ 'market-no-selected': !supermarketsSelected['mercadona'] }"
       src="../../../../assets/images/logo-Mercadona-peque.png"
       alt="Mercadona"
       style="border-radius: 25px"
     />
     <img
+      (click)="clickSupermarket('carrefour')"
+      [ngClass]="{ 'market-no-selected': !supermarketsSelected['carrefour'] }"
       src="../../../../assets/images/logo-peque-carrefur.webp"
       alt="Carrefour"
+    />
+
+    <img
+      (click)="clickSupermarket('aldi')"
+      [ngClass]="{ 'market-no-selected': !supermarketsSelected['aldi'] }"
+      src="../../../../assets/images/logo-aldi.svg"
+      alt="ALDI"
     />
   </div>
 </div>

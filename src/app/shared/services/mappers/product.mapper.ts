@@ -22,6 +22,9 @@ export class ProductMapper {
       case 'CARREFOUR':
         return entity.image_path;
 
+      case 'ALDI':
+        return entity.productPicture;
+
       default:
         return '';
     }
@@ -32,6 +35,8 @@ export class ProductMapper {
       case 'MERCADONA':
       case 'CARREFOUR':
         return entity.display_name;
+      case 'ALDI':
+        return entity.productName;
       default:
         return '';
     }
@@ -42,6 +47,8 @@ export class ProductMapper {
       case 'MERCADONA':
       case 'CARREFOUR':
         return entity.brand;
+      case 'ALDI':
+        return entity.brandName;
       default:
         return '';
     }
@@ -54,6 +61,9 @@ export class ProductMapper {
 
       case 'CARREFOUR':
         return entity.active_price;
+
+      case 'ALDI':
+        return entity.salesPrice;
       default:
         return 0;
     }
@@ -66,6 +76,9 @@ export class ProductMapper {
 
       case 'CARREFOUR':
         return entity?.app_strikethrough_price ? entity.list_price : undefined;
+
+      case 'ALDI':
+        return entity.oldPrice ?? undefined;
       default:
         return undefined;
     }
@@ -78,6 +91,9 @@ export class ProductMapper {
 
       case 'CARREFOUR':
         return 'https://www.carrefour.es' + entity.url;
+
+      case 'ALDI':
+        return entity.productUrl;
 
       default:
         return '';
