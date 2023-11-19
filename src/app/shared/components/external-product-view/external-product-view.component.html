@@ -5,12 +5,51 @@
     <div class="d-flex flex-column flex-grow-1 w-100 widget-prod__body">
       <div class="u-pointer">
         <div class="widget-prod__boximage">
+          <div
+            id="infoproduct-content--offers"
+            *ngIf="product.offers && product.offers[0]"
+          >
+            <div id="infoproduct-content--offers" class="pictos">
+              <div class="product-detail__pictos--offer">
+                <div
+                  class="m-categoria m-inmediata m-oferta mindescription_img pictos__item"
+                >
+                  <img
+                    class="image-component__image"
+                    alt="picto oferta"
+                    src="{{ product.offers[0].image }}"
+                  />
+                </div>
+              </div>
+              <div
+                *ngIf="product.offers[0].amount"
+                id="infoproduct-offers--chequecrece"
+                class="pannel--check pannel--check__deferred u-width--50"
+              >
+                <div
+                  class="discount"
+                  *ngIf="!product.offers[0].minDescription.includes('Ahora')"
+                >
+                  <span class="u-size--11"
+                    >+&nbsp;{{ product.offers[0].amount }}&nbsp;€</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-container *ngIf="viewSupermarketIcon">
+            <div class="supermarket-icon-container">
+              <img class="image-component__image" src="{{ product.icon }}" />
+            </div>
+          </ng-container>
+          <!--  -->
           <div class="widget-prod__boximage--size">
             <a class="" href="{{ product.href }}" target="_blank">
               <picture class="image-component"
                 ><img
                   loading="lazy"
-                  class="image-component__image"
+                  class="image-component__image productImage"
                   alt="{{ product.display_name }}"
                   src="{{ product.thumbnail }}"
               /></picture>

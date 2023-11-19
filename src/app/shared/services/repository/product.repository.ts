@@ -24,6 +24,7 @@ export class ProductRepository {
     carrefourUrl: 'https://www.carrefour.es/search-api/query/v1/search',
     aldiUrl:
       'https://l9knu74io7-dsn.algolia.net/1/indexes/*/queries?X-Algolia-Api-Key=19b0e28f08344395447c7bdeea32da58&X-Algolia-Application-Id=L9KNU74IO7',
+    diaUrl: 'https://www.dia.es/api/v1/search-back/search/reduced',
   };
 
   constructor(private http: HttpClient) {}
@@ -38,7 +39,9 @@ export class ProductRepository {
     return this.http.get(url).pipe(
       first(),
       catchError(() => of({ products: [] })),
-      map((data: any) => data.products)
+      map((data: any) =>
+        data.products.map((hit: any) => ProductMapper.toDomain(hit, 'CONSUM'))
+      )
     );
   }
 
@@ -96,6 +99,17 @@ export class ProductRepository {
           return elements;
         })
       );
+  }
+
+  getDiaData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.diaUrl}?q=${query}&page=1`;
+    return this.http.get(url).pipe(
+      first(),
+      catchError(() => of({ content: { docs: [] } })),
+      map((data: any) =>
+        data.search_items.map((hit: any) => ProductMapper.toDomain(hit, 'DIA'))
+      )
+    );
   }
 
   //
