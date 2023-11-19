@@ -38,20 +38,20 @@
 
 <ng-container *ngIf="!empty">
   <div class="container-types">
-    <div style="float: left">
+    <div style="float: left; font-size: 14px">
       <h2 class="results-title">Resultados:</h2>
     </div>
 
     <div class="types-buttons">
-      <div style="float: left; margin-left: 16px">
+      <div style="float: left; font-size: 14px">
         <span
           class="type-button"
           [ngClass]="{ selectedType: filterByType === 'SUPERMARKET' }"
           (click)="setType('SUPERMARKET')"
-          >Por Supermercado</span
+          >Supermercados</span
         >
       </div>
-      <div style="float: left; margin-left: 16px">
+      <div style="float: left; font-size: 14px">
         <span
           class="type-button"
           [ngClass]="{ selectedType: filterByType === 'PRICE' }"
@@ -74,4 +74,10 @@
   <app-price-comparator
     [externalProducts]="externalProducts"
   ></app-price-comparator>
+</ng-container>
+
+<ng-container>
+  <div class="copyright-container">
+    <span>{{ year }} - Super más barato - Developed by Daniel Aibar</span>
+  </div>
 </ng-container>

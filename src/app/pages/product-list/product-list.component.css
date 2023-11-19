@@ -212,6 +212,12 @@ span.selectedType {
     cursor: pointer;
 }
 
+.copyright-container {
+    text-align: center;
+    font-size: 14px;
+    margin: 8px 4px;
+}
+
 @media (max-width: 1000px) {
     .list-container {
         margin: 1rem 0.5rem 3rem;
@@ -224,6 +230,7 @@ span.selectedType {
 
     .results-title {
         margin: 20px 0.5rem;
+        font-size: 20px;
     }
 
     .types-buttons {
