@@ -45,6 +45,7 @@ export class ProductListComponent implements OnInit {
   searchSubscription!: Subscription;
   isSticky: boolean = false;
   inputSearch = '';
+  year: number = new Date().getFullYear();
 
   private readonly searchSubject = new Subject<string | undefined>();
 
