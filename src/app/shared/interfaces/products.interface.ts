@@ -7,6 +7,8 @@ export interface ExternalProduct {
   unit_price_old?: number;
   packaging?: string;
   type: string;
+  offers: any[] | undefined;
+  icon: string;
 }
 
 export interface Product {

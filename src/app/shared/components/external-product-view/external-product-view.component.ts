@@ -9,4 +9,5 @@ import { ExternalProduct } from '../../interfaces/products.interface';
 export class ExternalProductViewComponent {
   @Input() product!: ExternalProduct;
   @Input() type!: 'MERCADONA' | 'CARREFOUR' | string;
+  @Input() viewSupermarketIcon: boolean = false;
 }

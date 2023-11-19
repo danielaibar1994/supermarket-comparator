@@ -1,0 +1,9 @@
+<div class="mini-grid__container">
+  <ng-container *ngFor="let product of filterProductsByPrice()">
+    <app-external-product-view
+      [type]="product.type"
+      [product]="product"
+      [viewSupermarketIcon]="true"
+    ></app-external-product-view>
+  </ng-container>
+</div>

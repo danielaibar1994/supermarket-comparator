@@ -1,6 +1,6 @@
 <div
   class="home-container"
-  [ngClass]="{ 'empty-data': !products.length && !externalProducts.length }"
+  [ngClass]="{ 'empty-data': !externalProducts.length }"
 >
   <div class="header-container">
     <h1>Super más barato</h1>
@@ -36,97 +36,42 @@
   ></app-footer>
 </div>
 
-<div
-  class="list-container"
-  *ngIf="products.length"
-  [ngClass]="{ 'container-closed': !opened }"
->
-  <div class="sticky-brand consum" (click)="openedBar()">
-    <img
-      src="../../../assets/images/logo-consum.png"
-      alt=""
-      style="width: 30px; margin-right: 1rem"
-    />
-    <span class="element-content"> CONSUM ({{ products.length }}) </span>
-    <span class="closed-icon">{{ opened ? "-" : "+" }}</span>
-  </div>
-
-  <div class="mini-grid__container" [ngClass]="{ closed: !opened }">
-    <div class="filter-container">
-      <div
-        class="filter-icon"
-        *ngIf="filterByPrice === 'DES'"
-        [ngClass]="{ active: filterByPrice === 'DES' }"
-        (click)="setFilterPriceConsum()"
-      >
-        <img src="../../../assets/images/sort-price-a.png" alt="" />
-      </div>
-      <div
-        class="filter-icon"
-        *ngIf="filterByPrice === 'ASC' || filterByPrice === 'OFF'"
-        [ngClass]="{ active: filterByPrice === 'ASC' }"
-        (click)="setFilterPriceConsum()"
-      >
-        <img src="../../../assets/images/sort-price-b.png" alt="" />
-      </div>
+<ng-container *ngIf="!empty">
+  <div class="container-types">
+    <div style="float: left">
+      <h2 class="results-title">Resultados:</h2>
     </div>
 
-    <ng-container *ngFor="let item of products">
-      <app-product-view [product]="item"></app-product-view>
-    </ng-container>
-  </div>
-</div>
-
-<ng-container *ngFor="let item of supermarkets; let i = index">
-  <div
-    class="list-container"
-    *ngIf="filterProductsByType(item.name, i).length"
-    [ngClass]="{ 'container-closed': !item.opened }"
-  >
-    <div
-      class="sticky-brand external"
-      [style.background-color]="item.background"
-      (click)="visibilityContainer(i)"
-    >
-      <img
-        class="logo-image"
-        src="{{ item.src }}"
-        alt="{{ item.name }}"
-        [style.width]="item.srcWidth"
-      />
-
-      <span class="element-content">
-        {{ item.title }}
-        ({{ filterProductsByType(item.name, i).length }})
-      </span>
-      <span class="closed-icon">{{ item.opened ? "-" : "+" }}</span>
-    </div>
-
-    <div class="mini-grid__container" [ngClass]="{ closed: !item.opened }">
-      <div class="filter-container">
-        <div
-          class="filter-icon"
-          *ngIf="item.filter === 'DES'"
-          [ngClass]="{ active: item.filter === 'DES' }"
-          (click)="setFilterPrice(i)"
+    <div class="types-buttons">
+      <div style="float: left; margin-left: 16px">
+        <span
+          class="type-button"
+          [ngClass]="{ selectedType: filterByType === 'SUPERMARKET' }"
+          (click)="setType('SUPERMARKET')"
+          >Por Supermercado</span
         >
-          <img src="../../../assets/images/sort-price-a.png" alt="" />
-        </div>
-        <div
-          class="filter-icon"
-          *ngIf="item.filter === 'ASC' || item.filter === 'OFF'"
-          [ngClass]="{ active: item.filter === 'ASC' }"
-          (click)="setFilterPrice(i)"
-        >
-          <img src="../../../assets/images/sort-price-b.png" alt="" />
-        </div>
       </div>
-      <ng-container *ngFor="let product of filterProductsByType(item.name, i)">
-        <app-external-product-view
-          [type]="item.name"
-          [product]="product"
-        ></app-external-product-view>
-      </ng-container>
+      <div style="float: left; margin-left: 16px">
+        <span
+          class="type-button"
+          [ngClass]="{ selectedType: filterByType === 'PRICE' }"
+          (click)="setType('PRICE')"
+          >Más Barato</span
+        >
+      </div>
     </div>
   </div>
+</ng-container>
+
+<ng-container *ngIf="filterByType === 'SUPERMARKET'">
+  <app-supermarket-view
+    [externalProducts]="externalProducts"
+    [supermarkets]="supermarkets"
+  ></app-supermarket-view>
+</ng-container>
+
+<ng-container *ngIf="filterByType === 'PRICE'">
+  <app-price-comparator
+    [externalProducts]="externalProducts"
+  ></app-price-comparator>
 </ng-container>

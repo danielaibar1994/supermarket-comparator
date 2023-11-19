@@ -103,7 +103,11 @@ a:active {
 img {
   vertical-align: middle;
   border-style: none;
-  height: 135px;
+ 
+}
+
+img.productImage {
+   height: 135px;
 }
 
 .widget-prod__boximage-pictos {
@@ -267,6 +271,14 @@ cmp-language .dropdown-toggle .tol-icon-component {
 .widget-prod__price--line-through {
   background-image: none;
   text-decoration: line-through;
+}
+
+.supermarket-icon-container {
+  position: absolute;
+  z-index: 20;
+  width: 40px;
+  right: 0;
+  margin-right: 16px;
 }
 
 @media (max-width: 1000px) {
