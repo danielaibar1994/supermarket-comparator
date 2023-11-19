@@ -29,5 +29,12 @@
       src="../../../../assets/images/logo-aldi.svg"
       alt="ALDI"
     />
+
+    <img
+      (click)="clickSupermarket('dia')"
+      [ngClass]="{ 'market-no-selected': !supermarketsSelected['dia'] }"
+      src="../../../../assets/images/logo-dia.png"
+      alt="ALDI"
+    />
   </div>
 </div>

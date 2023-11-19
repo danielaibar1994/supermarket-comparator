@@ -1,0 +1,67 @@
+import { Component, Input } from '@angular/core';
+import { ExternalProduct } from '../../interfaces/products.interface';
+
+@Component({
+  selector: 'app-supermarket-view',
+  templateUrl: './supermarket-view.component.html',
+  styleUrls: ['./supermarket-view.component.css'],
+})
+export class SupermarketViewComponent {
+  @Input() supermarkets!: any;
+  @Input() externalProducts!: any;
+
+  filterProductsByType(type: string, index: number): ExternalProduct[] {
+    switch (this.supermarkets[index].filter) {
+      case 'OFF':
+        return this.externalProducts.filter(
+          (d: { type: string }) => d.type === type
+        );
+
+      case 'ASC':
+        return this.externalProducts
+          .filter((d: { type: string }) => d.type === type)
+          .sort((a: { unit_price: number }, b: { unit_price: number }) =>
+            a.unit_price > b.unit_price
+              ? 1
+              : a.unit_price === b.unit_price
+              ? 0
+              : -1
+          );
+
+      case 'DES':
+        return this.externalProducts
+          .filter((d: { type: string }) => d.type === type)
+          .sort((a: { unit_price: number }, b: { unit_price: number }) =>
+            a.unit_price > b.unit_price
+              ? 1
+              : a.unit_price === b.unit_price
+              ? 0
+              : -1
+          )
+          .reverse();
+
+      default:
+        return this.externalProducts.filter(
+          (d: { type: string }) => d.type === type
+        );
+    }
+  }
+
+  visibilityContainer(index: number) {
+    this.supermarkets[index].opened = !this.supermarkets[index].opened;
+  }
+
+  setFilterPrice(index: number) {
+    switch (this.supermarkets[index].filter) {
+      case 'OFF':
+        this.supermarkets[index].filter = 'ASC';
+        break;
+      case 'ASC':
+        this.supermarkets[index].filter = 'DES';
+        break;
+      case 'DES':
+        this.supermarkets[index].filter = 'OFF';
+        break;
+    }
+  }
+}

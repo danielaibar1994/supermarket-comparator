@@ -11,6 +11,8 @@ export class ProductMapper {
       unit_price_old: this.unit_price_old(entity, type),
       href: this.href(entity, type),
       type: type,
+      offers: this.offers(entity, type),
+      icon: this.icon(entity, type),
     };
   }
 
@@ -25,6 +27,14 @@ export class ProductMapper {
       case 'ALDI':
         return entity.productPicture;
 
+      case 'DIA':
+        return 'https://www.dia.es' + entity.image;
+
+      case 'CONSUM':
+        return entity.media[0]
+          ? entity.media[0].url
+          : entity.productData.imageURL;
+
       default:
         return '';
     }
@@ -34,9 +44,13 @@ export class ProductMapper {
     switch (type) {
       case 'MERCADONA':
       case 'CARREFOUR':
+      case 'DIA':
         return entity.display_name;
       case 'ALDI':
         return entity.productName;
+
+      case 'CONSUM':
+        return entity.productData.description;
       default:
         return '';
     }
@@ -46,9 +60,13 @@ export class ProductMapper {
     switch (type) {
       case 'MERCADONA':
       case 'CARREFOUR':
+      case 'DIA':
         return entity.brand;
       case 'ALDI':
         return entity.brandName;
+
+      case 'CONSUM':
+        return entity.productData.brand.name;
       default:
         return '';
     }
@@ -64,6 +82,14 @@ export class ProductMapper {
 
       case 'ALDI':
         return entity.salesPrice;
+
+      case 'DIA':
+        return entity.prices.price;
+
+      case 'CONSUM':
+        return entity.priceData.prices[1]
+          ? entity.priceData.prices[1].value.centAmount
+          : entity.priceData.prices[0].value.centAmount;
       default:
         return 0;
     }
@@ -79,6 +105,16 @@ export class ProductMapper {
 
       case 'ALDI':
         return entity.oldPrice ?? undefined;
+
+      case 'DIA':
+        return entity.prices.strikethrough_price > entity.prices.price
+          ? entity.prices.strikethrough_price
+          : undefined;
+
+      case 'CONSUM':
+        return entity.priceData.prices[1]
+          ? entity.priceData.prices[0].value.centAmount
+          : undefined;
       default:
         return undefined;
     }
@@ -95,6 +131,40 @@ export class ProductMapper {
       case 'ALDI':
         return entity.productUrl;
 
+      case 'DIA':
+        return 'https://www.dia.es' + entity.url;
+
+      case 'CONSUM':
+        return entity.productData.url;
+
+      default:
+        return '';
+    }
+  }
+
+  private static offers(entity: any, type: string): any[] | undefined {
+    switch (type) {
+      case 'CONSUM':
+        return entity.offers;
+
+      default:
+        return undefined;
+    }
+  }
+
+  private static icon(entity: any, type: string): string {
+    switch (type) {
+      case 'MERCADONA':
+        return '../../../../assets/images/logo-Mercadona-peque.png';
+      case 'CARREFOUR':
+        return '../../../../assets/images/logo-peque-carrefur.webp';
+      case 'DIA':
+        return '../../../../assets/images/logo-dia.png';
+      case 'ALDI':
+        return './../../../assets/images/logo-aldi.svg';
+
+      case 'CONSUM':
+        return '../../../../assets/images/logo-peque-consum.png';
       default:
         return '';
     }

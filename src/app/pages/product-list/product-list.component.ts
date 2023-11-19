@@ -14,6 +14,7 @@ import {
 } from 'rxjs';
 import { ProductState } from 'src/app/pages/product-list/store/product.store';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
+import { SUPERMARKETS } from './constants/supermarkets';
 
 @Component({
   selector: 'app-product-list',
@@ -21,147 +22,30 @@ import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
+  @ViewChild('editor') editor!: ElementRef;
+
   get empty(): boolean {
-    return !this.products.length && !this.externalProducts.length;
-  }
-
-  get products() {
-    let aux = [...this.productService.productsSelector];
-
-    switch (this.filterByPrice) {
-      case 'OFF':
-        return aux;
-
-      case 'ASC':
-        return aux.sort((a, b) => {
-          const aPrice = a.priceData.prices[1]
-            ? a.priceData.prices[1].value.centAmount
-            : a.priceData.prices[0].value.centAmount;
-
-          const bPrice = b.priceData.prices[1]
-            ? b.priceData.prices[1].value.centAmount
-            : b.priceData.prices[0].value.centAmount;
-
-          return aPrice > bPrice ? 1 : aPrice === bPrice ? 0 : -1;
-        });
-
-      case 'DES':
-        return aux
-          .sort((a, b) => {
-            const aPrice = a.priceData.prices[1]
-              ? a.priceData.prices[1].value.centAmount
-              : a.priceData.prices[0].value.centAmount;
-
-            const bPrice = b.priceData.prices[1]
-              ? b.priceData.prices[1].value.centAmount
-              : b.priceData.prices[0].value.centAmount;
-
-            return aPrice > bPrice ? 1 : aPrice === bPrice ? 0 : -1;
-          })
-          .reverse();
-
-      default:
-        return aux;
-    }
+    return !this.externalProducts.length;
   }
 
   get externalProducts(): ExternalProduct[] {
     return this.productService.externalProductsSelector;
   }
 
-  filterProductsByType(type: string, index: number): ExternalProduct[] {
-    switch (this.supermarkets[index].filter) {
-      case 'OFF':
-        return this.externalProducts.filter((d) => d.type === type);
-
-      case 'ASC':
-        return this.externalProducts
-          .filter((d) => d.type === type)
-          .sort((a, b) =>
-            a.unit_price > b.unit_price
-              ? 1
-              : a.unit_price === b.unit_price
-              ? 0
-              : -1
-          );
-
-      case 'DES':
-        return this.externalProducts
-          .filter((d) => d.type === type)
-          .sort((a, b) =>
-            a.unit_price > b.unit_price
-              ? 1
-              : a.unit_price === b.unit_price
-              ? 0
-              : -1
-          )
-          .reverse();
-
-      default:
-        return this.externalProducts.filter((d) => d.type === type);
-    }
-  }
-
-  opened = false;
-
-  supermarkets = [
-    // {
-    //   id: 1,
-    //   name: 'Consum',
-    //   title: 'CONSUM',
-    //   src: '../../../assets/images/logo-consum.png',
-    //   srcWidth: '30px',
-    //   variable: 'products',
-    // background: '#ff9800'
-    // },
-    {
-      id: 2,
-      name: 'MERCADONA',
-      title: '',
-      src: '../../../assets/images/logo-mercadona.svg',
-      srcWidth: 'fit-content',
-      variable: 'externalProducts',
-      background: '#a1e3c8',
-      opened: false,
-      filter: 'OFF',
-    },
-    {
-      id: 3,
-      name: 'CARREFOUR',
-      title: '',
-      src: '../../../assets/images/loco-carre.svg',
-      srcWidth: '12rem',
-      variable: 'carrefourProducts',
-      background: '#a1b9e3',
-      opened: false,
-      filter: 'OFF',
-    },
-    {
-      id: 4,
-      name: 'ALDI',
-      title: 'ALDI',
-      src: '../../../assets/images/logo-aldi.svg',
-      srcWidth: '',
-      variable: 'aldiProducts',
-      background: '#40c8f2',
-      opened: false,
-      filter: 'OFF',
-    },
-  ];
-
+  supermarkets = SUPERMARKETS;
   supermarketsSelected: { [key: string]: boolean } = {
     consum: true,
     mercadona: true,
     carrefour: true,
     aldi: true,
+    dia: true,
   };
 
-  filterByPrice: 'DES' | 'ASC' | 'OFF' = 'OFF';
-
-  @ViewChild('editor') editor!: ElementRef;
+  filterByType: 'SUPERMARKET' | 'PRICE' = 'SUPERMARKET';
   searchSubscription!: Subscription;
   isSticky: boolean = false;
   inputSearch = '';
+
   private readonly searchSubject = new Subject<string | undefined>();
 
   constructor(private readonly productService: ProductState) {}
@@ -177,10 +61,7 @@ export class ProductListComponent implements OnInit {
         debounceTime(700),
         distinctUntilChanged(),
         tap((searchQuery) => {
-          this.productService.loadSupermarkets(
-            this.supermarketsSelected,
-            searchQuery
-          );
+          this.loadSupermarkets(searchQuery);
         })
       )
       .subscribe();
@@ -191,48 +72,24 @@ export class ProductListComponent implements OnInit {
     this.searchSubject.next(searchQuery?.trim());
   }
 
-  visibilityContainer(index: number) {
-    this.supermarkets[index].opened = !this.supermarkets[index].opened;
-  }
-
-  openedBar(): void {
-    this.opened = !this.opened;
-  }
-
-  clearInput() {
+  clearInput(): void {
     this.inputSearch = '';
     this.searchSubject.next('');
   }
 
-  setFilterPriceConsum() {
-    switch (this.filterByPrice) {
-      case 'OFF':
-        this.filterByPrice = 'ASC';
-        break;
-      case 'ASC':
-        this.filterByPrice = 'DES';
-        break;
-      case 'DES':
-        this.filterByPrice = 'OFF';
-        break;
-    }
-  }
-
-  setFilterPrice(index: number) {
-    switch (this.supermarkets[index].filter) {
-      case 'OFF':
-        this.supermarkets[index].filter = 'ASC';
-        break;
-      case 'ASC':
-        this.supermarkets[index].filter = 'DES';
-        break;
-      case 'DES':
-        this.supermarkets[index].filter = 'OFF';
-        break;
-    }
-  }
-
-  clickSupermarket(name: string) {
+  clickSupermarket(name: string): void {
     this.supermarketsSelected[name] = !this.supermarketsSelected[name];
+    this.loadSupermarkets();
+  }
+
+  setType(type: 'SUPERMARKET' | 'PRICE'): void {
+    this.filterByType = type;
+  }
+
+  private loadSupermarkets(searchQuery?: string): void {
+    this.productService.loadSupermarkets(
+      this.supermarketsSelected,
+      searchQuery ?? this.inputSearch
+    );
   }
 }

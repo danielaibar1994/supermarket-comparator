@@ -1,0 +1,6 @@
+.mini-grid__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem auto 2rem auto;
+}
