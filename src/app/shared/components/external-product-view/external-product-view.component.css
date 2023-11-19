@@ -283,10 +283,14 @@ cmp-language .dropdown-toggle .tol-icon-component {
 
 @media (max-width: 1000px) {
   .mini-grid__widget-prod {
-    width: 10.6rem;
+    width: 11rem;
   }
 
   .widget-prod__price--line-through {
     font-size: 12px;
+  }
+
+  .widget-prod {
+    padding: 1rem 0.8rem;
   }
 }
