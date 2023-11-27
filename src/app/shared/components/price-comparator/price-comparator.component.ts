@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, TrackByFunction } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 
 @Component({
@@ -8,6 +8,8 @@ import { ExternalProduct } from '../../interfaces/products.interface';
 })
 export class PriceComparatorComponent {
   @Input() externalProducts!: ExternalProduct[];
+
+  trackById: TrackByFunction<ExternalProduct> = (index, p) => p.thumbnail;
 
   filterProductsByPrice(): any[] {
     return this.externalProducts.sort((a, b) => a.unit_price - b.unit_price);

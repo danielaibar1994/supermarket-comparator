@@ -11,16 +11,20 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { SupermarketViewComponent } from './shared/components/supermarket-view/supermarket-view.component';
 import { PriceComparatorComponent } from './shared/components/price-comparator/price-comparator.component';
+import { AddButtonComponent } from './shared/components/add-button/add-button.component';
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    ExternalProductViewComponent,
     LoaderComponent,
     FooterComponent,
     SupermarketViewComponent,
     PriceComparatorComponent,
+    ExternalProductViewComponent,
+
+    AddButtonComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

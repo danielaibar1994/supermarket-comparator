@@ -1,5 +1,5 @@
 <div class="mini-grid__container">
-  <ng-container *ngFor="let product of filterProductsByPrice()">
+  <ng-container *ngFor="let product of filterProductsByPrice(); trackById">
     <app-external-product-view
       [type]="product.type"
       [product]="product"
