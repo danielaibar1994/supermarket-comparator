@@ -36,8 +36,12 @@
     margin: 4rem;
 }
 
+.sticky-fixed {
+  position: sticky;
+}
+
 .sticky-brand {
-    position: sticky;
+  
     top: 78px;
     z-index: 100;
     padding: 0.3rem 1rem;

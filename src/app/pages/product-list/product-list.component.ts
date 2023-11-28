@@ -15,11 +15,25 @@ import {
 import { ProductState } from 'src/app/pages/product-list/store/product.store';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { SUPERMARKETS } from './constants/supermarkets';
+import { PriceComparatorComponent } from '../../shared/components/price-comparator/price-comparator.component';
+import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
+  standalone: true,
+  imports: [
+    NgClass,
+    FormsModule,
+    FooterComponent,
+    NgIf,
+    SupermarketViewComponent,
+    PriceComparatorComponent,
+  ],
 })
 export class ProductListComponent implements OnInit {
   @ViewChild('editor') editor!: ElementRef;
@@ -53,7 +67,7 @@ export class ProductListComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    this.isSticky = window.pageYOffset >= 250;
+    this.isSticky = window.scrollY >= 250;
   }
 
   ngOnInit(): void {

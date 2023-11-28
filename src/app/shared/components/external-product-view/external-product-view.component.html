@@ -18,6 +18,7 @@
                     class="image-component__image"
                     alt="picto oferta"
                     src="{{ product.offers[0].image }}"
+                    [loading]="'lazy'"
                   />
                 </div>
               </div>
@@ -52,6 +53,7 @@
                   class="image-component__image productImage"
                   alt="{{ product.display_name }}"
                   src="{{ product.thumbnail }}"
+                  [loading]="'lazy'"
               /></picture>
             </a>
           </div>
@@ -85,6 +87,7 @@
         <div
           class="widget-prod__price--with-offer d-flex justify-content-end widget-prod__price--row"
         >
+          <app-add-button [product]="product"></app-add-button>
           <span
             *ngIf="product.unit_price_old"
             id="grid-widget--offerprice"

@@ -1,14 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, TrackByFunction } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
+import { ExternalProductViewComponent } from '../external-product-view/external-product-view.component';
+import { NgFor, NgIf, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-supermarket-view',
   templateUrl: './supermarket-view.component.html',
   styleUrls: ['./supermarket-view.component.css'],
+  standalone: true,
+  imports: [NgFor, NgIf, NgClass, ExternalProductViewComponent],
 })
 export class SupermarketViewComponent {
   @Input() supermarkets!: any;
-  @Input() externalProducts!: any;
+  @Input() externalProducts!: ExternalProduct[];
+  @Input() isStickyMarket: boolean = true;
+
+  trackById: TrackByFunction<ExternalProduct> = (index, p) => p.thumbnail;
 
   filterProductsByType(type: string, index: number): ExternalProduct[] {
     switch (this.supermarkets[index].filter) {
