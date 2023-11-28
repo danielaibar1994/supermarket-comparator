@@ -1,10 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
+import { ExternalProductViewComponent } from '../external-product-view/external-product-view.component';
+import { NgFor, NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-supermarket-view',
-  templateUrl: './supermarket-view.component.html',
-  styleUrls: ['./supermarket-view.component.css'],
+    selector: 'app-supermarket-view',
+    templateUrl: './supermarket-view.component.html',
+    styleUrls: ['./supermarket-view.component.css'],
+    standalone: true,
+    imports: [
+        NgFor,
+        NgIf,
+        NgClass,
+        ExternalProductViewComponent,
+    ],
 })
 export class SupermarketViewComponent {
   @Input() supermarkets!: any;
