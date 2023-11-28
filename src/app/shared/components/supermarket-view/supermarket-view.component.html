@@ -1,11 +1,12 @@
 <ng-container *ngFor="let item of supermarkets; let i = index">
   <div
     class="list-container"
-    *ngIf="filterProductsByType(item.name, i).length"
+    *ngIf="filterProductsByType(item.name, i).slice(0, 50).length"
     [ngClass]="{ 'container-closed': !item.opened }"
   >
     <div
       class="sticky-brand external"
+      [ngClass]="{ 'sticky-fixed': isStickyMarket }"
       [style.background-color]="item.background"
       (click)="visibilityContainer(i)"
     >
@@ -18,7 +19,7 @@
 
       <span class="element-content">
         {{ item.title }}
-        ({{ filterProductsByType(item.name, i).length }})
+        ({{ filterProductsByType(item.name, i).slice(0, 50).length }})
       </span>
       <span class="closed-icon">{{ item.opened ? "-" : "+" }}</span>
     </div>
@@ -42,11 +43,18 @@
           <img src="../../../assets/images/sort-price-b.png" alt="" />
         </div>
       </div>
-      <ng-container *ngFor="let product of filterProductsByType(item.name, i)">
-        <app-external-product-view
-          [type]="item.name"
-          [product]="product"
-        ></app-external-product-view>
+      <ng-container *ngIf="item.opened">
+        <ng-container
+          *ngFor="
+            let product of filterProductsByType(item.name, i).slice(0, 50);
+            trackById
+          "
+        >
+          <app-external-product-view
+            [type]="item.name"
+            [product]="product"
+          ></app-external-product-view>
+        </ng-container>
       </ng-container>
     </div>
   </div>

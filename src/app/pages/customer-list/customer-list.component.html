@@ -1,0 +1,18 @@
+<div>
+  <div class="customer-list-title">
+    <h2>MI LISTA DE LA COMPRA</h2>
+    <span
+      >*Los precios pueden ser diferentes si ha transcurrido mucho tiempo desde
+      que se guardó en tu lista.</span
+    >
+  </div>
+
+  <div>
+    <h3 class="results-title">Mis supermercados:</h3>
+  </div>
+  <app-supermarket-view
+    [externalProducts]="(products$ | async) ?? []"
+    [supermarkets]="supermarkets"
+    [isStickyMarket]="false"
+  ></app-supermarket-view>
+</div>

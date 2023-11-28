@@ -1,0 +1,8 @@
+<div
+  class="add-button"
+  [ngClass]="{ selected: isAdded }"
+  (click)="addProductInStore()"
+  title="Añadir a mi lista"
+>
+  <span>{{ isAdded ? "-" : "+" }}</span>
+</div>

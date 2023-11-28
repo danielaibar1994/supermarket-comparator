@@ -33,7 +33,7 @@ export class ProductRepository {
     const url =
       `${
         this.basesURL.consumUrl
-      }?limit=${100}&offset=${offset}&showRecommendations=false` +
+      }?limit=${50}&offset=${offset}&showRecommendations=false` +
       (query ? `&q=${query}` : '');
 
     return this.http.get(url).pipe(
