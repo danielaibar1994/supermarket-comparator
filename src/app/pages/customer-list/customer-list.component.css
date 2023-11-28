@@ -1,0 +1,25 @@
+.customer-list-title {
+    background: #acdcff;
+    border-radius: 0 0 25px 25px;
+    box-shadow: 1px 3px 5px -3px rgba(0, 0, 0, 0.75);
+    padding-bottom: 1rem;
+    display: grid;
+    text-align: center;
+    color: #0e4169;
+}
+
+.results-title {
+    margin: 24px 3rem;
+}
+
+
+@media (max-width: 1000px) {
+ 
+
+    .results-title {
+        margin: 20px 0.5rem;
+        font-size: 20px;
+    }
+
+  
+}

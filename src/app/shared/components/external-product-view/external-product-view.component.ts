@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { AddButtonComponent } from '../add-button/add-button.component';
-import { NgIf, NgOptimizedImage } from '@angular/common';
+import { IMAGE_CONFIG, NgIf, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-external-product-view',
@@ -9,6 +9,14 @@ import { NgIf, NgOptimizedImage } from '@angular/common';
   styleUrls: ['./external-product-view.component.css'],
   standalone: true,
   imports: [NgIf, AddButtonComponent, NgOptimizedImage],
+  providers: [
+    {
+      provide: IMAGE_CONFIG,
+      useValue: {
+        breakpoints: [16, 48, 96, 128, 384, 640, 750, 828, 1080, 1200, 1920],
+      },
+    },
+  ],
 })
 export class ExternalProductViewComponent {
   @Input() product!: ExternalProduct;

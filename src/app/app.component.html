@@ -1,2 +1,14 @@
-<router-outlet></router-outlet>
+<div class="router-container">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="bottom-bar">
+  <a
+    routerLink="/"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Precios</a
+  >
+  <a routerLink="/list" routerLinkActive="active-link">Mi Lista</a>
+</footer>
 <app-loader></app-loader>
