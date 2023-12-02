@@ -1,5 +1,10 @@
 <div>
   <div class="customer-list-title">
+    <fa-icon
+      [icon]="faListCheck"
+      size="3x"
+      [styles]="{ color: '#155487' }"
+    ></fa-icon>
     <h2>MI LISTA DE LA COMPRA</h2>
     <span
       >*Los precios pueden ser diferentes si ha transcurrido mucho tiempo desde
@@ -7,12 +12,25 @@
     >
   </div>
 
-  <div>
+  <div *ngIf="!!((products$ | async) ?? []).length">
     <h3 class="results-title">Mis supermercados:</h3>
   </div>
+
   <app-supermarket-view
     [externalProducts]="(products$ | async) ?? []"
     [supermarkets]="supermarkets"
     [isStickyMarket]="false"
   ></app-supermarket-view>
+
+  <div
+    *ngIf="!((products$ | async) ?? []).length"
+    style="text-align: center; padding: 3rem 1rem; color: #155487"
+  >
+    <fa-icon
+      [icon]="faCartShopping"
+      size="3x"
+      [styles]="{ color: '#155487' }"
+    ></fa-icon>
+    <p>Añade desde la pestaña de Precios tus productos favoritos.</p>
+  </div>
 </div>
