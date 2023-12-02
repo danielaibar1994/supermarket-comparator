@@ -1,11 +1,19 @@
 .customer-list-title {
-    background: #acdcff;
+    /* background: #acdcff; */
+
+    background: rgb(172,220,255);
+    background: -moz-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
+    background: linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endColorstr="#0e4169",GradientType=1);
+
+
     border-radius: 0 0 25px 25px;
     box-shadow: 1px 3px 5px -3px rgba(0, 0, 0, 0.75);
     padding: 1.5rem 0.5rem;
     display: grid;
     text-align: center;
-    color: #0e4169;
+    color: #0e395b;
 }
 
 .results-title {
