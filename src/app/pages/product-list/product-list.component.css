@@ -94,9 +94,12 @@
     display: block;
     width: 100%;
     text-align: center;
-    padding: 7rem 0 1rem 0;
-    text-transform: uppercase;
+    padding: 3rem 0 1rem 0;
     color: #104169;
+}
+
+.header-container h1 {
+    text-transform: uppercase;
 }
 
 .container-sticky.sticky {
@@ -215,7 +218,7 @@ span.selectedType {
 .copyright-container {
     text-align: center;
     font-size: 14px;
-    margin: 8px 4px;
+    margin: 16px 4px;
 }
 
 @media (max-width: 1000px) {
