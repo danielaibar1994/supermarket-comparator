@@ -5,10 +5,11 @@
     z-index: 200;
     width: 100%;
     height: 56px;
-    bottom: 0;
+   
     position: fixed;
     background: white;
-    box-shadow: 1px 3px 5px 2px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px -1px 5px 2px rgba(0, 0, 0, 0.75);
+    top: 0;
 }
 
 .bottom-bar a {
@@ -28,4 +29,18 @@ a.active-link {
     font-weight: 900;
     background: #155487;
     border-radius: 25px;
+}
+
+@media (max-width: 1000px) {
+ 
+
+    .bottom-bar {
+        bottom: 0;
+        top: initial;
+        box-shadow: 1px 3px 5px 2px rgba(0, 0, 0, 0.75);
+      
+    }
+    
+
+  
 }
