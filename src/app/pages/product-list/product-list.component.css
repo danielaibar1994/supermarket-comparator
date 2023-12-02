@@ -14,11 +14,11 @@
     margin: 0 auto;
     height: 2.5rem;
     border-radius: 14px;
-    border: 2px solid #005271;
+    border: 2px solid #155487;
     padding-left: 1rem;
     font-size: 1.2rem;
     display: block;
-    color: #005271;
+    color: #155487;
 }
 
 .search-container {
@@ -110,13 +110,13 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endCo
 }
 
 .container-sticky.sticky {
-    /* background: #acdcff; */
+    background: #acdcff;
 
-    background: rgb(172,220,255);
+    /* background: rgb(172,220,255);
     background: -moz-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
     background: -webkit-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
     background: linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endColorstr="#0e4169",GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endColorstr="#0e4169",GradientType=1); */
     position: fixed;
     top: 0;
     width: 100%;
