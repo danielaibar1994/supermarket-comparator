@@ -25,6 +25,8 @@ export class ProductRepository {
     aldiUrl:
       'https://l9knu74io7-dsn.algolia.net/1/indexes/*/queries?X-Algolia-Api-Key=19b0e28f08344395447c7bdeea32da58&X-Algolia-Application-Id=L9KNU74IO7',
     diaUrl: 'https://www.dia.es/api/v1/search-back/search/reduced',
+    masymasUrl: 'https://tienda.masymas.com/api/rest/V1.0/catalog/product',
+    alcampoUrl: '/apiAlcampo',
   };
 
   constructor(private http: HttpClient) {}
@@ -110,6 +112,34 @@ export class ProductRepository {
         data.search_items.map((hit: any) => ProductMapper.toDomain(hit, 'DIA'))
       )
     );
+  }
+
+  getMasymasData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.masymasUrl}?page=1&limit=20&offset=0&showRecommendations=false&q=${query}`;
+    return this.http.get(url).pipe(
+      first(),
+      catchError(() => of({ products: [] })),
+      map((data: any) =>
+        data.products.map((hit: any) => ProductMapper.toDomain(hit, 'MASYMAS'))
+      )
+    );
+  }
+
+  getAlcampoData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.alcampoUrl}?limit=40&offset=0&term=${query}`;
+    return this.http
+      .get(url, {
+        headers: {},
+      })
+      .pipe(
+        first(),
+        catchError(() => of({ entities: { product: {} } })),
+        map((data: any) =>
+          Object.keys(data.entities.product).map((hit: any) =>
+            ProductMapper.toDomain(data.entities.product[hit], 'ALCAMPO')
+          )
+        )
+      );
   }
 
   //
