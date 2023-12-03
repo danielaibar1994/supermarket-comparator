@@ -48,15 +48,7 @@ export class ProductListComponent implements OnInit {
   }
 
   supermarkets = SUPERMARKETS;
-  supermarketsSelected: { [key: string]: boolean } = {
-    consum: true,
-    mercadona: true,
-    carrefour: true,
-    aldi: true,
-    dia: true,
-    masymas: true,
-    alcampo: true,
-  };
+  supermarketsSelected!: { [key: string]: boolean };
 
   filterByType: 'SUPERMARKET' | 'PRICE' = 'SUPERMARKET';
   searchSubscription!: Subscription;
@@ -70,7 +62,7 @@ export class ProductListComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    // this.isSticky = window.scrollY >= 360;
+    this.isSticky = window.scrollY >= 400;
   }
 
   ngOnInit(): void {
@@ -83,6 +75,27 @@ export class ProductListComponent implements OnInit {
         })
       )
       .subscribe();
+
+    this.getSelectedMarkets();
+  }
+
+  getSelectedMarkets(): void {
+    let selected = localStorage.getItem('supermarketsSelected');
+
+    if (!selected) {
+      this.supermarketsSelected = {
+        consum: true,
+        mercadona: true,
+        carrefour: true,
+        aldi: true,
+        dia: true,
+        masymas: true,
+        alcampo: false,
+      };
+    } else {
+      console.warn(JSON.parse(selected));
+      this.supermarketsSelected = JSON.parse(selected);
+    }
   }
 
   onSearchQueryInput(event: Event): void {
@@ -97,6 +110,10 @@ export class ProductListComponent implements OnInit {
 
   clickSupermarket(name: string): void {
     this.supermarketsSelected[name] = !this.supermarketsSelected[name];
+    localStorage.setItem(
+      'supermarketsSelected',
+      JSON.stringify(this.supermarketsSelected)
+    );
     this.loadSupermarkets();
   }
 

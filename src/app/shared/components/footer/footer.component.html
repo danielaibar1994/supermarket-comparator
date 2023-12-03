@@ -36,9 +36,7 @@
       src="../../../../assets/images/logo-dia.png"
       alt="DIA"
     />
-  </div>
 
-  <div class="brand-logos">
     <img
       (click)="clickSupermarket('masymas')"
       [ngClass]="{ 'market-no-selected': !supermarketsSelected['masymas'] }"
@@ -46,7 +44,9 @@
       alt="MASYMAS"
       style="border-radius: 8px"
     />
+  </div>
 
+  <div class="brand-logos">
     <img
       (click)="clickSupermarket('alcampo')"
       [ngClass]="{ 'market-no-selected': !supermarketsSelected['alcampo'] }"
