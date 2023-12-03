@@ -1,7 +1,7 @@
 .footer {
   padding: 0.5rem;
   text-align: center;
-  height: 5rem;
+  /* height: 5rem; */
 }
 
 .brand-logos {
@@ -9,12 +9,14 @@
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+  flex-flow: wrap;
 }
 
 .brand-logos img {
-  width: 45px;
-  margin: 0 10px;
-  cursor: pointer;
+  width: 50px;
+  margin: 0 8px 14px 8px;
+    cursor: pointer;
+    object-fit: contain;
 }
 
 .footer-title {

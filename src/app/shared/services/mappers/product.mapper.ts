@@ -35,6 +35,14 @@ export class ProductMapper {
           ? entity.media[0].url
           : entity.productData.imageURL;
 
+      case 'MASYMAS':
+        return entity.media[0]
+          ? entity.media[0].url
+          : entity.productData.imageURL;
+
+      case 'ALCAMPO':
+        return entity.image.src;
+
       default:
         return '';
     }
@@ -51,6 +59,12 @@ export class ProductMapper {
 
       case 'CONSUM':
         return entity.productData.description;
+
+      case 'MASYMAS':
+        return entity.productData.description;
+
+      case 'ALCAMPO':
+        return entity.name;
       default:
         return '';
     }
@@ -67,6 +81,12 @@ export class ProductMapper {
 
       case 'CONSUM':
         return entity.productData.brand.name;
+
+      case 'MASYMAS':
+        return entity.productData.brand.name;
+
+      case 'ALCAMPO':
+        return entity.brand;
       default:
         return '';
     }
@@ -90,6 +110,15 @@ export class ProductMapper {
         return entity.priceData.prices[1]
           ? entity.priceData.prices[1].value.centAmount
           : entity.priceData.prices[0].value.centAmount;
+
+      case 'MASYMAS':
+        return entity.priceData.prices[1]
+          ? entity.priceData.prices[1].value.centAmount
+          : entity.priceData.prices[0].value.centAmount;
+
+      case 'ALCAMPO':
+        return entity.price.current.amount;
+
       default:
         return 0;
     }
@@ -115,6 +144,15 @@ export class ProductMapper {
         return entity.priceData.prices[1]
           ? entity.priceData.prices[0].value.centAmount
           : undefined;
+
+      case 'MASYMAS':
+        return entity.priceData.prices[1]
+          ? entity.priceData.prices[0].value.centAmount
+          : undefined;
+
+      case 'ALCAMPO':
+        return undefined;
+
       default:
         return undefined;
     }
@@ -137,6 +175,15 @@ export class ProductMapper {
       case 'CONSUM':
         return entity.productData.url;
 
+      case 'MASYMAS':
+        return entity.productData.url;
+
+      case 'ALCAMPO':
+        return (
+          'https://www.compraonline.alcampo.es/products/' +
+          entity.retailerProductId
+        );
+
       default:
         return '';
     }
@@ -157,7 +204,7 @@ export class ProductMapper {
       case 'MERCADONA':
         return '../../../../assets/images/logo-Mercadona-peque.png';
       case 'CARREFOUR':
-        return '../../../../assets/images/logo-peque-carrefur.webp';
+        return '../../../../assets/images/carre-logo.png';
       case 'DIA':
         return '../../../../assets/images/logo-dia.png';
       case 'ALDI':
@@ -165,6 +212,12 @@ export class ProductMapper {
 
       case 'CONSUM':
         return '../../../../assets/images/logo-peque-consum.png';
+
+      case 'MASYMAS':
+        return '../../../../assets/images/masymas-logo.png';
+
+      case 'ALCAMPO':
+        return '../../../../assets/images/alcampo-logo.png';
       default:
         return '';
     }

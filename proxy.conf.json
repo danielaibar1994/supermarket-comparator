@@ -1,0 +1,10 @@
+{
+  "/apiAlcampo": {
+    "target": "https://www.compraonline.alcampo.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiAlcampo": "/api/v5/products/search"
+    }
+  }
+}
