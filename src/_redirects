@@ -1,2 +1,2 @@
-/apiAlcampo/*  https://www.compraonline.alcampo.es/:splat 200
 /*  /index.html 200
+/apiAlcampo/*  https://www.compraonline.alcampo.es/api/v5/products/search:splat 200
