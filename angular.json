@@ -51,14 +51,17 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "consum-store:build:production",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
               "buildTarget": "consum-store:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
