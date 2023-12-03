@@ -24,19 +24,20 @@
     />
 
     <img
-      (click)="clickSupermarket('aldi')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['aldi'] }"
-      src="../../../../assets/images/logo-aldi.svg"
-      alt="ALDI"
-    />
-
-    <img
       (click)="clickSupermarket('dia')"
       [ngClass]="{ 'market-no-selected': !supermarketsSelected['dia'] }"
       src="../../../../assets/images/logo-dia.png"
       alt="DIA"
     />
+  </div>
 
+  <div class="brand-logos">
+    <img
+      (click)="clickSupermarket('aldi')"
+      [ngClass]="{ 'market-no-selected': !supermarketsSelected['aldi'] }"
+      src="../../../../assets/images/logo-aldi.svg"
+      alt="ALDI"
+    />
     <img
       (click)="clickSupermarket('masymas')"
       [ngClass]="{ 'market-no-selected': !supermarketsSelected['masymas'] }"
@@ -44,9 +45,7 @@
       alt="MASYMAS"
       style="border-radius: 8px"
     />
-  </div>
 
-  <div class="brand-logos">
     <img
       (click)="clickSupermarket('alcampo')"
       [ngClass]="{ 'market-no-selected': !supermarketsSelected['alcampo'] }"
