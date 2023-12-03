@@ -62,7 +62,7 @@ export class ProductListComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    this.isSticky = window.scrollY >= 400;
+    this.isSticky = window.scrollY >= 600;
   }
 
   ngOnInit(): void {
