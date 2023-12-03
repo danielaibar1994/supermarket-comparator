@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   Observable,
   catchError,
@@ -8,10 +8,12 @@ import {
   map,
   mergeMap,
   of,
+  switchMap,
   tap,
 } from 'rxjs';
 import { ExternalProduct, Product } from '../../interfaces/products.interface';
 import { ProductMapper } from '../mappers/product.mapper';
+import { query } from '@angular/animations';
 
 @Injectable({ providedIn: 'root' })
 export class ProductRepository {
@@ -141,6 +143,79 @@ export class ProductRepository {
         )
       );
   }
+
+  // Gadis
+
+  private lastSessionDate: Date = new Date(0); // Inicializado con una fecha muy antigua
+  private iSessionId: string | null = null;
+  private marketUri = '/apiGadis'; // Reemplaza con tu URI correcta
+
+  getGadisSession(query?: string): Observable<any> {
+    const now: Date = new Date();
+    const diff: number = Math.abs(
+      (now.getTime() - this.lastSessionDate.getTime()) / (1000 * 60)
+    );
+
+    // if (diff > 30 || this.iSessionId === null) {
+    const requestBody = 'resource=postalCode&cl_lang=es&cl_postal_code=15001';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    });
+
+    return this.http
+      .post(this.marketUri, requestBody, {
+        headers,
+        withCredentials: true,
+        observe: 'response',
+        responseType: 'text',
+      })
+      .pipe(
+        map((response) => {
+          // console.warn(response);
+          return response.headers.get('Set-Cookie');
+        }),
+        catchError((error) => {
+          this.logger.error('Gadis get sessionId error', error);
+          throw error;
+        }),
+        switchMap((sessionId) => {
+          this.iSessionId = sessionId;
+          this.lastSessionDate = new Date();
+          return this.getGadisData(query);
+        })
+      );
+    // }
+  }
+
+  getGadisData(query?: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    });
+
+    return this.http
+      .post(
+        '/apiGadis',
+        'resource=productsListInfiniteScroll&lang=es&currentPostalCode=15010&currentUserId=&checksBrandsFilter=&checksPropertiesFilters' +
+          '=&productsListFilterSearch=&productsPage=0&orderProducts=&templateName=&isSearch=true&searchData=' +
+          query,
+        { headers }
+      )
+      .pipe(
+        first(),
+        catchError(() => of({ dato: { productos: [] } })),
+        map((data: any) => {
+          return data.dato.productos.map((hit: any) =>
+            ProductMapper.toDomain(hit, 'GADIS')
+          );
+        })
+      );
+  }
+
+  private logger = {
+    error: (message: string, error: any) => {
+      console.error(message, error);
+    },
+  };
 
   //
   // EXPERIMENTAL

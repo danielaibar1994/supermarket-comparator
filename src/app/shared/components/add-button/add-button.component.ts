@@ -28,7 +28,12 @@ export class AddButtonComponent {
       this.removeProductInStore();
       return;
     }
-    this.store.setInfo(this.product);
+    this.store.setInfo({
+      ...this.product,
+      expire: new Date(),
+      update: new Date(),
+      firstPrice: this.product.unit_price,
+    });
     this.toastr.success('Producto añadido a tu lista', undefined, {
       timeOut: 2000,
       tapToDismiss: true,

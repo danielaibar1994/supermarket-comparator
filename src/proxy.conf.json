@@ -6,5 +6,13 @@
     "pathRewrite": {
       "^/apiAlcampo": "/api/v5/products/search"
     }
+  },
+  "/apiGadis": {
+    "target": "https://www.gadisline.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiGadis": "/content/themes/gadislineth/view/functions/ajax_apiCinfo.php"
+    }
   }
 }

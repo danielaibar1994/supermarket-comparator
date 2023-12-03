@@ -62,7 +62,7 @@ export class ProductListComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    this.isSticky = window.scrollY >= 600;
+    this.isSticky = window.scrollY >= 700;
   }
 
   ngOnInit(): void {
@@ -91,10 +91,26 @@ export class ProductListComponent implements OnInit {
         dia: true,
         masymas: true,
         alcampo: false,
+        gadis: false,
       };
     } else {
-      console.warn(JSON.parse(selected));
-      this.supermarketsSelected = JSON.parse(selected);
+      const parsed = JSON.parse(selected);
+
+      if (Object.keys(parsed).length < 8) {
+        // New markets added, so need to restore localstorage
+        this.supermarketsSelected = {
+          consum: true,
+          mercadona: true,
+          carrefour: true,
+          aldi: true,
+          dia: true,
+          masymas: true,
+          alcampo: false,
+          gadis: false,
+        };
+      } else {
+        this.supermarketsSelected = parsed;
+      }
     }
   }
 

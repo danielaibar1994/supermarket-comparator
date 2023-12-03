@@ -52,5 +52,19 @@
       src="../../../../assets/images/alcampo-logo.png"
       alt="ALCAMPO"
     />
+
+    <img
+      (click)="clickSupermarket('gadis')"
+      [ngClass]="{ 'market-no-selected': !supermarketsSelected['gadis'] }"
+      src="../../../../assets/images/gadis-logo.jpeg"
+      alt="GADIS"
+    />
+  </div>
+
+  <div
+    *ngIf="supermarketsSelected['gadis']"
+    style="color: #10436d; font-size: 14px"
+  >
+    * Gadis puede demorar la visualizacion de la lista.
   </div>
 </div>
