@@ -19,7 +19,7 @@ import { PriceComparatorComponent } from '../../shared/components/price-comparat
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
@@ -33,6 +33,7 @@ import { NgClass, NgIf } from '@angular/common';
     NgIf,
     SupermarketViewComponent,
     PriceComparatorComponent,
+    NgOptimizedImage,
   ],
 })
 export class ProductListComponent implements OnInit {
@@ -53,6 +54,8 @@ export class ProductListComponent implements OnInit {
     carrefour: true,
     aldi: true,
     dia: true,
+    masymas: true,
+    alcampo: true,
   };
 
   filterByType: 'SUPERMARKET' | 'PRICE' = 'SUPERMARKET';
