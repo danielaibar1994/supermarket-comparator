@@ -43,6 +43,12 @@ export class ProductMapper {
       case 'ALCAMPO':
         return entity.image.src;
 
+      case 'GADIS':
+        return (
+          'https://www.gadisline.com/' +
+          entity.imagenes[0].path.split('/html/')[1]
+        );
+
       default:
         return '';
     }
@@ -65,6 +71,9 @@ export class ProductMapper {
 
       case 'ALCAMPO':
         return entity.name;
+
+      case 'GADIS':
+        return entity.descripcionLarga;
       default:
         return '';
     }
@@ -87,6 +96,9 @@ export class ProductMapper {
 
       case 'ALCAMPO':
         return entity.brand;
+
+      case 'GADIS':
+        return entity.marca;
       default:
         return '';
     }
@@ -118,6 +130,9 @@ export class ProductMapper {
 
       case 'ALCAMPO':
         return entity.price.current.amount;
+
+      case 'GADIS':
+        return entity.precio;
 
       default:
         return 0;
@@ -153,6 +168,9 @@ export class ProductMapper {
       case 'ALCAMPO':
         return undefined;
 
+      case 'GADIS':
+        return undefined;
+
       default:
         return undefined;
     }
@@ -182,6 +200,11 @@ export class ProductMapper {
         return (
           'https://www.compraonline.alcampo.es/products/' +
           entity.retailerProductId
+        );
+
+      case 'GADIS':
+        return (
+          'https://www.gadisline.com/producto/?productID=' + entity.productoId
         );
 
       default:
@@ -218,6 +241,9 @@ export class ProductMapper {
 
       case 'ALCAMPO':
         return '../../../../assets/images/alcampo-logo.png';
+
+      case 'GADIS':
+        return '../../../../assets/images/gadis-logo.jpeg';
       default:
         return '';
     }

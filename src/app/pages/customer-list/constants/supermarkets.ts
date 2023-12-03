@@ -76,4 +76,15 @@ export const SUPERMARKETS: any = [
     opened: false,
     filter: 'OFF',
   },
+  {
+    id: 8,
+    name: 'GADIS',
+    title: 'GADIS',
+    src: '../../../assets/images/gadis-logo.jpeg',
+    srcWidth: '',
+    variable: 'gadisProducts',
+    background: '#552a19',
+    opened: false,
+    filter: 'OFF',
+  },
 ];

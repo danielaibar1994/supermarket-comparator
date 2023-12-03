@@ -1,11 +1,11 @@
 .customer-list-title {
     /* background: #acdcff; */
 
-    background: rgb(172,220,255);
-    background: -moz-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-    background: linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endColorstr="#0e4169",GradientType=1);
+    background: rgb(172, 220, 255);
+    background: -moz-linear-gradient(0deg, rgba(172, 220, 255, 1) 0%, rgba(14, 65, 105, 1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(172, 220, 255, 1) 0%, rgba(14, 65, 105, 1) 100%);
+    background: linear-gradient(0deg, rgba(172, 220, 255, 1) 0%, rgba(14, 65, 105, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff", endColorstr="#0e4169", GradientType=1);
 
 
     border-radius: 0 0 25px 25px;
@@ -22,12 +22,12 @@
 
 
 @media (max-width: 1000px) {
- 
+
 
     .results-title {
         margin: 20px 0.5rem;
         font-size: 20px;
     }
 
-  
+
 }
