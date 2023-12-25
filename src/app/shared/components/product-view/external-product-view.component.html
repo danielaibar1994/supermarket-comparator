@@ -97,14 +97,9 @@
 
           <span id="grid-widget--price" class="widget-prod__price--bold"
             >{{ product.unit_price }}&nbsp;€
-            <span
-              *ngIf="type === 'MERCA'"
-              class="packaging"
-              style="color: gray; font-size: 0.8rem"
-              >{{
-                product.packaging?.includes("Pack") ? " /pack" : " /ud"
-              }}</span
-            ></span
+            <span *ngIf="type === 'MERCA'" class="packaging">{{
+              product.packaging?.includes("Pack") ? " /pack" : " /ud"
+            }}</span></span
           >
         </div>
       </div>

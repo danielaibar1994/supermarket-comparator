@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, combineLatest, forkJoin, of, tap } from 'rxjs';
-import {
-  ExternalProduct,
-  Product,
-} from 'src/app/shared/interfaces/products.interface';
+import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { ProductRepository } from 'src/app/shared/services/repository/product.repository';
 import { SignalService } from 'src/app/shared/services/state.service';
 
-const initialState: initialProductState = {
-  products: [],
+export const initialState: initialProductState = {
   externalProducts: [],
 };
 
 export interface initialProductState {
-  products: Product[];
   externalProducts: ExternalProduct[];
 }
 
@@ -22,10 +17,6 @@ export interface initialProductState {
 })
 export class ProductState extends SignalService<initialProductState> {
   // Selectors - public
-  get productsSelector() {
-    return this.state.products;
-  }
-
   get externalProductsSelector() {
     return this.state.externalProducts;
   }
@@ -65,9 +56,12 @@ export class ProductState extends SignalService<initialProductState> {
         )
         .subscribe();
     } else {
-      this.setProductReducer([]);
       this.setExternalProductReducer([]);
     }
+  }
+
+  clear(): void {
+    this.clearProductReducer();
   }
 
   // EFFECTS - private
@@ -101,11 +95,12 @@ export class ProductState extends SignalService<initialProductState> {
   }
 
   // REDUCER - private
-  private setProductReducer(products: Product[]) {
-    this.setState({ products: [...products] });
-  }
 
   private setExternalProductReducer(products: any[]) {
     this.setState({ externalProducts: [...products] });
+  }
+
+  private clearProductReducer() {
+    this.setState({ externalProducts: [] });
   }
 }

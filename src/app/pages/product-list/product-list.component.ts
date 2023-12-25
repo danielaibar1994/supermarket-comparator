@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -12,7 +13,7 @@ import {
   distinctUntilChanged,
   tap,
 } from 'rxjs';
-import { ProductState } from 'src/app/pages/product-list/store/product.store';
+import { ProductState } from 'src/app/+state/product.store';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { SUPERMARKETS } from './constants/supermarkets';
 import { PriceComparatorComponent } from '../../shared/components/price-comparator/price-comparator.component';
@@ -36,7 +37,7 @@ import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
     NgOptimizedImage,
   ],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('editor') editor!: ElementRef;
 
   get empty(): boolean {
@@ -44,7 +45,7 @@ export class ProductListComponent implements OnInit {
   }
 
   get externalProducts(): ExternalProduct[] {
-    return this.productService.externalProductsSelector;
+    return this.store.externalProductsSelector;
   }
 
   supermarkets = SUPERMARKETS;
@@ -58,7 +59,7 @@ export class ProductListComponent implements OnInit {
 
   private readonly searchSubject = new Subject<string | undefined>();
 
-  constructor(private readonly productService: ProductState) {}
+  constructor(private readonly store: ProductState) {}
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
@@ -137,8 +138,12 @@ export class ProductListComponent implements OnInit {
     this.filterByType = type;
   }
 
+  ngOnDestroy(): void {
+    this.store.clear();
+  }
+
   private loadSupermarkets(searchQuery?: string): void {
-    this.productService.loadSupermarkets(
+    this.store.loadSupermarkets(
       this.supermarketsSelected,
       searchQuery ?? this.inputSearch
     );

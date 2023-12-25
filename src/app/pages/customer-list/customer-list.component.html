@@ -1,15 +1,6 @@
 <div>
   <div class="customer-list-title">
-    <div
-      style="
-        border: 4px solid white;
-        border-radius: 50px;
-        width: fit-content;
-        margin: 0 auto;
-        padding: 13px;
-        box-shadow: 0px 1px 0px #000000;
-      "
-    >
+    <div class="customer-icon-container">
       <fa-icon
         [icon]="faListCheck"
         size="3x"
@@ -17,9 +8,7 @@
       ></fa-icon>
     </div>
 
-    <h2 style="color: white; text-shadow: 0px 1px 1px #000000">
-      MI LISTA DE LA COMPRA
-    </h2>
+    <h2 class="customer-title">MI LISTA DE LA COMPRA</h2>
     <span
       >* Los precios pueden ser diferentes si ha transcurrido mucho tiempo desde
       que se guardó en tu lista.</span
@@ -36,10 +25,7 @@
     [isStickyMarket]="false"
   ></app-supermarket-view>
 
-  <div
-    *ngIf="!((products$ | async) ?? []).length"
-    style="text-align: center; padding: 3rem 1rem; color: #155487"
-  >
+  <div *ngIf="!((products$ | async) ?? []).length" class="empty-customer-list">
     <fa-icon
       [icon]="faCartShopping"
       size="3x"
