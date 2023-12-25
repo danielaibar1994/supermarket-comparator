@@ -1,14 +1,14 @@
 import { Component, Input, TrackByFunction } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
-import { ExternalProductViewComponent } from '../external-product-view/external-product-view.component';
+import { ExternalProductViewComponent } from '../product-view/external-product-view.component';
 import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-price-comparator',
-    templateUrl: './price-comparator.component.html',
-    styleUrls: ['./price-comparator.component.css'],
-    standalone: true,
-    imports: [NgFor, ExternalProductViewComponent],
+  selector: 'app-price-comparator',
+  templateUrl: './price-comparator.component.html',
+  styleUrls: ['./price-comparator.component.css'],
+  standalone: true,
+  imports: [NgFor, ExternalProductViewComponent],
 })
 export class PriceComparatorComponent {
   @Input() externalProducts!: ExternalProduct[];

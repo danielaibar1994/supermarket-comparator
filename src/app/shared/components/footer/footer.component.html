@@ -3,68 +3,34 @@
     <span class="market-support">Selecciona tus supermercados:</span>
   </div>
   <div class="brand-logos">
-    <img
-      (click)="clickSupermarket('consum')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['consum'] }"
-      src="../../../../assets/images/logo-peque-consum.png"
-      alt="Consum"
-    />
-    <img
-      (click)="clickSupermarket('mercadona')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['mercadona'] }"
-      src="../../../../assets/images/logo-Mercadona-peque.png"
-      alt="Mercadona"
-      style="border-radius: 25px"
-    />
-    <img
-      (click)="clickSupermarket('carrefour')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['carrefour'] }"
-      src="../../../../assets/images/carre-logo.png"
-      alt="Carrefour"
-    />
-
-    <img
-      (click)="clickSupermarket('dia')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['dia'] }"
-      src="../../../../assets/images/logo-dia.png"
-      alt="DIA"
-    />
+    <ng-container *ngFor="let market of SUPERMARKETS_LIST">
+      <img
+        (click)="clickSupermarket(market.name)"
+        [ngClass]="{
+          'market-no-selected': !supermarketsSelected[market.name.toString()]
+        }"
+        [src]="market.icon"
+        [alt]="market.name"
+        [style]="market.style ?? ''"
+      />
+    </ng-container>
   </div>
 
   <div class="brand-logos">
-    <img
-      (click)="clickSupermarket('aldi')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['aldi'] }"
-      src="../../../../assets/images/logo-aldi.svg"
-      alt="ALDI"
-    />
-    <img
-      (click)="clickSupermarket('masymas')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['masymas'] }"
-      src="../../../../assets/images/masymas-logo.png"
-      alt="MASYMAS"
-      style="border-radius: 8px"
-    />
-
-    <img
-      (click)="clickSupermarket('alcampo')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['alcampo'] }"
-      src="../../../../assets/images/alcampo-logo.png"
-      alt="ALCAMPO"
-    />
-
-    <img
-      (click)="clickSupermarket('gadis')"
-      [ngClass]="{ 'market-no-selected': !supermarketsSelected['gadis'] }"
-      src="../../../../assets/images/gadis-logo.jpeg"
-      alt="GADIS"
-    />
+    <ng-container *ngFor="let market of SUPERMARKETS_LIST_SECOND">
+      <img
+        (click)="clickSupermarket(market.name)"
+        [ngClass]="{
+          'market-no-selected': !supermarketsSelected[market.name.toString()]
+        }"
+        [src]="market.icon"
+        [alt]="market.name"
+        [style]="market.style ?? ''"
+      />
+    </ng-container>
   </div>
 
-  <div
-    *ngIf="supermarketsSelected['gadis']"
-    style="color: #10436d; font-size: 14px"
-  >
+  <div *ngIf="supermarketsSelected['gadis']" class="message-info-footer">
     * Gadis puede demorar la visualizacion de la lista.
   </div>
 </div>
