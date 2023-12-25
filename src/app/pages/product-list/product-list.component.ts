@@ -13,7 +13,6 @@ import {
   distinctUntilChanged,
   tap,
 } from 'rxjs';
-
 import { SUPERMARKETS } from './constants/supermarkets';
 import { PriceComparatorComponent } from '../../shared/components/price-comparator/price-comparator.component';
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
