@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SupermarketViewComponent } from 'src/app/shared/components/supermarket-view/supermarket-view.component';
 
-import { EventsStorageService } from 'src/app/shared/services/events-storage.service';
 import { Observable } from 'rxjs';
-import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { SUPERMARKETS } from './constants/supermarkets';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCartShopping, faListCheck } from '@fortawesome/free-solid-svg-icons';
+import { EventsStorageService } from '../../shared/services/events-storage.service';
+import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
+import { ExternalProduct } from '../../shared/interfaces/products.interface';
 
 @Component({
   selector: 'app-customer-list',

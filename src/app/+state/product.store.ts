@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, combineLatest, forkJoin, of, tap } from 'rxjs';
-import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
-import { ProductRepository } from 'src/app/shared/services/repository/product.repository';
-import { SignalService } from 'src/app/shared/services/state.service';
+import { SignalService } from '../shared/services/state.service';
+import { ExternalProduct } from '../shared/interfaces/products.interface';
+import { ProductRepository } from '../shared/services/repository/product.repository';
 
 export const initialState: initialProductState = {
   externalProducts: [],
