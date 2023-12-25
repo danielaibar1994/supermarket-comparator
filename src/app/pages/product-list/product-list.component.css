@@ -82,14 +82,12 @@
 }
 
 .home-container {
-    /* background: #acdcff;
-     */
 
-     background: rgb(172,220,255);
-background: -moz-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-background: -webkit-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-background: linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endColorstr="#0e4169",GradientType=1);
+    background: rgb(172, 220, 255);
+    background: -moz-linear-gradient(0deg, rgba(172, 220, 255, 1) 0%, rgba(14, 65, 105, 1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(172, 220, 255, 1) 0%, rgba(14, 65, 105, 1) 100%);
+    background: linear-gradient(0deg, rgba(172, 220, 255, 1) 0%, rgba(14, 65, 105, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff", endColorstr="#0e4169", GradientType=1);
 
     border-radius: 0 0 25px 25px;
     -webkit-box-shadow: 1px 3px 5px -3px rgba(0, 0, 0, 0.75);
@@ -110,14 +108,19 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endCo
     text-transform: uppercase;
 }
 
+.header-container h3 {
+    color: white;
+    text-shadow: 0px 1px 1px #000000;
+    margin: 1rem
+}
+
+.header-container img {
+    width: 200px;
+    filter: drop-shadow(0 0 0.75rem #acdcff)
+}
+
 .container-sticky.sticky {
     background: #acdcff;
-
-    /* background: rgb(172,220,255);
-    background: -moz-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-    background: linear-gradient(0deg, rgba(172,220,255,1) 0%, rgba(14,65,105,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#acdcff",endColorstr="#0e4169",GradientType=1); */
     position: fixed;
     top: 0;
     width: 100%;
@@ -204,11 +207,6 @@ span.selectedType {
     margin: 28px 3rem 0;
 }
 
-/* .types-container {
-    height: 60px;
-    display: flow-root;
-} */
-
 .container-types {
     height: fit-content;
     display: flow-root;
@@ -235,6 +233,11 @@ span.selectedType {
     text-align: center;
     font-size: 14px;
     margin: 16px 4px;
+}
+
+.results-title-container, .types-buttons-container {
+    float: left;
+    font-size: 14px
 }
 
 @media (max-width: 1000px) {

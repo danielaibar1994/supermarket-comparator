@@ -62,9 +62,11 @@ div#infoproduct-content--offers {
 .flex-grow-1 {
   flex-grow: 1 !important;
 }
+
 .flex-column {
   flex-direction: column !important;
 }
+
 .d-flex {
   display: flex !important;
 }
@@ -82,6 +84,7 @@ div#infoproduct-content--offers {
 .widget-prod__boximage {
   cursor: auto;
 }
+
 *,
 :after,
 :before {
@@ -103,11 +106,11 @@ a:active {
 img {
   vertical-align: middle;
   border-style: none;
- 
+
 }
 
 img.productImage {
-   height: 135px;
+  height: 135px;
 }
 
 .widget-prod__boximage-pictos {
@@ -162,12 +165,15 @@ img.productImage {
 .justify-content-end {
   justify-content: flex-end !important;
 }
+
 .flex-nowrap {
   flex-wrap: nowrap !important;
 }
+
 .flex-column {
   flex-direction: column !important;
 }
+
 .d-flex {
   display: flex !important;
 }
@@ -175,9 +181,11 @@ img.productImage {
 .widget-prod__price--row {
   flex-direction: row;
 }
+
 .justify-content-end {
   justify-content: flex-end !important;
 }
+
 .d-flex {
   display: flex !important;
 }
@@ -200,15 +208,18 @@ img.productImage {
 .u-width--50 {
   width: 3.125rem;
 }
+
 .discount {
   border: 2px solid #ff5019;
 }
+
 .pannel--check {
   font-size: 0.75rem;
   text-align: center;
   background-color: #fff;
   border-radius: 1.5rem;
 }
+
 .pannel--check {
   font-size: 0.75rem;
   text-align: center;
@@ -239,23 +250,24 @@ h3.widget-prod__info-description.u-text--truncate-2 {
   margin-bottom: 3px;
   font-family: roboto;
 }
+
 .u-size--16,
 cmp-actions-button .dropdown-toggle .tol-icon-component,
 cmp-support .dropdown-toggle .tol-icon-component,
 cmp-language .dropdown-toggle .tol-icon-component {
   font-size: 1rem;
 }
+
 .u-line--through-diagonal,
 .widget-prod__price--line-through,
 .hatted-amount-component .hat-component__top,
 .promotions-line__item--final-price {
-  background-image: linear-gradient(
-    to top left,
-    rgba(255, 255, 255, 0.0392156863) 48%,
-    #ff003b,
-    rgba(255, 255, 255, 0.0392156863) 52%
-  );
+  background-image: linear-gradient(to top left,
+      rgba(255, 255, 255, 0.0392156863) 48%,
+      #ff003b,
+      rgba(255, 255, 255, 0.0392156863) 52%);
 }
+
 .u-danger {
   color: #ff003b;
   font-family: inherit;
@@ -279,6 +291,11 @@ cmp-language .dropdown-toggle .tol-icon-component {
   width: 40px;
   right: 0;
   margin-right: 16px;
+}
+
+.packaging {
+  color: gray;
+  font-size: 0.8rem
 }
 
 @media (max-width: 1000px) {

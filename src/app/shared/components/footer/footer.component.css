@@ -15,8 +15,8 @@
 .brand-logos img {
   width: 46px;
   margin: 0 8px 14px 8px;
-    cursor: pointer;
-    object-fit: contain;
+  cursor: pointer;
+  object-fit: contain;
 }
 
 .footer-title {
@@ -31,4 +31,9 @@
 .market-support {
   font-size: 1.2rem;
   color: #10436d;
+}
+
+.message-info-footer {
+  color: #10436d;
+  font-size: 14px
 }
