@@ -13,14 +13,15 @@ import {
   distinctUntilChanged,
   tap,
 } from 'rxjs';
-import { ProductState } from 'src/app/+state/product.store';
-import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { SUPERMARKETS } from './constants/supermarkets';
 import { PriceComparatorComponent } from '../../shared/components/price-comparator/price-comparator.component';
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
+import { ExternalProduct } from '../../shared/interfaces/products.interface';
+import { ProductState } from '../../+state/product.store';
+import { BrowserStorageService } from '../../shared/services/browser-storage.service';
 
 @Component({
   selector: 'app-product-list',
@@ -59,7 +60,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   private readonly searchSubject = new Subject<string | undefined>();
 
-  constructor(private readonly store: ProductState) {}
+  constructor(
+    private readonly store: ProductState,
+    private readonly browserStorageService: BrowserStorageService
+  ) {}
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
@@ -81,7 +85,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   getSelectedMarkets(): void {
-    let selected = localStorage.getItem('supermarketsSelected');
+    // let selected = localStorage.getItem('supermarketsSelected');
+    let selected = this.browserStorageService.get('supermarketsSelected');
 
     if (!selected) {
       this.supermarketsSelected = {

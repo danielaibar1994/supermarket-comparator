@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, combineLatest, forkJoin, of, tap } from 'rxjs';
-import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
-import { ProductRepository } from 'src/app/shared/services/repository/product.repository';
-import { SignalService } from 'src/app/shared/services/state.service';
+import { SignalService } from '../shared/services/state.service';
+import { ExternalProduct } from '../shared/interfaces/products.interface';
+import { ProductRepository } from '../shared/services/repository/product.repository';
+import { LoaderService } from '../shared/components/loader/service/loader.service';
 
 export const initialState: initialProductState = {
   externalProducts: [],
@@ -21,13 +22,17 @@ export class ProductState extends SignalService<initialProductState> {
     return this.state.externalProducts;
   }
 
-  constructor(private readonly productRepository: ProductRepository) {
+  constructor(
+    private readonly productRepository: ProductRepository,
+    private readonly loader: LoaderService
+  ) {
     super(initialState);
   }
 
   // Actions - public
   loadSupermarkets(selected: { [key: string]: boolean }, query?: string) {
     if (query) {
+      this.loader.setLoading(true);
       forkJoin([...this.loadExternalProductEffect(query, selected)])
         .pipe(
           tap(
@@ -51,6 +56,7 @@ export class ProductState extends SignalService<initialProductState> {
                 ...alcampoProducts,
                 ...gadisProducts,
               ]);
+              this.loader.setLoading(false);
             }
           )
         )
