@@ -18,7 +18,7 @@ export class LocalStorageService {
 
   localStorageData: Storage = inject(BROWSER_STORAGE);
 
-  // constructor(@Inject(BROWSER_STORAGE) public localStorageData: Storage) {}
+  // constructor( @Inject(LocalStorage) private localStorage) {}
 
   // private localStorage = localStorage;
 

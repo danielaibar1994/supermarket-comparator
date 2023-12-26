@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './add-button.component.css',
   standalone: true,
   imports: [NgClass],
+  providers: [EventsStorageService],
 })
 export class AddButtonComponent {
   @Input() product!: ExternalProduct;

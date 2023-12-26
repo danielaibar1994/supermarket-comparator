@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { ExternalProduct } from '../interfaces/products.interface';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'any' })
 export class EventsStorageService extends LocalStorageService {
   override myLocalStorageTag = 'myListStorage';
   override storageType: 'ONE' | 'MULTIPLE' = 'MULTIPLE';
