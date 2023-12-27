@@ -11,7 +11,7 @@ export const SUPERMARKETS_LIST = [
     sector: 1,
   },
   {
-    name: 'carrefur',
+    name: 'carrefour',
     icon: '../../../../assets/images/carre-logo.png',
     sector: 1,
   },
