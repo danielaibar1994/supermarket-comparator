@@ -13,6 +13,7 @@ import {
 } from 'rxjs';
 import { ExternalProduct, Product } from '../../interfaces/products.interface';
 import { ProductMapper } from '../mappers/product.mapper';
+import { query } from '@angular/animations';
 
 @Injectable({ providedIn: 'root' })
 export class ProductRepository {

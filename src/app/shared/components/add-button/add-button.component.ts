@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { NgClass } from '@angular/common';
-import { ShoppingListState } from 'src/app/+state/shopping-list.store';
+import { EventsStorageService } from '../../services/events-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-button',
@@ -9,6 +10,7 @@ import { ShoppingListState } from 'src/app/+state/shopping-list.store';
   styleUrl: './add-button.component.css',
   standalone: true,
   imports: [NgClass],
+  providers: [EventsStorageService],
 })
 export class AddButtonComponent {
   @Input() product!: ExternalProduct;
@@ -17,18 +19,29 @@ export class AddButtonComponent {
     return this.store.isAdded(this.product);
   }
 
-  constructor(private readonly store: ShoppingListState) {}
+  constructor(
+    private readonly store: EventsStorageService,
+    private toastr: ToastrService
+  ) {}
 
   addProductInStore() {
     if (this.isAdded) {
       this.removeProductInStore();
       return;
     }
-    this.store.addToList({
+    this.store.setInfo({
       ...this.product,
       expire: new Date(),
       update: new Date(),
       firstPrice: this.product.unit_price,
+    });
+    this.toastr.success('Producto añadido a tu lista', undefined, {
+      timeOut: 2000,
+      tapToDismiss: true,
+      progressBar: true,
+      newestOnTop: true,
+      closeButton: true,
+      positionClass: 'toast-top-full-width',
     });
   }
 

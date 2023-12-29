@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class SessionStorageService {
+export class LocalStorageService {
   myData$ = new BehaviorSubject<any>(null);
   myDataObservable$ = this.myData$.asObservable();
 
-  myLocalStorageTag = 'mySessionStorage';
+  myLocalStorageTag = 'myLocalStorage';
   storageType: 'ONE' | 'MULTIPLE' = 'ONE';
   parameterId = 'id';
   duplicateData = true;
 
-  private localStorage = sessionStorage;
+  private localStorage = localStorage;
 
   setInfo(data: any): void {
     if (this.storageType.includes('ONE')) {
@@ -19,10 +19,6 @@ export class SessionStorageService {
     } else {
       this.setMultipleInfo(data);
     }
-  }
-
-  setArrayInfo(data: any[]): void {
-    data.forEach((d) => this.setMultipleInfo(d));
   }
 
   loadInfo(localStoreTag: string): void {
