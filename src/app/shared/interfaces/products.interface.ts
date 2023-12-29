@@ -1,3 +1,9 @@
+export interface ExtendedExternalProduct extends ExternalProduct {
+  expire?: Date;
+  update?: Date;
+  firstPrice?: number;
+}
+
 export interface ExternalProduct {
   href: string;
   display_name: string;

@@ -1,0 +1,48 @@
+<div>
+  <div class="customer-list-title">
+    <div class="customer-icon-container">
+      <fa-icon
+        [icon]="faUser"
+        size="3x"
+        [styles]="{ color: 'white' }"
+      ></fa-icon>
+    </div>
+
+    <h2 class="customer-title">Perfil</h2>
+  </div>
+
+  <ng-container *ngIf="profileSectionSelected === null">
+    <div style="margin: 0 16px">
+      <div class="profile-section" (click)="changeSection('PROFILE-EDIT')">
+        <div>
+          <span>Mis datos </span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="profile-section" (click)="changeSection('PRIVACY')">
+        <div>
+          <span>Privacidad</span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="profile-section" (click)="changeSection('HELP')">
+        <div>
+          <span>Centro de Ayuda</span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- <ng-container *ngIf="profileSectionSelected === 'PROFILE'">
+    <app-form *ngIf="session" [userSession]="session"></app-form>
+  </ng-container> -->
+
+  <div style="text-align: center">
+    <button class="button block close" (click)="signOut()">
+      Cerrar sesión
+    </button>
+  </div>
+</div>

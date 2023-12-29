@@ -15,17 +15,20 @@
     >
   </div>
 
-  <div *ngIf="!!((products$ | async) ?? []).length">
+  <div *ngIf="!!products$.length">
     <h3 class="results-title">Mis supermercados:</h3>
   </div>
 
   <app-supermarket-view
-    [externalProducts]="(products$ | async) ?? []"
+    [externalProducts]="products$"
     [supermarkets]="supermarkets"
     [isStickyMarket]="false"
   ></app-supermarket-view>
 
-  <div *ngIf="!((products$ | async) ?? []).length" class="empty-customer-list">
+  <div
+    *ngIf="!(products$ ?? []).length && !loading$"
+    class="empty-customer-list"
+  >
     <fa-icon
       [icon]="faCartShopping"
       size="3x"

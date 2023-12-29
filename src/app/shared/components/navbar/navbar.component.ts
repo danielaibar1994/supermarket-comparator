@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faListCheck, faShop } from '@fortawesome/free-solid-svg-icons';
+import { faListCheck, faShop, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -14,4 +14,5 @@ import { faListCheck, faShop } from '@fortawesome/free-solid-svg-icons';
 export class NavbarComponent {
   faListCheck = faListCheck;
   faShop = faShop;
+  faUser = faUser;
 }
