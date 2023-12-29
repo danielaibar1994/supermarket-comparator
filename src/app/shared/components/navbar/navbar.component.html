@@ -1,16 +1,22 @@
-<footer class="bottom-bar" style="font-size: 14px">
+<footer class="bottom-bar">
   <a
     routerLink="/"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
   >
-    <fa-icon class="icon-nav" [icon]="faShop" size="lg"></fa-icon>
+    <fa-icon [icon]="faShop" size="lg"></fa-icon>
 
     <span> Precios </span>
   </a>
   <a routerLink="/list" routerLinkActive="active-link">
-    <fa-icon class="icon-nav" [icon]="faListCheck" size="lg"></fa-icon>
+    <fa-icon [icon]="faListCheck" size="lg"></fa-icon>
 
     <span>Mi Lista</span>
+  </a>
+
+  <a routerLink="/profile" routerLinkActive="active-link">
+    <fa-icon class="icon-nav" [icon]="faUser" size="lg"></fa-icon>
+
+    <span>Perfil</span>
   </a>
 </footer>

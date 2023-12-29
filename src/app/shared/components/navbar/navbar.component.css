@@ -15,7 +15,7 @@
 }
 
 .bottom-bar a {
-    padding: 11px 50px;
+    padding: 11px 35px;
     cursor: pointer;
     text-decoration: none;
     color: #155487;
@@ -32,10 +32,6 @@ a.active-link {
     background: #155487;
     border-radius: 10px;
     box-shadow: 0px 0px 4px 0px #262626;
-}
-
-.icon-nav {
-    font-size: 14px;
 }
 
 /* @media (max-width: 1000px) {

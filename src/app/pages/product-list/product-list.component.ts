@@ -13,15 +13,16 @@ import {
   distinctUntilChanged,
   tap,
 } from 'rxjs';
+import { ProductState } from 'src/app/+state/product.store';
+import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { SUPERMARKETS } from './constants/supermarkets';
 import { PriceComparatorComponent } from '../../shared/components/price-comparator/price-comparator.component';
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
-import { ExternalProduct } from '../../shared/interfaces/products.interface';
-import { ProductState } from '../../+state/product.store';
-import { BrowserStorageService } from '../../shared/services/browser-storage.service';
+import { ShoppingListState } from 'src/app/+state/shopping-list.store';
+import { SupabaseService } from 'src/app/shared/services/supabase.service';
 
 @Component({
   selector: 'app-product-list',
@@ -60,9 +61,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   private readonly searchSubject = new Subject<string | undefined>();
 
+  private userIdShoppingList = '';
+
   constructor(
     private readonly store: ProductState,
-    private readonly browserStorageService: BrowserStorageService
+    private readonly listStore: ShoppingListState,
+    private readonly supabase: SupabaseService
   ) {}
 
   @HostListener('window:scroll', ['$event'])
@@ -81,12 +85,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
+    this.supabase.authChanges((_, session) => {
+      if (session?.user && session.user.id !== this.userIdShoppingList) {
+        this.userIdShoppingList = session.user.id;
+        this.fetchShoppingList();
+      }
+    });
+
     this.getSelectedMarkets();
   }
 
+  fetchShoppingList() {
+    this.listStore.getDataShoppingList();
+  }
+
   getSelectedMarkets(): void {
-    // let selected = localStorage.getItem('supermarketsSelected');
-    let selected = this.browserStorageService.get('supermarketsSelected');
+    let selected = localStorage.getItem('supermarketsSelected');
 
     if (!selected) {
       this.supermarketsSelected = {
