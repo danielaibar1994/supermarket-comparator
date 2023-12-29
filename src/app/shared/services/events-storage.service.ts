@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({ providedIn: 'root' })
-export class EventsStorageService extends LocalStorageService {
+export class EventsStorageService extends SessionStorageService {
   override myLocalStorageTag = 'myListStorage';
   override storageType: 'ONE' | 'MULTIPLE' = 'MULTIPLE';
   override parameterId = 'thumbnail';
