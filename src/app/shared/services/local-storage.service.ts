@@ -1,10 +1,5 @@
-import { Inject, Injectable, InjectionToken, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
-export const BROWSER_STORAGE = new InjectionToken<Storage>('Browser Storage', {
-  providedIn: 'root',
-  factory: () => localStorage,
-});
 
 @Injectable({ providedIn: 'root' })
 export class LocalStorageService {
@@ -16,11 +11,7 @@ export class LocalStorageService {
   parameterId = 'id';
   duplicateData = true;
 
-  localStorageData: Storage = inject(BROWSER_STORAGE);
-
-  // constructor( @Inject(LocalStorage) private localStorage) {}
-
-  // private localStorage = localStorage;
+  private localStorage = localStorage;
 
   setInfo(data: any): void {
     if (this.storageType.includes('ONE')) {
@@ -31,21 +22,19 @@ export class LocalStorageService {
   }
 
   loadInfo(localStoreTag: string): void {
-    if (this.localStorageData.getItem(localStoreTag)?.length) {
-      const data = JSON.parse(
-        this.localStorageData.getItem(localStoreTag) ?? ''
-      );
+    if (this.localStorage.getItem(localStoreTag)?.length) {
+      const data = JSON.parse(this.localStorage.getItem(localStoreTag) ?? '');
       this.myData$.next(data);
     }
   }
 
   clearInfo() {
-    this.localStorageData.removeItem(this.myLocalStorageTag);
+    this.localStorage.removeItem(this.myLocalStorageTag);
     this.myData$.next(null);
   }
 
   clearAllLocalStorage(): void {
-    this.localStorageData.clear();
+    this.localStorage.clear();
     this.myData$.next(null);
   }
 
@@ -59,15 +48,15 @@ export class LocalStorageService {
 
   private setOneInfo(data: any) {
     const jsonData = JSON.stringify(data);
-    this.localStorageData.setItem(this.myLocalStorageTag, jsonData);
+    this.localStorage.setItem(this.myLocalStorageTag, jsonData);
     this.myData$.next(data);
   }
 
   private setMultipleInfo(data: any) {
     let localData;
-    if (this.localStorageData.getItem(this.myLocalStorageTag)) {
+    if (this.localStorage.getItem(this.myLocalStorageTag)) {
       localData = JSON.parse(
-        this.localStorageData.getItem(this.myLocalStorageTag) ?? ''
+        this.localStorage.getItem(this.myLocalStorageTag) ?? ''
       );
     }
 
@@ -86,7 +75,7 @@ export class LocalStorageService {
       }
     }
 
-    this.localStorageData.setItem(
+    this.localStorage.setItem(
       this.myLocalStorageTag,
       JSON.stringify(localData)
     );
@@ -95,7 +84,7 @@ export class LocalStorageService {
 
   private removeInfoMultiple(dataToRemove: any) {
     let localData = JSON.parse(
-      this.localStorageData.getItem(this.myLocalStorageTag) ?? ''
+      this.localStorage.getItem(this.myLocalStorageTag) ?? ''
     );
 
     localData = !!localData?.length ? localData : [];
@@ -105,7 +94,7 @@ export class LocalStorageService {
         dataToRemove[this.parameterId].toString()
     );
 
-    this.localStorageData.setItem(
+    this.localStorage.setItem(
       this.myLocalStorageTag,
       JSON.stringify(localData)
     );

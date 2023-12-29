@@ -19,17 +19,8 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/_redirects", "src/favicon.ico", "src/assets"],
-            "styles": [
-              "node_modules/@fortawesome/fontawesome-svg-core/styles.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "src/styles.css"
-            ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "styles": ["node_modules/ngx-toastr/toastr.css", "src/styles.css"],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -50,7 +41,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
