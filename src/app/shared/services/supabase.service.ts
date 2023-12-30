@@ -21,9 +21,10 @@ import { Router } from '@angular/router';
 export interface Profile {
   id?: string;
   username: string;
-  website: string;
+  surname: string;
   avatar_url: string;
-  full_name: string;
+  name: string;
+  phone: string;
 }
 
 @Injectable({
@@ -124,7 +125,7 @@ export class SupabaseService {
   profile(user: User) {
     return this.supabase
       .from('profiles')
-      .select(`username, website, avatar_url, full_name`)
+      .select(`name, surname, avatar_url, phone, username`)
       .eq('id', user.id)
       .single();
   }

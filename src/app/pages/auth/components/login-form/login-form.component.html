@@ -22,7 +22,7 @@
             aria-describedby="emailHelp"
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="options.id !== ACTIONS.recovery">
           <label for="exampleInputPassword1" class="form-label"
             >Contraseña</label
           >
@@ -43,6 +43,13 @@
             <a [routerLink]="['/sign-up']" class="text-black"
               >Crear una nueva cuenta</a
             >
+
+            <a
+              *ngIf="options.id !== ACTIONS.recovery"
+              [routerLink]="['/recovery']"
+              class="text-black"
+              >Recuperar contraseña</a
+            >
           </ng-container>
         </div>
       </form>
@@ -50,6 +57,13 @@
         <a [routerLink]="['/sign-in']" class="text-black">
           Ya tienes una cuenta? <small>Accede desde aquí!</small>
         </a>
+
+        <a
+          *ngIf="options.id !== ACTIONS.recovery"
+          [routerLink]="['/recovery']"
+          class="text-black"
+          >Recuperar contraseña</a
+        >
       </ng-template>
     </section>
   </div>

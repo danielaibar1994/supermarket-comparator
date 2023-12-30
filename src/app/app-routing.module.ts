@@ -14,6 +14,7 @@ import { HelpComponent } from './pages/auth/sections/help/help.component';
 import { SignInComponent } from './pages/auth/sections/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sections/sign-up/sign-up.component';
 import { ProfileComponent } from './pages/auth/sections/profile/profile.component';
+import { RecoveryComponent } from './pages/auth/sections/recovery/recovery.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full' }, //default route
@@ -53,6 +54,7 @@ const routes: Routes = [
   },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'recovery', component: RecoveryComponent },
 ];
 
 @NgModule({
