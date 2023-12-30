@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUserGear } from '@fortawesome/free-solid-svg-icons';
 import { FormComponent } from '../../components/form/form.component';
 import { SupabaseService } from 'src/app/shared/services/supabase.service';
 
@@ -23,7 +23,7 @@ export type SectionProfile = null | 'PROFILE' | 'PRIVACY' | 'HELP';
   styleUrl: './profile-edit.component.css',
 })
 export class ProfileEditComponent {
-  faUser = faUser;
+  faUserGear = faUserGear;
 
   session = this.supabase.session ? this.supabase.session.user : undefined;
 

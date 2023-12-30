@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export const initialState: initialShoppingListState = {
   shoppingList: [],
   loading: false,
+  isLogged: false,
   listId: -1,
 };
 
@@ -18,6 +19,7 @@ export interface initialShoppingListState {
   shoppingList: ExternalProduct[];
   loading: boolean;
   listId: number;
+  isLogged: boolean;
 }
 
 @Injectable({
@@ -31,6 +33,10 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
 
   get shoppingListLoading() {
     return this.state.loading;
+  }
+
+  get isLogged() {
+    return this.state.isLogged;
   }
 
   isAdded(product: ExternalProduct): boolean {
@@ -163,7 +169,7 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
   }
 
   private setListId(value: number) {
-    this.setState({ listId: value });
+    this.setState({ listId: value, isLogged: true });
   }
 
   private removeItemReducer(item: ExternalProduct) {
@@ -175,7 +181,7 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
   }
 
   private clearProductReducer() {
-    this.setState({ shoppingList: [] });
+    this.setState({ shoppingList: [], isLogged: false });
   }
 
   // UTILS

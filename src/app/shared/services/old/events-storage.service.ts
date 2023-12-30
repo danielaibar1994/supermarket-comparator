@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
-import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { SessionStorageService } from './session-storage.service';
 
 @Injectable({ providedIn: 'root' })

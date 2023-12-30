@@ -15,25 +15,27 @@
     >
   </div>
 
-  <div *ngIf="!!products$.length">
-    <h3 class="results-title">Mis supermercados:</h3>
-  </div>
+  <div class="container-products">
+    <div *ngIf="!!products$.length">
+      <h3 class="results-title">Mis supermercados:</h3>
+    </div>
 
-  <app-supermarket-view
-    [externalProducts]="products$"
-    [supermarkets]="supermarkets"
-    [isStickyMarket]="false"
-  ></app-supermarket-view>
+    <app-supermarket-view
+      [externalProducts]="products$"
+      [supermarkets]="supermarkets"
+      [isStickyMarket]="false"
+    ></app-supermarket-view>
 
-  <div
-    *ngIf="!(products$ ?? []).length && !loading$"
-    class="empty-customer-list"
-  >
-    <fa-icon
-      [icon]="faCartShopping"
-      size="3x"
-      [styles]="{ color: '#155487' }"
-    ></fa-icon>
-    <p>Añade desde la pestaña de Precios tus productos favoritos.</p>
+    <div
+      *ngIf="!(products$ ?? []).length && !loading$"
+      class="empty-customer-list"
+    >
+      <fa-icon
+        [icon]="faCartShopping"
+        size="3x"
+        [styles]="{ color: '#155487' }"
+      ></fa-icon>
+      <p>Añade desde la pestaña de Precios tus productos favoritos.</p>
+    </div>
   </div>
 </div>

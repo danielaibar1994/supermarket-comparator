@@ -2,13 +2,13 @@
   <div class="customer-list-title">
     <div class="customer-icon-container">
       <fa-icon
-        [icon]="faUser"
+        [icon]="faUserGear"
         size="3x"
         [styles]="{ color: 'white' }"
       ></fa-icon>
     </div>
 
-    <h2 class="customer-title">Mi perfil</h2>
+    <h2 class="customer-title">Mis datos</h2>
   </div>
 
   <app-form *ngIf="session" [userSession]="session"></app-form>

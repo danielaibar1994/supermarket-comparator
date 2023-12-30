@@ -20,9 +20,12 @@ import { PriceComparatorComponent } from '../../shared/components/price-comparat
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import { ShoppingListState } from 'src/app/+state/shopping-list.store';
 import { SupabaseService } from 'src/app/shared/services/supabase.service';
+import { AccessModalComponent } from 'src/app/shared/components/access-modal/access-modal.component';
+import { AccessModalService } from 'src/app/shared/components/access-modal/service/access-modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -30,6 +33,7 @@ import { SupabaseService } from 'src/app/shared/services/supabase.service';
   styleUrls: ['./product-list.component.css'],
   standalone: true,
   imports: [
+    CommonModule,
     NgClass,
     FormsModule,
     FooterComponent,
@@ -37,6 +41,7 @@ import { SupabaseService } from 'src/app/shared/services/supabase.service';
     SupermarketViewComponent,
     PriceComparatorComponent,
     NgOptimizedImage,
+    AccessModalComponent,
   ],
 })
 export class ProductListComponent implements OnInit, OnDestroy {
@@ -62,11 +67,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private readonly searchSubject = new Subject<string | undefined>();
 
   private userIdShoppingList = '';
+  modalOpen: boolean = this.accessModalService.getLoading();
 
   constructor(
     private readonly store: ProductState,
     private readonly listStore: ShoppingListState,
-    private readonly supabase: SupabaseService
+    private readonly supabase: SupabaseService,
+    readonly accessModalService: AccessModalService,
+    private readonly router: Router
   ) {}
 
   @HostListener('window:scroll', ['$event'])
@@ -155,6 +163,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   setType(type: 'SUPERMARKET' | 'PRICE'): void {
     this.filterByType = type;
+  }
+
+  // Modal
+  openModal(): void {
+    // this.modalOpen = true;
+    this.accessModalService.setLoading(false);
+  }
+
+  closeModal(): void {
+    // this.modalOpen = false;
+    this.accessModalService.setLoading(false);
+  }
+
+  redirectToRegistration(): void {
+    this.accessModalService.setLoading(false);
+    this.router.navigate(['/sign-up']);
   }
 
   ngOnDestroy(): void {

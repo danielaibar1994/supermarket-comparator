@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { NgClass } from '@angular/common';
 import { ShoppingListState } from 'src/app/+state/shopping-list.store';
+import { AccessModalService } from '../access-modal/service/access-modal.service';
 
 @Component({
   selector: 'app-add-button',
@@ -17,19 +18,30 @@ export class AddButtonComponent {
     return this.store.isAdded(this.product);
   }
 
-  constructor(private readonly store: ShoppingListState) {}
+  get isLogged(): boolean {
+    return this.store.isLogged;
+  }
+
+  constructor(
+    private readonly store: ShoppingListState,
+    private readonly accessModalService: AccessModalService
+  ) {}
 
   addProductInStore() {
-    if (this.isAdded) {
-      this.removeProductInStore();
-      return;
+    if (this.isLogged) {
+      if (this.isAdded) {
+        this.removeProductInStore();
+        return;
+      }
+      this.store.addToList({
+        ...this.product,
+        expire: new Date(),
+        update: new Date(),
+        firstPrice: this.product.unit_price,
+      });
+    } else {
+      this.accessModalService.setLoading(true);
     }
-    this.store.addToList({
-      ...this.product,
-      expire: new Date(),
-      update: new Date(),
-      firstPrice: this.product.unit_price,
-    });
   }
 
   removeProductInStore() {

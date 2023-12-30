@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoaderComponent } from './shared/components/loader/loader.component';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SupabaseService } from './shared/services/supabase.service';
 

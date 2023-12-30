@@ -240,6 +240,30 @@ span.selectedType {
     font-size: 14px
 }
 
+.register {
+    background-color: #155487;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.close {
+    float: right;
+}
+
+.register {
+    float: left;
+}
+
+.container-products {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 @media (max-width: 1000px) {
     .list-container {
         margin: 1rem 0.5rem 3rem;
