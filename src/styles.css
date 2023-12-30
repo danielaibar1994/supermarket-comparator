@@ -1,11 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 body, html {
-    font-family: 'Roboto';
-    margin: 0;
-    padding: 0;
-  }
+  font-family: 'Roboto';
+  margin: 0;
+  padding: 0;
+}
 
-  img {
-    border-style: none;
-    max-width: 100%;
-  }
+img {
+  border-style: none;
+  max-width: 100%;
+}
+
+.container-products {
+  max-width: 1200px;
+  margin: 0 auto;
+}

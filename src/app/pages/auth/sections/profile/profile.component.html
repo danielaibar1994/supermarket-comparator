@@ -15,6 +15,13 @@
     <div style="margin: 0 16px">
       <div class="profile-section" (click)="changeSection('PROFILE-EDIT')">
         <div>
+          <span style="margin-right: 12px">
+            <fa-icon
+              [icon]="faUserGear"
+              size="lg"
+              [styles]="{ color: '#155487' }"
+            ></fa-icon>
+          </span>
           <span>Mis datos </span>
           <span></span>
         </div>
@@ -22,6 +29,13 @@
 
       <div class="profile-section" (click)="changeSection('PRIVACY')">
         <div>
+          <span style="margin-right: 12px">
+            <fa-icon
+              [icon]="faShieldHalved"
+              size="lg"
+              [styles]="{ color: '#155487' }"
+            ></fa-icon>
+          </span>
           <span>Privacidad</span>
           <span></span>
         </div>
@@ -29,7 +43,14 @@
 
       <div class="profile-section" (click)="changeSection('HELP')">
         <div>
-          <span>Centro de Ayuda</span>
+          <span style="margin-right: 12px">
+            <fa-icon
+              [icon]="faCircleInfo"
+              size="lg"
+              [styles]="{ color: '#155487' }"
+            ></fa-icon>
+          </span>
+          <span> Centro de Ayuda</span>
           <span></span>
         </div>
       </div>

@@ -52,48 +52,69 @@
   ></app-footer>
 </div>
 
-<ng-container *ngIf="!empty">
-  <div class="container-types">
-    <div class="results-title-container">
-      <h2 class="results-title">Resultados:</h2>
-    </div>
+<div class="container-products">
+  <ng-container *ngIf="!empty">
+    <div class="container-types">
+      <div class="results-title-container">
+        <h2 class="results-title">Resultados:</h2>
+      </div>
 
-    <div class="types-buttons">
-      <div class="types-buttons-container">
-        <span
-          class="type-button"
-          [ngClass]="{ selectedType: filterByType === 'SUPERMARKET' }"
-          (click)="setType('SUPERMARKET')"
-          >Supermercados</span
-        >
+      <div class="types-buttons">
+        <div class="types-buttons-container">
+          <span
+            class="type-button"
+            [ngClass]="{ selectedType: filterByType === 'SUPERMARKET' }"
+            (click)="setType('SUPERMARKET')"
+            >Supermercados</span
+          >
+        </div>
+        <div class="types-buttons-container">
+          <span
+            class="type-button"
+            [ngClass]="{ selectedType: filterByType === 'PRICE' }"
+            (click)="setType('PRICE')"
+            >Más Barato</span
+          >
+        </div>
       </div>
-      <div class="types-buttons-container">
-        <span
-          class="type-button"
-          [ngClass]="{ selectedType: filterByType === 'PRICE' }"
-          (click)="setType('PRICE')"
-          >Más Barato</span
-        >
-      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="filterByType === 'SUPERMARKET'">
+    <app-supermarket-view
+      [externalProducts]="externalProducts"
+      [supermarkets]="supermarkets"
+    ></app-supermarket-view>
+  </ng-container>
+
+  <ng-container *ngIf="filterByType === 'PRICE'">
+    <app-price-comparator
+      [externalProducts]="externalProducts"
+    ></app-price-comparator>
+  </ng-container>
+
+  <ng-container>
+    <div class="copyright-container">
+      <span>{{ year }} - Super más barato - Desarrollada por Daniel Aibar</span>
+    </div>
+  </ng-container>
+</div>
+
+<app-access-modal
+  [showModal]="this.accessModalService.getLoading()"
+  (closeModal)="closeModal()"
+>
+  <div>
+    <h2>¡Regístrate para Acceder a Características Exclusivas!</h2>
+    <p>
+      Estamos emocionados de ofrecerte características exclusivas que mejorarán
+      tu experiencia. Para acceder a ellas, te invitamos a registrarte. ¡Únete a
+      nuestra comunidad hoy y descubre todo lo que tenemos preparado para ti!
+    </p>
+    <div>
+      <button class="register" (click)="redirectToRegistration()">
+        Registrarse
+      </button>
     </div>
   </div>
-</ng-container>
-
-<ng-container *ngIf="filterByType === 'SUPERMARKET'">
-  <app-supermarket-view
-    [externalProducts]="externalProducts"
-    [supermarkets]="supermarkets"
-  ></app-supermarket-view>
-</ng-container>
-
-<ng-container *ngIf="filterByType === 'PRICE'">
-  <app-price-comparator
-    [externalProducts]="externalProducts"
-  ></app-price-comparator>
-</ng-container>
-
-<ng-container>
-  <div class="copyright-container">
-    <span>{{ year }} - Super más barato - Desarrollada por Daniel Aibar</span>
-  </div>
-</ng-container>
+</app-access-modal>

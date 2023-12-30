@@ -5,10 +5,7 @@ import { LoadingInterceptor } from './shared/components/loader/service/loader.in
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { CustomerListComponent } from './pages/customer-list/customer-list.component';
 
-import {
-  redirectLoggedInToHomePage,
-  redirectUnauthorizedToLoginPage,
-} from './pages/auth/guards/auth.guard';
+import { redirectUnauthorizedToLoginPage } from './pages/auth/guards/auth.guard';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
 import { ProfileEditComponent } from './pages/auth/sections/profile-edit/profile-edit.component';

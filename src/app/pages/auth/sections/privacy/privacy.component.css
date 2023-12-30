@@ -51,6 +51,14 @@
 
 }
 
+.section {
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.6;
+}
+
 
 @media (max-width: 1000px) {
     .results-title {

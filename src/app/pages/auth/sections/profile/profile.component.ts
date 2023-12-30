@@ -3,10 +3,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleInfo,
+  faShieldHalved,
+  faUser,
+  faUserGear,
+} from '@fortawesome/free-solid-svg-icons';
 import { FormComponent } from '../../components/form/form.component';
 import { SupabaseService } from 'src/app/shared/services/supabase.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { ShoppingListState } from 'src/app/+state/shopping-list.store';
 
 export type SectionProfile = null | 'PROFILE-EDIT' | 'PRIVACY' | 'HELP';
 
@@ -25,6 +31,9 @@ export type SectionProfile = null | 'PROFILE-EDIT' | 'PRIVACY' | 'HELP';
 })
 export class ProfileComponent {
   faUser = faUser;
+  faCircleInfo = faCircleInfo;
+  faShieldHalved = faShieldHalved;
+  faUserGear = faUserGear;
 
   session = this.supabase.session ? this.supabase.session.user : undefined;
 
@@ -33,7 +42,7 @@ export class ProfileComponent {
   constructor(
     private readonly supabase: SupabaseService,
     private readonly router: Router,
-    private route: ActivatedRoute
+    private storeList: ShoppingListState
   ) {}
 
   ngOnInit() {
@@ -45,6 +54,7 @@ export class ProfileComponent {
   }
 
   async signOut() {
+    this.storeList.clear();
     await this.supabase.signOut();
     this.router.navigateByUrl('/sign-in', { replaceUrl: true });
   }
