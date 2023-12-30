@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SignInComponent } from '../sign-in/sign-in.component';
@@ -37,6 +37,12 @@ export class ProfileComponent {
 
   session = this.supabase.session ? this.supabase.session.user : undefined;
 
+  _profile: any | undefined = undefined;
+  profile = signal<any | undefined>(undefined);
+  private loggingEffect = effect(() => {
+    this._profile = this.profile();
+  });
+
   profileSectionSelected: SectionProfile = null;
 
   constructor(
@@ -60,6 +66,42 @@ export class ProfileComponent {
   }
 
   private init() {
-    this.supabase.authChanges((_, session) => (this.session = session?.user));
+    this.supabase.authChanges((_, session) => {
+      if (this.session?.id !== session?.user.id || !this._profile) {
+        if (this.session) {
+          this.getProfile();
+        }
+      }
+
+      this.session = session?.user;
+    });
+  }
+
+  private async getProfile() {
+    try {
+      const user = this.session;
+
+      if (user) {
+        const {
+          data: profile,
+          error,
+          status,
+        } = await this.supabase.profile(user);
+
+        if (error && status !== 406) {
+          throw error;
+        }
+
+        if (profile) {
+          this.profile.set(profile);
+        }
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    } finally {
+      // this.loading = false;
+    }
   }
 }

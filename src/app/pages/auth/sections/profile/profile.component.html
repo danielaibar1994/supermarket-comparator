@@ -8,7 +8,9 @@
       ></fa-icon>
     </div>
 
-    <h2 class="customer-title">Perfil</h2>
+    <h2 class="customer-title">
+      {{ _profile?.username ? "Bienvenido " + _profile.username : "Mi Perfil" }}
+    </h2>
   </div>
 
   <ng-container *ngIf="profileSectionSelected === null">
