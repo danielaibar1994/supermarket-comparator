@@ -42,6 +42,8 @@ export class LoginFormComponent {
 
   faRightToBracket = faRightToBracket;
 
+  ACTIONS = ACTIONS;
+
   @Input() options!: OptionsForm;
 
   constructor(
@@ -58,7 +60,9 @@ export class LoginFormComponent {
   async onSubmit(): Promise<void> {
     const credentials = this.authForm.value;
     let actionToCall =
-      this.options.id === ACTIONS.signIn
+      this.options.id === ACTIONS.recovery
+        ? this.authSvc.sendPwReset(credentials)
+        : this.options.id === ACTIONS.signIn
         ? this.authSvc.signIn(credentials)
         : this.authSvc.signUp(credentials);
 
@@ -69,7 +73,24 @@ export class LoginFormComponent {
     try {
       const result = (await actionToCall) as UserResponse;
       if (result && result.email) {
-        this.redirectUser();
+        if (this.options.id === ACTIONS.recovery) {
+          this.toastSvc.success(
+            'Please check your emails for further instructions!',
+            'Info',
+            {
+              timeOut: 2000,
+              tapToDismiss: true,
+              progressBar: true,
+              newestOnTop: true,
+              closeButton: true,
+              positionClass: 'toast-top-full-width',
+            }
+          );
+        } else {
+          if (result.email) {
+            this.redirectUser();
+          }
+        }
       } else {
         this.toastSvc.info(result.message, 'Info', {
           timeOut: 2000,
@@ -86,10 +107,16 @@ export class LoginFormComponent {
   }
 
   private initForm(): void {
-    this.authForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+    if (this.options.id !== ACTIONS.recovery) {
+      this.authForm = this.fb.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+      });
+    } else {
+      this.authForm = this.fb.group({
+        email: ['', Validators.required],
+      });
+    }
   }
 
   private redirectUser(): void {

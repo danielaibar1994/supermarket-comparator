@@ -25,10 +25,11 @@ export class FormComponent {
   userSession!: User;
 
   updateProfileForm = this.formBuilder.group({
-    username: '',
-    website: '',
+    name: '',
+    surname: '',
     avatar_url: '',
-    full_name: '',
+    phone: '',
+    username: '',
   });
 
   constructor(
@@ -42,12 +43,13 @@ export class FormComponent {
     this.loader.setLoading(true);
     await this.getProfile();
 
-    const { username, website, avatar_url, full_name } = this.profile;
+    const { name, phone, avatar_url, surname, username } = this.profile;
     this.updateProfileForm.patchValue({
-      username,
-      full_name,
-      website,
+      name,
+      surname,
+      phone,
       avatar_url,
+      username,
     });
     this.loader.setLoading(false);
   }
@@ -84,16 +86,18 @@ export class FormComponent {
       const user = this.userSession;
 
       const username = this.updateProfileForm.value.username as string;
-      const website = this.updateProfileForm.value.website as string;
+      const name = this.updateProfileForm.value.name as string;
+      const surname = this.updateProfileForm.value.surname as string;
       const avatar_url = this.updateProfileForm.value.avatar_url as string;
-      const full_name = this.updateProfileForm.value.full_name as string;
+      const phone = this.updateProfileForm.value.phone as string;
 
       const { error } = await this.supabase.updateProfile({
         id: user.id,
-        username,
-        website,
+        name,
+        surname,
         avatar_url,
-        full_name,
+        phone,
+        username: this.profile.username,
       });
       if (error) throw error;
     } catch (error) {

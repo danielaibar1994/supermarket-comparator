@@ -53,6 +53,8 @@ a.text-black {
     text-decoration: none;
     color: #0c324f;
     cursor: pointer;
+    display: block;
+    margin-bottom: 16px;
 }
 
 /*  */
