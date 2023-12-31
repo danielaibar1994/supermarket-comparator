@@ -193,6 +193,12 @@ export class SupabaseService {
     return this.supabase.from('profiles').upsert(update);
   }
 
+  updatePassword(new_password: string) {
+    return this.supabase.auth.updateUser({
+      password: new_password,
+    });
+  }
+
   downLoadImage(path: string) {
     return this.supabase.storage.from('avatars').download(path);
   }

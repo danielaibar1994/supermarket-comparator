@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AvatarComponent } from '../avatar/avatar.component';
 import { LoaderService } from 'src/app/shared/components/loader/service/loader.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -19,6 +20,7 @@ import { LoaderService } from 'src/app/shared/components/loader/service/loader.s
 })
 export class FormComponent {
   loading = false;
+  isChangePassword$ = new BehaviorSubject<boolean>(false);
   profile!: Profile;
 
   @Input()
@@ -30,6 +32,11 @@ export class FormComponent {
     avatar_url: '',
     phone: '',
     username: '',
+  });
+
+  changePasswordForm = this.formBuilder.group({
+    password: '',
+    confirmPassword: '',
   });
 
   constructor(
@@ -109,6 +116,24 @@ export class FormComponent {
     }
   }
 
+  async updatePassword(): Promise<void> {
+    try {
+      this.loading = true;
+      const user = this.userSession;
+
+      const password = this.changePasswordForm.value.password as string;
+
+      const { error } = await this.supabase.updatePassword(password);
+      if (error) throw error;
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    } finally {
+      this.loading = false;
+    }
+  }
+
   async signOut() {
     await this.supabase.signOut();
     this.router.navigateByUrl('/sign-in', { replaceUrl: true });
@@ -127,5 +152,9 @@ export class FormComponent {
 
   goBack() {
     this.router.navigate(['/profile']);
+  }
+
+  changePassword(value: boolean) {
+    this.isChangePassword$.next(value);
   }
 }

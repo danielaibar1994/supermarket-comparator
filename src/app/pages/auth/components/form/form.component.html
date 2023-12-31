@@ -1,51 +1,103 @@
-<form
-  [formGroup]="updateProfileForm"
-  class="form-widget"
-  (ngSubmit)="updateProfile()"
->
-  <div
-    style="margin-bottom: 16px; color: #145487; cursor: pointer"
-    (click)="goBack()"
+<ng-container *ngIf="(isChangePassword$ | async) === false">
+  <form
+    [formGroup]="updateProfileForm"
+    class="form-widget"
+    (ngSubmit)="updateProfile()"
   >
-    <span style="margin-left: 16px"> < Volver a Perfil </span>
-  </div>
-  <!-- <app-avatar [avatarUrl]="this.avatarUrl" (upload)="updateAvatar($event)">
+    <div
+      style="margin-bottom: 16px; color: #145487; cursor: pointer"
+      (click)="goBack()"
+    >
+      <span style="margin-left: 16px"> < Volver a Perfil </span>
+    </div>
+
+    <!-- <app-avatar [avatarUrl]="this.avatarUrl" (upload)="updateAvatar($event)">
   </app-avatar> -->
 
-  <div class="data-content">
-    <label for="email">Correo</label>
-    <input id="email" type="text" [value]="userSession.email" disabled />
-  </div>
-  <!-- <div class="data-content">
-    <label for="username">Usuario</label>
-    <input formControlName="username" id="username" type="text" />
-  </div> -->
-  <!-- <div class="data-content">
-    <label for="username">Nombre</label>
-    <input formControlName="username" id="username" type="text" />
-  </div> -->
+    <div class="data-content">
+      <label for="email">Correo</label>
+      <input id="email" type="text" [value]="userSession.email" disabled />
+    </div>
 
-  <div class="data-content">
-    <label for="username">Nombre</label>
-    <input formControlName="name" id="name" type="text" />
-  </div>
+    <div class="data-content">
+      <label for="username">Nombre</label>
+      <input formControlName="name" id="name" type="text" />
+    </div>
 
-  <div class="data-content">
-    <label for="username">Apellidos</label>
-    <input formControlName="surname" id="surname" type="text" />
-  </div>
+    <div class="data-content">
+      <label for="username">Apellidos</label>
+      <input formControlName="surname" id="surname" type="text" />
+    </div>
 
-  <div class="data-content">
-    <label for="website">Teléfono</label>
-    <input formControlName="phone" id="phone" type="url" />
-  </div>
+    <div class="data-content">
+      <label for="website">Teléfono</label>
+      <input formControlName="phone" id="phone" type="url" />
+    </div>
 
-  <div class="data-content">
-    <button type="submit" class="button primary block" [disabled]="loading">
-      {{ loading ? "Cargando ..." : "Actualizar" }}
-    </button>
-  </div>
-</form>
+    <div class="data-content">
+      <button type="submit" class="button primary block" [disabled]="loading">
+        {{ loading ? "Cargando ..." : "Actualizar" }}
+      </button>
+    </div>
+
+    <div class="change-pass-container" style="text-align: center">
+      <span
+        style="text-align: center; color: red; cursor: pointer"
+        (click)="changePassword(true)"
+        >Cambiar contraseña</span
+      >
+    </div>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="(isChangePassword$ | async) === true">
+  <form
+    [formGroup]="changePasswordForm"
+    class="form-widget"
+    (ngSubmit)="updatePassword()"
+  >
+    <div
+      style="margin-bottom: 16px; color: #145487; cursor: pointer"
+      (click)="goBack()"
+    >
+      <span style="margin-left: 16px"> < Volver a Perfil </span>
+    </div>
+
+    <div class="data-content">
+      <label for="username">Nueva contraseña</label>
+      <input
+        autocomplete="false"
+        formControlName="password"
+        id="password"
+        type="password"
+      />
+    </div>
+
+    <div class="data-content">
+      <label for="username">Confirmar nueva contraseña</label>
+      <input
+        autocomplete="false"
+        formControlName="confirmPassword"
+        id="confirmPassword"
+        type="password"
+      />
+    </div>
+
+    <div class="data-content">
+      <button type="submit" class="button primary block" [disabled]="loading">
+        {{ loading ? "Cargando ..." : "Actualizar" }}
+      </button>
+    </div>
+
+    <div class="change-pass-container" style="text-align: center">
+      <span
+        style="text-align: center; color: red; cursor: pointer"
+        (click)="changePassword(false)"
+        >Cancelar</span
+      >
+    </div>
+  </form>
+</ng-container>
 <!-- <div style="text-align: center">
   <button class="button block close" (click)="signOut()">Cerrar sesión</button>
 </div> -->

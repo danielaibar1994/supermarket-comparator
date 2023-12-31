@@ -34,6 +34,6 @@ export class CustomerListComponent implements OnInit {
   constructor(private readonly store: ShoppingListState) {}
 
   ngOnInit(): void {
-    this.store.getShoppingList();
+    this.store.getShoppingList('LIST');
   }
 }
