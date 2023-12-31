@@ -14,5 +14,13 @@
     "pathRewrite": {
       "^/apiGadis": "/content/themes/gadislineth/view/functions/ajax_apiCinfo.php"
     }
+  },
+  "/apiECI": {
+    "target": "https://www.elcorteingles.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiECI": "/alimentacion/api/catalog/supermercado/type_ahead/"
+    }
   }
 }

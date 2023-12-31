@@ -87,4 +87,15 @@ export const SUPERMARKETS: any = [
     opened: false,
     filter: 'OFF',
   },
+  {
+    id: 9,
+    name: 'ECI',
+    title: 'ECI',
+    src: '../../../assets/images/eci-logo.png',
+    srcWidth: '',
+    variable: 'eciProducts',
+    background: '#016754',
+    opened: false,
+    filter: 'OFF',
+  },
 ];

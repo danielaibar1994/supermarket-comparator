@@ -40,6 +40,7 @@ export class ProductState extends SignalService<initialProductState> {
               masymasProducts,
               alcampoProducts,
               gadisProducts,
+              eciProducts,
             ]) => {
               this.setExternalProductReducer([
                 ...consumProducts,
@@ -50,6 +51,7 @@ export class ProductState extends SignalService<initialProductState> {
                 ...masymasProducts,
                 ...alcampoProducts,
                 ...gadisProducts,
+                ...eciProducts,
               ]);
             }
           )
@@ -91,6 +93,8 @@ export class ProductState extends SignalService<initialProductState> {
       selected['gadis']
         ? this.productRepository.getGadisSession(query)
         : of([]),
+
+      selected['eci'] ? this.productRepository.getECIData(query) : of([]),
     ];
   }
 

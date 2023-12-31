@@ -28,6 +28,8 @@ export class ProductRepository {
     diaUrl: 'https://www.dia.es/api/v1/search-back/search/reduced',
     masymasUrl: 'https://tienda.masymas.com/api/rest/V1.0/catalog/product',
     alcampoUrl: '/apiAlcampo',
+    eciUrl:
+      'https://www.elcorteingles.es/alimentacion/api/catalog/supermercado/type_ahead/',
   };
 
   constructor(private http: HttpClient) {}
@@ -141,6 +143,29 @@ export class ProductRepository {
                 ProductMapper.toDomain(data.entities.product[hit], 'ALCAMPO')
               )
             : []
+        )
+      );
+  }
+
+  // ECI
+
+  getECIData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${'/apiECI'}?question=${query}&scope=supermarket&center=010MOE&results=40`;
+    return this.http
+      .get(url, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      })
+      .pipe(
+        first(),
+        catchError(() =>
+          of({ catalog_result: { products_list: { items: [] } } })
+        ),
+        map((data: any) =>
+          data.catalog_result.products_list.items.map((hit: any) =>
+            ProductMapper.toDomain(hit.product, 'ECI')
+          )
         )
       );
   }

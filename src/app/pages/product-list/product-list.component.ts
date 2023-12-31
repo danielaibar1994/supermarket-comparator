@@ -124,7 +124,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     } else {
       const parsed = JSON.parse(selected);
 
-      if (Object.keys(parsed).length < 8) {
+      if (Object.keys(parsed).length < 9) {
         // New markets added, so need to restore localstorage
         this.supermarketsSelected = {
           consum: true,
@@ -135,6 +135,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
           masymas: true,
           alcampo: false,
           gadis: false,
+          eci: false,
         };
       } else {
         this.supermarketsSelected = parsed;

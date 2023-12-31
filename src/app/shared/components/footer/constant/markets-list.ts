@@ -21,6 +21,12 @@ export const SUPERMARKETS_LIST = [
     style: 'border-radius: 8px',
     sector: 1,
   },
+  {
+    name: 'eci',
+    icon: '../../../../assets/images/eci-logo.png',
+    style: '',
+    sector: 1,
+  },
   { name: 'aldi', icon: '../../../../assets/images/logo-aldi.svg', sector: 2 },
   {
     name: 'masymas',
