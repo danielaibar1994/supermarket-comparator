@@ -49,6 +49,12 @@ export class ProductMapper {
           entity.imagenes[0].path.split('/html/')[1]
         );
 
+      case 'ECI':
+        return (
+          'https:' +
+          entity.media.images[0].xxs.url.replace('40x40.jpg', '150x150.jpg')
+        );
+
       default:
         return '';
     }
@@ -74,6 +80,9 @@ export class ProductMapper {
 
       case 'GADIS':
         return entity.descripcionLarga;
+
+      case 'ECI':
+        return this.separarFrases(entity.name[0])[1];
       default:
         return '';
     }
@@ -99,6 +108,9 @@ export class ProductMapper {
 
       case 'GADIS':
         return entity.marca;
+
+      case 'ECI':
+        return this.separarFrases(entity.name[0])[0];
       default:
         return '';
     }
@@ -133,6 +145,9 @@ export class ProductMapper {
 
       case 'GADIS':
         return entity.precio;
+
+      case 'ECI':
+        return entity.price.seo_price;
 
       default:
         return 0;
@@ -171,6 +186,9 @@ export class ProductMapper {
       case 'GADIS':
         return undefined;
 
+      case 'ECI':
+        return entity.price.seo_original_price;
+
       default:
         return undefined;
     }
@@ -206,6 +224,9 @@ export class ProductMapper {
         return (
           'https://www.gadisline.com/producto/?productID=' + entity.productoId
         );
+
+      case 'ECI':
+        return 'https://www.elcorteingles.es' + entity.pdp_url;
 
       default:
         return '';
@@ -244,8 +265,25 @@ export class ProductMapper {
 
       case 'GADIS':
         return '../../../../assets/images/gadis-logo.jpeg';
+
+      case 'ECI':
+        return '../../../../assets/images/eci-logo.jpeg';
       default:
         return '';
+    }
+  }
+
+  private static separarFrases(texto: string): string[] {
+    const coincidencias = texto.match(/([A-Z\s]+)([a-z0-9\s]+)/);
+
+    if (coincidencias && coincidencias.length === 3) {
+      const resultado: string[] = [
+        coincidencias[1].trim(),
+        coincidencias[2].trim(),
+      ];
+      return resultado;
+    } else {
+      return [texto];
     }
   }
 }
