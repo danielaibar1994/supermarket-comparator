@@ -104,7 +104,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   fetchShoppingList() {
-    this.listStore.getDataShoppingList();
+    this.listStore.getShoppingList('HOME');
   }
 
   getSelectedMarkets(): void {

@@ -60,8 +60,8 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
   }
 
   // Actions - public
-  getShoppingList() {
-    this.fetchShoppingList();
+  getShoppingList(section: 'HOME' | 'LIST') {
+    this.checkShoppingList(section);
   }
 
   addToList(item: ExtendedExternalProduct) {
@@ -77,6 +77,20 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
   }
 
   // EFFECTS - private
+
+  checkShoppingList(section: 'HOME' | 'LIST') {
+    if (this.state.listId === -1) {
+      if (section === 'LIST') {
+        this.fetchShoppingList();
+      } else {
+        this.getDataShoppingList();
+      }
+
+      return;
+    }
+
+    return;
+  }
   async fetchShoppingList(): Promise<void> {
     this.clear();
     this.loader.setLoading(true);

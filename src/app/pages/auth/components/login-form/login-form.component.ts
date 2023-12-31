@@ -107,15 +107,30 @@ export class LoginFormComponent {
   }
 
   private initForm(): void {
-    if (this.options.id !== ACTIONS.recovery) {
-      this.authForm = this.fb.group({
-        email: ['', Validators.required],
-        password: ['', Validators.required],
-      });
-    } else {
-      this.authForm = this.fb.group({
-        email: ['', Validators.required],
-      });
+    switch (this.options.id) {
+      case ACTIONS.recovery:
+        this.authForm = this.fb.group({
+          email: ['', Validators.required],
+        });
+        break;
+
+      case ACTIONS.changePassword:
+        this.authForm = this.fb.group({
+          newPassword: ['', Validators.required],
+          password: ['', Validators.required],
+        });
+        break;
+
+      case ACTIONS.signIn:
+      case ACTIONS.signUp:
+        this.authForm = this.fb.group({
+          email: ['', Validators.required],
+          password: ['', Validators.required],
+        });
+        break;
+
+      default:
+        break;
     }
   }
 

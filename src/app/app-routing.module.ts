@@ -14,7 +14,8 @@ import { HelpComponent } from './pages/auth/sections/help/help.component';
 import { SignInComponent } from './pages/auth/sections/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sections/sign-up/sign-up.component';
 import { ProfileComponent } from './pages/auth/sections/profile/profile.component';
-import { RecoveryComponent } from './pages/auth/sections/recovery/recovery.component';
+import { RecoveryComponent } from './pages/auth/sections/recovery copy/recovery.component';
+import { ChangePasswordComponent } from './pages/auth/sections/change-password/recovery.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full' }, //default route
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'recovery', component: RecoveryComponent },
+  // { path: 'change-password', component: ChangePasswordComponent },
 ];
 
 @NgModule({
@@ -75,4 +77,11 @@ const routes: Routes = [
     },
   ],
 })
+
+// const supabase = createClient(supabaseUrl, supabaseKey, {
+//   auth: {
+//     autoRefreshToken: false, // All my Supabase access is from server, so no need to refresh the token
+//     detectSessionInUrl: false, // We are not using OAuth, so we don't need this. Also, we are manually "detecting" the session in the server-side code
+//     persistSession: false, // All our access is from server, so no need to persist the session to browser's local storage
+//   },
 export class AppRoutingModule {}
