@@ -8,23 +8,23 @@
   </div>
   <div class="">
     <div class="search-container">
-      <div class="input-container">
-        <input
-          type="text"
-          class="search-input"
-          id="searchQuery"
-          [(ngModel)]="inputSearch"
-          (input)="onSearchQueryInput($event)"
-          placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
-        />
-        <!-- <div
-          *ngIf="inputSearch.length"
-          class="clear-button"
-          (click)="clearInput()"
-        >
-          X
-        </div> -->
-      </div>
+      <input
+        type="text"
+        placeholder="Buscar..."
+        [(ngModel)]="inputSearch"
+        (input)="onSearchQueryInputKeyUp($event)"
+        (keyup.enter)="onSearchQueryInput($event)"
+        placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
+      />
+
+      <!-- <div class="ng-fa-icon-container"> -->
+
+      <fa-icon
+        (click)="onSearchQueryInput($event)"
+        [icon]="faSearch"
+        size="lg"
+        [styles]="{ color: '#155487' }"
+      ></fa-icon>
     </div>
   </div>
 
@@ -34,16 +34,21 @@
     [ngClass]="{ sticky: isSticky }"
   >
     <div class="search-container">
-      <div class="input-container">
-        <input
-          type="text"
-          class="search-input"
-          id="searchQuery"
-          [(ngModel)]="inputSearch"
-          (input)="onSearchQueryInput($event)"
-          placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
-        />
-      </div>
+      <input
+        type="text"
+        placeholder="Buscar..."
+        [(ngModel)]="inputSearch"
+        (input)="onSearchQueryInputKeyUp($event)"
+        (keyup.enter)="onSearchQueryInput($event)"
+        placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
+      />
+
+      <fa-icon
+        (click)="onSearchQueryInput($event)"
+        [icon]="faSearch"
+        size="lg"
+        [styles]="{ color: '#155487' }"
+      ></fa-icon>
     </div>
   </div>
   <app-footer

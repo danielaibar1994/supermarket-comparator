@@ -163,7 +163,7 @@ export class ProductRepository {
           of({ catalog_result: { products_list: { items: [] } } })
         ),
         map((data: any) =>
-          data.catalog_result.products_list.items.map((hit: any) =>
+          data.catalog_result.products_list.items?.map((hit: any) =>
             ProductMapper.toDomain(hit.product, 'ECI')
           )
         )

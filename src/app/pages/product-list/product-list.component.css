@@ -283,3 +283,47 @@ span.selectedType {
         margin: 24px 0.5rem;
     }
 }
+
+
+/*  */
+
+.search-container {
+    position: relative;
+    display: grid;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+input {
+    padding-right: 30px;
+    height: 40px;
+    border: 2px solid #155487;
+    border-radius: 8px;
+    padding-left: 14px;
+    font-size: 16px;
+}
+
+.ng-fa-icon-container {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: #155487;
+    padding: 8px 8px;
+    color: white;
+    border-radius: 8px;
+}
+
+/* .ng-fa-icon-container span {
+    margin-right: 8px;
+} */
+
+.ng-fa-icon {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #155487;
+}

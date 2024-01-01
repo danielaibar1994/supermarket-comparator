@@ -26,6 +26,8 @@ import { SupabaseService } from 'src/app/shared/services/supabase.service';
 import { AccessModalComponent } from 'src/app/shared/components/access-modal/access-modal.component';
 import { AccessModalService } from 'src/app/shared/components/access-modal/service/access-modal.service';
 import { Router } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product-list',
@@ -42,6 +44,7 @@ import { Router } from '@angular/router';
     PriceComparatorComponent,
     NgOptimizedImage,
     AccessModalComponent,
+    FontAwesomeModule,
   ],
 })
 export class ProductListComponent implements OnInit, OnDestroy {
@@ -69,6 +72,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private userIdShoppingList = '';
   modalOpen: boolean = this.accessModalService.getLoading();
 
+  faSearch = faSearch;
+
   constructor(
     private readonly store: ProductState,
     private readonly listStore: ShoppingListState,
@@ -79,13 +84,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
-    this.isSticky = window.scrollY >= 700;
+    this.isSticky = window.scrollY >= 600;
   }
 
   ngOnInit(): void {
     this.searchSubscription = this.searchSubject
       .pipe(
-        debounceTime(700),
+        debounceTime(100),
         distinctUntilChanged(),
         tap((searchQuery) => {
           this.loadSupermarkets(searchQuery);
@@ -143,6 +148,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSearchQueryInputKeyUp(event: Event): void {
+    const searchQuery = (event.target as HTMLInputElement).value;
+
+    if (!searchQuery.length) {
+      this.searchSubject.next(searchQuery?.trim());
+    }
+  }
+
   onSearchQueryInput(event: Event): void {
     const searchQuery = (event.target as HTMLInputElement).value;
     this.searchSubject.next(searchQuery?.trim());
@@ -168,12 +181,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   // Modal
   openModal(): void {
-    // this.modalOpen = true;
     this.accessModalService.setLoading(false);
   }
 
   closeModal(): void {
-    // this.modalOpen = false;
     this.accessModalService.setLoading(false);
   }
 
@@ -187,9 +198,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   private loadSupermarkets(searchQuery?: string): void {
+    this.closeAllSupermarketsContainer();
     this.store.loadSupermarkets(
       this.supermarketsSelected,
       searchQuery ?? this.inputSearch
     );
+  }
+
+  private closeAllSupermarketsContainer() {
+    this.supermarkets.map((s: any) => (s.opened = false));
   }
 }
