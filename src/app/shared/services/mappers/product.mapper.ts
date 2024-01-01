@@ -267,14 +267,16 @@ export class ProductMapper {
         return '../../../../assets/images/gadis-logo.jpeg';
 
       case 'ECI':
-        return '../../../../assets/images/eci-logo.jpeg';
+        return '../../../../assets/images/eci-logo.png';
       default:
         return '';
     }
   }
 
   private static separarFrases(texto: string): string[] {
-    const coincidencias = texto.match(/([A-Z\s]+)([a-z0-9\s]+)/);
+    const coincidencias = texto.match(
+      /([A-Z][^\s]*(?:\s+[A-Z][^\s]*)*)([\s\S]*)/
+    );
 
     if (coincidencias && coincidencias.length === 3) {
       const resultado: string[] = [
@@ -283,7 +285,7 @@ export class ProductMapper {
       ];
       return resultado;
     } else {
-      return [texto];
+      return [texto, ''];
     }
   }
 }
