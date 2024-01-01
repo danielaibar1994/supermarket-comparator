@@ -310,9 +310,10 @@ input {
     right: 17px;
     transform: translateY(-50%);
     cursor: pointer;
-    background: #155487;
+    /* background: #155487; */
     padding: 12px 12px 12px 18px;
-    color: white;
+    /* color: white; */
+    color: #155487;
     border-radius: 2px 8px 8px 2px;
 }
 
