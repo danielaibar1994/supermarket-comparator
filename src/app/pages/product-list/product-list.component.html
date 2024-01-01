@@ -10,6 +10,7 @@
     <div class="search-container">
       <input
         type="text"
+        autocapitalize="none"
         placeholder="Buscar..."
         [(ngModel)]="inputSearch"
         (input)="onSearchQueryInputKeyUp($event)"
@@ -17,14 +18,14 @@
         placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
       />
 
-      <!-- <div class="ng-fa-icon-container"> -->
-
-      <fa-icon
-        (click)="onSearchQueryInput($event)"
-        [icon]="faSearch"
-        size="lg"
-        [styles]="{ color: '#155487' }"
-      ></fa-icon>
+      <div class="ng-fa-icon-container" (click)="onSearchQueryInput($event)">
+        <!-- <span>Buscar</span> -->
+        <fa-icon
+          [icon]="faSearch"
+          size="lg"
+          [styles]="{ color: 'white' }"
+        ></fa-icon>
+      </div>
     </div>
   </div>
 
@@ -36,6 +37,7 @@
     <div class="search-container">
       <input
         type="text"
+        autocapitalize="none"
         placeholder="Buscar..."
         [(ngModel)]="inputSearch"
         (input)="onSearchQueryInputKeyUp($event)"
@@ -43,12 +45,20 @@
         placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
       />
 
-      <fa-icon
+      <!-- <fa-icon
         (click)="onSearchQueryInput($event)"
         [icon]="faSearch"
         size="lg"
         [styles]="{ color: '#155487' }"
-      ></fa-icon>
+      ></fa-icon> -->
+      <div class="ng-fa-icon-container" (click)="onSearchQueryInput($event)">
+        <!-- <span>Buscar</span> -->
+        <fa-icon
+          [icon]="faSearch"
+          size="lg"
+          [styles]="{ color: 'white' }"
+        ></fa-icon>
+      </div>
     </div>
   </div>
   <app-footer
