@@ -22,5 +22,13 @@
     "pathRewrite": {
       "^/apiECI": "/alimentacion/api/catalog/supermercado/type_ahead/"
     }
+  },
+  "/apiHipercor": {
+    "target": "https://www.hipercor.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiHipercor": "/alimentacion/api/catalog/supermercado/type_ahead/"
+    }
   }
 }

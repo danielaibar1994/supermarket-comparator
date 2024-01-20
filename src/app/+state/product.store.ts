@@ -41,6 +41,7 @@ export class ProductState extends SignalService<initialProductState> {
               alcampoProducts,
               gadisProducts,
               eciProducts,
+              hipercorProducts,
             ]) => {
               this.setExternalProductReducer([
                 ...consumProducts,
@@ -52,6 +53,7 @@ export class ProductState extends SignalService<initialProductState> {
                 ...alcampoProducts,
                 ...gadisProducts,
                 ...eciProducts,
+                ...hipercorProducts,
               ]);
             }
           )
@@ -95,6 +97,9 @@ export class ProductState extends SignalService<initialProductState> {
         : of([]),
 
       selected['eci'] ? this.productRepository.getECIData(query) : of([]),
+      selected['hipercor']
+        ? this.productRepository.getHipercorData(query)
+        : of([]),
     ];
   }
 

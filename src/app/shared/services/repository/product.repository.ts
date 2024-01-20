@@ -11,7 +11,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { ExternalProduct, Product } from '../../interfaces/products.interface';
+import { ExternalProduct } from '../../interfaces/products.interface';
 import { ProductMapper } from '../mappers/product.mapper';
 
 @Injectable({ providedIn: 'root' })
@@ -30,11 +30,13 @@ export class ProductRepository {
     alcampoUrl: '/apiAlcampo',
     eciUrl:
       'https://www.elcorteingles.es/alimentacion/api/catalog/supermercado/type_ahead/',
+    hipercorUrl:
+      'https://www.hipercor.es/alimentacion/api/catalog/supermercado/type_ahead/?question=%s&scope=supermarket&center=010MOH&results=10',
   };
 
   constructor(private http: HttpClient) {}
 
-  getData(offset = 0, query?: string): Observable<Product[]> {
+  getData(offset = 0, query?: string): Observable<ExternalProduct[]> {
     const url =
       `${
         this.basesURL.consumUrl
@@ -110,7 +112,7 @@ export class ProductRepository {
     const url = `${this.basesURL.diaUrl}?q=${query}&page=1`;
     return this.http.get(url).pipe(
       first(),
-      catchError(() => of({ content: { docs: [] } })),
+      catchError(() => of({ search_items: [] })),
       map((data: any) =>
         data.search_items.map((hit: any) => ProductMapper.toDomain(hit, 'DIA'))
       )
@@ -170,6 +172,29 @@ export class ProductRepository {
       );
   }
 
+  // HIPERCOR
+
+  getHipercorData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${'/apiHipercor'}?question=${query}&scope=supermarket&center=010MOE&results=40`;
+    return this.http
+      .get(url, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      })
+      .pipe(
+        first(),
+        catchError(() =>
+          of({ catalog_result: { products_list: { items: [] } } })
+        ),
+        map((data: any) =>
+          data.catalog_result.products_list.items?.map((hit: any) =>
+            ProductMapper.toDomain(hit.product, 'HIPERCOR')
+          )
+        )
+      );
+  }
+
   // Gadis
 
   private lastSessionDate: Date = new Date(0); // Inicializado con una fecha muy antigua
@@ -182,7 +207,6 @@ export class ProductRepository {
       (now.getTime() - this.lastSessionDate.getTime()) / (1000 * 60)
     );
 
-    // if (diff > 30 || this.iSessionId === null) {
     const requestBody = 'resource=postalCode&cl_lang=es&cl_postal_code=15001';
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -197,7 +221,6 @@ export class ProductRepository {
       })
       .pipe(
         map((response) => {
-          // console.warn(response);
           return response.headers.get('Set-Cookie');
         }),
         catchError((error) => {
@@ -210,7 +233,6 @@ export class ProductRepository {
           return this.getGadisData(query);
         })
       );
-    // }
   }
 
   getGadisData(query?: string): Observable<any> {

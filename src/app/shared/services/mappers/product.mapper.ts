@@ -50,6 +50,7 @@ export class ProductMapper {
         );
 
       case 'ECI':
+      case 'HIPERCOR':
         return (
           'https:' +
           entity.media.images[0].xxs.url.replace('40x40.jpg', '150x150.jpg')
@@ -82,6 +83,7 @@ export class ProductMapper {
         return entity.descripcionLarga;
 
       case 'ECI':
+      case 'HIPERCOR':
         return this.separarFrases(entity.name[0])[1];
       default:
         return '';
@@ -110,6 +112,7 @@ export class ProductMapper {
         return entity.marca;
 
       case 'ECI':
+      case 'HIPERCOR':
         return this.separarFrases(entity.name[0])[0];
       default:
         return '';
@@ -147,6 +150,7 @@ export class ProductMapper {
         return entity.precio;
 
       case 'ECI':
+      case 'HIPERCOR':
         return entity.price.seo_price;
 
       default:
@@ -187,6 +191,7 @@ export class ProductMapper {
         return undefined;
 
       case 'ECI':
+      case 'HIPERCOR':
         return entity.price.seo_original_price;
 
       default:
@@ -228,6 +233,8 @@ export class ProductMapper {
       case 'ECI':
         return 'https://www.elcorteingles.es' + entity.pdp_url;
 
+      case 'HIPERCOR':
+        return 'https://www.hipercor.es' + entity.pdp_url;
       default:
         return '';
     }
@@ -268,6 +275,9 @@ export class ProductMapper {
 
       case 'ECI':
         return '../../../../assets/images/eci-logo.png';
+
+      case 'HIPERCOR':
+        return '../../../../assets/images/hipercor-logo.png';
       default:
         return '';
     }

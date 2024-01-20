@@ -1,5 +1,6 @@
 /apiAlcampo/*  https://www.compraonline.alcampo.es/api/v5/products/search:splat 200
 /apiGadis/*  https://www.gadisline.com/content/themes/gadislineth/view/functions/ajax_apiCinfo.php:splat 200
 /apiECI/*  https://www.elcorteingles.es/alimentacion/api/catalog/supermercado/type_ahead/:splat 200
+/apiHipercor/*  https://www.hipercor.es/alimentacion/api/catalog/supermercado/type_ahead/:splat 200
 /*  /index.html 200
 

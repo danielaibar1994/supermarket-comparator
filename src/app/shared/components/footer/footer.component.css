@@ -1,7 +1,6 @@
 .footer {
   padding: 0.5rem;
   text-align: center;
-  /* height: 5rem; */
 }
 
 .brand-logos {
@@ -35,5 +34,5 @@
 
 .message-info-footer {
   color: #10436d;
-  font-size: 14px
+  font-size: 14px;
 }
