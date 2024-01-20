@@ -20,9 +20,6 @@ export class CustomerListComponent implements OnInit {
   faCartShopping = faCartShopping;
   faListCheck = faListCheck;
 
-  // products$ = this.store.myDataObservable$ as Observable<ExternalProduct[]>;
-  // products$ = this.store.shoppingListSelector;
-
   get products$(): ExternalProduct[] {
     return this.store.shoppingListSelector;
   }

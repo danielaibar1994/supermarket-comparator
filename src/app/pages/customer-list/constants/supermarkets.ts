@@ -98,4 +98,16 @@ export const SUPERMARKETS: any = [
     opened: false,
     filter: 'OFF',
   },
+
+  {
+    id: 10,
+    name: 'HIPERCOR',
+    title: 'HIPERCOR',
+    src: '../../../assets/images/hipercor-logo.png',
+    srcWidth: '',
+    variable: 'hipercorProducts',
+    background: '#00337a',
+    opened: false,
+    filter: 'OFF',
+  },
 ];

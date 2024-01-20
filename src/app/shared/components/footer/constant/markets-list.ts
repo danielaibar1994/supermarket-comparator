@@ -40,6 +40,13 @@ export const SUPERMARKETS_LIST = [
     sector: 2,
   },
   {
+    name: 'hipercor',
+    icon: '../../../../assets/images/hipercor-logo.png',
+    style:
+      'background-color: white; padding: 12px 0px 10px 4px; border-radius: 8px; ',
+    sector: 2,
+  },
+  {
     name: 'gadis',
     icon: '../../../../assets/images/gadis-logo.jpeg',
     style: 'border-radius: 8px',

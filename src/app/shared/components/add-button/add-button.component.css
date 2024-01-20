@@ -1,17 +1,17 @@
 .add-button {
-    width: 20px;
-    background: #addcff;
-    text-align: center;
-    border-radius: 25px;
-    color: #155487;
-    padding: 4px 6px;
-    position: absolute;
-    left: 1rem;
-    bottom: 12px;
-    cursor: pointer;
+  width: 20px;
+  background: #addcff;
+  text-align: center;
+  border-radius: 25px;
+  color: #155487;
+  padding: 4px 6px;
+  position: absolute;
+  left: 1rem;
+  bottom: 12px;
+  cursor: pointer;
 }
 
 .selected {
-    background: #fc9c18;
-    color: #8d5b00;
+  background: #fc9c18;
+  color: #8d5b00;
 }
