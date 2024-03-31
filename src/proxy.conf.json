@@ -30,5 +30,14 @@
     "pathRewrite": {
       "^/apiHipercor": "/alimentacion/api/catalog/supermercado/type_ahead/"
     }
+  },
+
+  "/apiEroski": {
+    "target": "https://supermercado.eroski.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiEroski": "/es/search/results/"
+    }
   }
 }

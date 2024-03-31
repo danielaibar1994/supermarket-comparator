@@ -21,13 +21,13 @@ import { SupermarketViewComponent } from '../../shared/components/supermarket-vi
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgClass, NgIf, NgOptimizedImage } from '@angular/common';
-import { ShoppingListState } from 'src/app/+state/shopping-list.store';
-import { SupabaseService } from 'src/app/shared/services/supabase.service';
 import { AccessModalComponent } from 'src/app/shared/components/access-modal/access-modal.component';
 import { AccessModalService } from 'src/app/shared/components/access-modal/service/access-modal.service';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+// import { ShoppingListState } from 'src/app/+state/shopping-list.store';
 
 @Component({
   selector: 'app-product-list',
@@ -69,15 +69,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   private readonly searchSubject = new Subject<string | undefined>();
 
-  private userIdShoppingList = '';
+  // private userIdShoppingList = '';
   modalOpen: boolean = this.accessModalService.getLoading();
 
   faSearch = faSearch;
 
+  // private readonly listStore: ShoppingListState,
   constructor(
     private readonly store: ProductState,
-    private readonly listStore: ShoppingListState,
-    private readonly supabase: SupabaseService,
     readonly accessModalService: AccessModalService,
     private readonly router: Router
   ) {}
@@ -98,19 +97,19 @@ export class ProductListComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.supabase.authChanges((_, session) => {
-      if (session?.user && session.user.id !== this.userIdShoppingList) {
-        this.userIdShoppingList = session.user.id;
-        this.fetchShoppingList();
-      }
-    });
+    // this.supabase.authChanges((_, session) => {
+    //   if (session?.user && session.user.id !== this.userIdShoppingList) {
+    //     this.userIdShoppingList = session.user.id;
+    //     this.fetchShoppingList();
+    //   }
+    // });
 
     this.getSelectedMarkets();
   }
 
-  fetchShoppingList() {
-    this.listStore.getShoppingList('HOME');
-  }
+  // fetchShoppingList() {
+  //   this.listStore.getShoppingList('HOME');
+  // }
 
   getSelectedMarkets(): void {
     let selected = localStorage.getItem('supermarketsSelected');

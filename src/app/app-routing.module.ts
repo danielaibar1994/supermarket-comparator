@@ -26,36 +26,36 @@ const routes: Routes = [
   {
     path: 'list',
     component: CustomerListComponent,
-    canActivate: [redirectUnauthorizedToLoginPage],
-    canActivateChild: [redirectUnauthorizedToLoginPage],
+    // canActivate: [redirectUnauthorizedToLoginPage],
+    // canActivateChild: [redirectUnauthorizedToLoginPage],
   },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [redirectUnauthorizedToLoginPage],
-    canActivateChild: [redirectUnauthorizedToLoginPage],
-  },
-  {
-    path: 'profile-edit',
-    component: ProfileEditComponent,
-    canActivate: [redirectUnauthorizedToLoginPage],
-    canActivateChild: [redirectUnauthorizedToLoginPage],
-  },
-  {
-    path: 'privacy',
-    component: PrivacyComponent,
-    canActivate: [redirectUnauthorizedToLoginPage],
-    canActivateChild: [redirectUnauthorizedToLoginPage],
-  },
-  {
-    path: 'help',
-    component: HelpComponent,
-    canActivate: [redirectUnauthorizedToLoginPage],
-    canActivateChild: [redirectUnauthorizedToLoginPage],
-  },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'recovery', component: RecoveryComponent },
+  // {
+  //   path: 'profile',
+  //   component: ProfileComponent,
+  //   canActivate: [redirectUnauthorizedToLoginPage],
+  //   canActivateChild: [redirectUnauthorizedToLoginPage],
+  // },
+  // {
+  //   path: 'profile-edit',
+  //   component: ProfileEditComponent,
+  //   canActivate: [redirectUnauthorizedToLoginPage],
+  //   canActivateChild: [redirectUnauthorizedToLoginPage],
+  // },
+  // {
+  //   path: 'privacy',
+  //   component: PrivacyComponent,
+  //   canActivate: [redirectUnauthorizedToLoginPage],
+  //   canActivateChild: [redirectUnauthorizedToLoginPage],
+  // },
+  // {
+  //   path: 'help',
+  //   component: HelpComponent,
+  //   canActivate: [redirectUnauthorizedToLoginPage],
+  //   canActivateChild: [redirectUnauthorizedToLoginPage],
+  // },
+  // { path: 'sign-in', component: SignInComponent },
+  // { path: 'sign-up', component: SignUpComponent },
+  // { path: 'recovery', component: RecoveryComponent },
   // { path: 'change-password', component: ChangePasswordComponent },
 ];
 
@@ -68,13 +68,13 @@ const routes: Routes = [
       useClass: LoadingInterceptor,
       multi: true,
     },
-    {
-      provide: SupabaseClient,
-      useValue: createClient(
-        environment.supabase.url,
-        environment.supabase.key
-      ),
-    },
+    // {
+    //   provide: SupabaseClient,
+    //   useValue: createClient(
+    //     environment.supabase.url,
+    //     environment.supabase.key
+    //   ),
+    // },
   ],
 })
 
