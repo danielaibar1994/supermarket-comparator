@@ -5,8 +5,9 @@ import { SupermarketViewComponent } from 'src/app/shared/components/supermarket-
 import { SUPERMARKETS } from './constants/supermarkets';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCartShopping, faListCheck } from '@fortawesome/free-solid-svg-icons';
-import { ShoppingListState } from 'src/app/+state/shopping-list.store';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
+import { EventsStorageService } from 'src/app/shared/services/old/events-storage.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-customer-list',
@@ -20,17 +21,19 @@ export class CustomerListComponent implements OnInit {
   faCartShopping = faCartShopping;
   faListCheck = faListCheck;
 
-  get products$(): ExternalProduct[] {
-    return this.store.shoppingListSelector;
-  }
+  // get products$(): ExternalProduct[] {
+  //   return this.store.shoppingListSelector;
+  // }
 
-  get loading$(): boolean {
-    return this.store.shoppingListLoading;
-  }
+  products$ = this.store.myDataObservable$ as Observable<ExternalProduct[]>;
 
-  constructor(private readonly store: ShoppingListState) {}
+  // get loading$(): boolean {
+  //   return this.store.shoppingListLoading;
+  // }
+
+  constructor(private readonly store: EventsStorageService) {}
 
   ngOnInit(): void {
-    this.store.getShoppingList('LIST');
+    // this.store.getShoppingList('LIST');
   }
 }
