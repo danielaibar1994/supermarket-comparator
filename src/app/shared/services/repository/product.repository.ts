@@ -140,7 +140,7 @@ export class ProductRepository {
         first(),
         catchError(() => of({ entities: { product: {} } })),
         map((data: any) =>
-          data.entities?.product?.length
+          data.entities?.product && Object.keys(data.entities?.product).length
             ? Object.keys(data.entities?.product).map((hit: any) =>
                 ProductMapper.toDomain(data.entities.product[hit], 'ALCAMPO')
               )
