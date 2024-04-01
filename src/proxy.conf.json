@@ -39,5 +39,13 @@
     "pathRewrite": {
       "^/apiEroski": "/es/search/results/"
     }
+  },
+  "/apiCarrefour": {
+    "target": "https://www.carrefour.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiCarrefour": "/search-api/query/v1/search"
+    }
   }
 }

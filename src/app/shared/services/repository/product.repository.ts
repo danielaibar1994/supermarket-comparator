@@ -22,7 +22,7 @@ export class ProductRepository {
     consumUrl: 'https://tienda.consum.es/api/rest/V1.0/catalog/product',
     mercadonaUrl:
       'https://7uzjkl1dj0-dsn.algolia.net/1/indexes/products_prod_4315_es/query?x-algolia-application-id=7UZJKL1DJ0&x-algolia-api-key=9d8f2e39e90df472b4f2e559a116fe17',
-    carrefourUrl: 'https://www.carrefour.es/search-api/query/v1/search',
+    carrefourUrl: '/apiCarrefour',
     aldiUrl:
       'https://l9knu74io7-dsn.algolia.net/1/indexes/*/queries?X-Algolia-Api-Key=19b0e28f08344395447c7bdeea32da58&X-Algolia-Application-Id=L9KNU74IO7',
     diaUrl: 'https://www.dia.es/api/v1/search-back/search/reduced',
@@ -67,9 +67,7 @@ export class ProductRepository {
   }
 
   getCarrefourData(query?: string): Observable<ExternalProduct[]> {
-    const url =
-      `${this.basesURL.carrefourUrl}?query=${query}&scope=desktop&lang=es&rows=40&start=0&origin=default&f.op=OR` +
-      (query ? `&q=${query}` : '');
+    const url = `${this.basesURL.carrefourUrl}?query=${query}&scope=desktop&lang=es&session=d4eef8bf-8b32-4d21-b9fd-7ec6054603f4&rows=24&start=0&origin=default&f.op=OR`;
     return this.http.get(url).pipe(
       first(),
       catchError(() => of({ content: { docs: [] } })),
