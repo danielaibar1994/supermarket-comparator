@@ -56,6 +56,12 @@ export class ProductMapper {
           entity.media.images[0].xxs.url.replace('40x40.jpg', '150x150.jpg')
         );
 
+      case 'EROSKI':
+        return entity.thumbnail;
+
+      case 'LIDL':
+        return 'https://www.lidl.es/' + entity.thumbnail;
+
       default:
         return '';
     }
@@ -85,6 +91,10 @@ export class ProductMapper {
       case 'ECI':
       case 'HIPERCOR':
         return this.separarFrases(entity.name[0])[1];
+
+      case 'EROSKI':
+      case 'LIDL':
+        return entity.displayName;
       default:
         return '';
     }
@@ -114,6 +124,11 @@ export class ProductMapper {
       case 'ECI':
       case 'HIPERCOR':
         return this.separarFrases(entity.name[0])[0];
+
+      case 'EROSKI':
+      case 'LIDL':
+        return this.extraerPalabrasMayusculas(entity.displayName);
+
       default:
         return '';
     }
@@ -153,6 +168,10 @@ export class ProductMapper {
       case 'HIPERCOR':
         return entity.price.seo_price;
 
+      case 'EROSKI':
+      case 'LIDL':
+        return entity.unit_price;
+
       default:
         return 0;
     }
@@ -188,6 +207,10 @@ export class ProductMapper {
         return undefined;
 
       case 'GADIS':
+        return undefined;
+
+      case 'EROSKI':
+      case 'LIDL':
         return undefined;
 
       case 'ECI':
@@ -235,6 +258,13 @@ export class ProductMapper {
 
       case 'HIPERCOR':
         return 'https://www.hipercor.es' + entity.pdp_url;
+
+      case 'EROSKI':
+        return 'https://supermercado.eroski.es' + entity.href;
+
+      case 'LIDL':
+        return 'https://www.lidl.es/' + entity.href;
+
       default:
         return '';
     }
@@ -278,6 +308,13 @@ export class ProductMapper {
 
       case 'HIPERCOR':
         return '../../../../assets/images/hipercor-logo.png';
+
+      case 'EROSKI':
+        return '../../../../assets/images/eroski-logo.svg';
+
+      case 'LIDL':
+        return '../../../../assets/images/lidl-logo.svg';
+
       default:
         return '';
     }
@@ -297,5 +334,23 @@ export class ProductMapper {
     } else {
       return [texto, ''];
     }
+  }
+
+  private static extraerPalabrasMayusculas(texto: string): string {
+    // Dividir el texto en palabras
+    const palabras = texto.split(' ');
+
+    // Filtrar las palabras que están completamente en mayúsculas
+    const palabrasMayusculas = palabras.filter((palabra) =>
+      this.esPalabraTodaMayuscula(palabra)
+    );
+
+    // Devolver la primera palabra completamente en mayúsculas encontrada
+    return palabrasMayusculas.length > 0 ? palabrasMayusculas[0] : '';
+  }
+
+  private static esPalabraTodaMayuscula(palabra: string): boolean {
+    // Verificar si la palabra está completamente en mayúsculas
+    return palabra === palabra.toUpperCase();
   }
 }

@@ -32,6 +32,15 @@
     }
   },
 
+  "/apiInitEroski": {
+    "target": "https://supermercado.eroski.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiInitEroski": ""
+    }
+  },
+
   "/apiEroski": {
     "target": "https://supermercado.eroski.es",
     "secure": true,
@@ -46,6 +55,15 @@
     "changeOrigin": true,
     "pathRewrite": {
       "^/apiCarrefour": "/search-api/query/v1/search"
+    }
+  },
+
+  "/apiLidl": {
+    "target": "https://www.lidl.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiLidl": "/es/search"
     }
   }
 }

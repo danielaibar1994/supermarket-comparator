@@ -2,7 +2,7 @@ export const SUPERMARKETS_LIST = [
   {
     name: 'consum',
     icon: '../../../../assets/images/logo-peque-consum.png',
-    sector: 1,
+    sector: 3,
   },
   {
     name: 'mercadona',
@@ -25,14 +25,14 @@ export const SUPERMARKETS_LIST = [
     name: 'eci',
     icon: '../../../../assets/images/eci-logo.png',
     style: '',
-    sector: 1,
+    sector: 2,
   },
   { name: 'aldi', icon: '../../../../assets/images/logo-aldi.svg', sector: 2 },
   {
     name: 'masymas',
     icon: '../../../../assets/images/masymas-logo.png',
     style: 'border-radius: 8px',
-    sector: 2,
+    sector: 3,
   },
   {
     name: 'alcampo',
@@ -50,6 +50,20 @@ export const SUPERMARKETS_LIST = [
     name: 'gadis',
     icon: '../../../../assets/images/gadis-logo.jpeg',
     style: 'border-radius: 8px',
-    sector: 2,
+    sector: 3,
+  },
+
+  {
+    name: 'eroski',
+    icon: '../../../../assets/images/eroski-logo.svg',
+    style: 'border-radius: 8px',
+    sector: 3,
+  },
+
+  {
+    name: 'lidl',
+    icon: '../../../../assets/images/lidl-logo.svg',
+    style: 'border-radius: 8px',
+    sector: 1,
   },
 ];

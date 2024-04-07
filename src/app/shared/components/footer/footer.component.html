@@ -30,6 +30,20 @@
     </ng-container>
   </div>
 
+  <div class="brand-logos">
+    <ng-container *ngFor="let market of SUPERMARKETS_LIST_THIRD">
+      <img
+        (click)="clickSupermarket(market.name)"
+        [ngClass]="{
+          'market-no-selected': !supermarketsSelected[market.name.toString()]
+        }"
+        [src]="market.icon"
+        [alt]="market.name"
+        [style]="market.style ?? ''"
+      />
+    </ng-container>
+  </div>
+
   <div *ngIf="supermarketsSelected['gadis']" class="message-info-footer">
     * Gadis puede demorar la visualizacion de la lista.
   </div>

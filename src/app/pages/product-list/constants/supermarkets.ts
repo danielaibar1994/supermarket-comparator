@@ -110,4 +110,28 @@ export const SUPERMARKETS: any = [
     opened: false,
     filter: 'OFF',
   },
+
+  {
+    id: 11,
+    name: 'EROSKI',
+    title: 'EROSKI',
+    src: '../../../assets/images/eroski-logo.svg',
+    srcWidth: '',
+    variable: 'eroskiProducts',
+    background: '#00337a',
+    opened: false,
+    filter: 'OFF',
+  },
+
+  {
+    id: 12,
+    name: 'LIDL',
+    title: 'LIDL',
+    src: '../../../assets/images/lidl-logo.svg',
+    srcWidth: '',
+    variable: 'lidlProducts',
+    background: '#00337a',
+    opened: false,
+    filter: 'OFF',
+  },
 ];
