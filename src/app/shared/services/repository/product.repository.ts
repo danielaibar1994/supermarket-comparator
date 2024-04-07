@@ -32,6 +32,9 @@ export class ProductRepository {
       'https://www.elcorteingles.es/alimentacion/api/catalog/supermercado/type_ahead/',
     hipercorUrl:
       'https://www.hipercor.es/alimentacion/api/catalog/supermercado/type_ahead/?question=%s&scope=supermarket&center=010MOH&results=10',
+
+    eroskirUrl: '/apiEroski',
+    lidlApi: '/apiLidl',
   };
 
   constructor(private http: HttpClient) {}
@@ -257,11 +260,167 @@ export class ProductRepository {
       );
   }
 
+  getEroskiData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.eroskirUrl}?q=${query}&suggestionsFilter=false`;
+
+    return this.http.get('/apiInitEroski').pipe(
+      first(),
+      catchError(() => of('')),
+
+      switchMap(() => this.http.get(url, { responseType: 'text' })),
+      map((data: any) => {
+        const formatted = this.extractEroskiDataFromHTML(data);
+
+        return formatted.map((hit: any) =>
+          ProductMapper.toDomain(hit, 'EROSKI')
+        );
+      })
+    );
+  }
+
+  getLidlData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.lidlApi}?query=${query}`;
+    return this.http.get(url, { responseType: 'text' }).pipe(
+      first(),
+      catchError(() => of('')),
+      map((data: any) => {
+        const formatted = this.extractLidlDataFromHTML(data);
+        return formatted.map((hit: any) => ProductMapper.toDomain(hit, 'LIDL'));
+      })
+    );
+  }
+
   private logger = {
     error: (message: string, error: any) => {
       console.error(message, error);
     },
   };
+
+  private extractEroskiDataFromHTML(html: string): any {
+    const childrenJson: any[] = [];
+
+    // Crear un elemento div temporal para analizar el HTML
+    // const tempDiv = document.createElement('div');
+    // tempDiv.innerHTML = html;
+
+    // Crear un nuevo documento HTML usando DOMParser
+    const parser = new DOMParser();
+    const tempDiv = parser.parseFromString(html, 'text/html');
+
+    // Encontrar el div con el atributo data-container-type="zone" y id="productListZone"
+    const productListZone = tempDiv.querySelector('div[id="productListZone"]');
+
+    // console.warn(productListZone);
+
+    if (productListZone) {
+      // Obtener todos los hijos del div productListZone
+      const children = Array.from(productListZone.children);
+
+      // Iterar sobre cada hijo y extraer la información deseada como JSON
+      children.forEach((child) => {
+        const childData: any = {};
+
+        if (child.tagName.toLowerCase() === 'span') {
+          return;
+        }
+
+        // childData.tagName = child.tagName.toLowerCase();
+        // childData.textContent = child.textContent ?? ''.trim();
+
+        // Image
+        const productImage = child.querySelector('img.product-img');
+
+        if (productImage) {
+          childData.thumbnail = productImage.getAttribute('src') || ''; // Obtener la URL de la imagen
+        }
+
+        // Display Name & href
+        const displayName = child.querySelector('h2.product-title a');
+
+        if (displayName) {
+          childData.displayName = displayName.textContent?.trim() || ''; // Obtener la URL de la imagen
+          childData.href = displayName.getAttribute('href') || ''; // Obtener la URL de la imagen
+        }
+
+        // unit_price
+        const unit_price = child.querySelector('span.price-offer-now');
+
+        if (unit_price) {
+          childData.unit_price = unit_price.textContent?.trim() || ''; // Obtener la URL de la imagen
+        }
+
+        // OBject
+
+        childrenJson.push(childData);
+      });
+    }
+
+    return childrenJson;
+  }
+
+  private extractLidlDataFromHTML(html: string): any {
+    const childrenJson: any[] = [];
+
+    const parser = new DOMParser();
+    const tempDiv = parser.parseFromString(html, 'text/html');
+
+    // Encontrar el div con el atributo data-container-type="zone" y id="grid-item-container"
+    const productListZone = tempDiv.querySelector('div.grid-item-container');
+
+    if (productListZone) {
+      // Obtener todos los hijos del div productListZone
+      const children = Array.from(productListZone.children);
+
+      // Iterar sobre cada hijo y extraer la información deseada como JSON
+      children.forEach((child) => {
+        const childData: any = {};
+
+        if (child.tagName.toLowerCase() === 'span') {
+          return;
+        }
+
+        // HREF
+        const productUrl = child.querySelector(
+          'div.plp-product-grid-box-tile__wrapper a'
+        );
+
+        if (productUrl) {
+          childData.href = productUrl.getAttribute('href') || ''; // Obtener la URL de la imagen
+        }
+
+        // Image
+        const productImage = child.querySelector(
+          'div.plp-product-grid-box-tile__wrapper a img'
+        );
+
+        if (productImage) {
+          childData.thumbnail = productImage.getAttribute('src') || ''; // Obtener la URL de la imagen
+        }
+
+        // Display Name
+        const displayName = child.querySelector(
+          'div.plp-product-grid-box-tile__title strong'
+        );
+
+        if (displayName) {
+          childData.displayName = displayName.textContent?.trim() || ''; // Obtener la URL de la imagen
+        }
+
+        // unit_price
+        const unit_price = child.querySelector('div.price-pill__price');
+
+        if (unit_price) {
+          childData.unit_price = unit_price.textContent?.trim() || ''; // Obtener la URL de la imagen
+        }
+
+        // OBject
+
+        childrenJson.push(childData);
+      });
+    }
+
+    return childrenJson;
+  }
 
   //
   // EXPERIMENTAL

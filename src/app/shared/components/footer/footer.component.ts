@@ -18,6 +18,9 @@ export class FooterComponent {
   SUPERMARKETS_LIST_SECOND = SUPERMARKETS_LIST.filter(
     (market) => market.sector === 2
   );
+  SUPERMARKETS_LIST_THIRD = SUPERMARKETS_LIST.filter(
+    (market) => market.sector === 3
+  );
 
   clickSupermarket(name: string) {
     this.supermarketChange.emit(name);

@@ -3,5 +3,8 @@
 /apiGadis/*  https://www.gadisline.com/content/themes/gadislineth/view/functions/ajax_apiCinfo.php:splat 200
 /apiECI/*  https://www.elcorteingles.es/alimentacion/api/catalog/supermercado/type_ahead/:splat 200
 /apiHipercor/*  https://www.hipercor.es/alimentacion/api/catalog/supermercado/type_ahead/:splat 200
+/apiEroski/*  https://supermercado.eroski.es/es/search/results/:splat 200
+/apiInitEroski/*  https://supermercado.eroski.es:splat 200
+/apiLidl/*  https://www.lidl.es/es/search:splat 200
 /*  /index.html 200
 
