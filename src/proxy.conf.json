@@ -85,6 +85,15 @@
     }
   },
 
+  "/apiInitCondis": {
+    "target": "https://www.condisline.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiInitEroski": ""
+    }
+  },
+
   "/apiBonpreu": {
     "target": "https://www.compraonline.bonpreuesclat.cat",
     "secure": true,
