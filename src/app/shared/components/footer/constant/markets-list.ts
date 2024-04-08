@@ -32,7 +32,7 @@ export const SUPERMARKETS_LIST = [
     name: 'masymas',
     icon: '../../../../assets/images/masymas-logo.png',
     style: 'border-radius: 8px',
-    sector: 3,
+    sector: 2,
   },
   {
     name: 'alcampo',
@@ -74,12 +74,12 @@ export const SUPERMARKETS_LIST = [
     sector: 3,
   },
 
-  {
-    name: 'condis',
-    icon: '../../../../assets/images/condis-logo.jpeg',
-    style: 'border-radius: 8px',
-    sector: 2,
-  },
+  // {
+  //   name: 'condis',
+  //   icon: '../../../../assets/images/condis-logo.jpeg',
+  //   style: 'border-radius: 8px',
+  //   sector: 2,
+  // },
 
   {
     name: 'bonpreu',

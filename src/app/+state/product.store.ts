@@ -44,7 +44,7 @@ export class ProductState extends SignalService<initialProductState> {
               hipercorProducts,
               eroskiProducts,
               lidlProducts,
-              condisProducts,
+              // condisProducts,
               hiperdinoProducts,
               bonpreuProducts,
             ]) => {
@@ -61,7 +61,7 @@ export class ProductState extends SignalService<initialProductState> {
                 ...hipercorProducts,
                 ...eroskiProducts,
                 ...lidlProducts,
-                ...condisProducts,
+                // ...condisProducts,
                 ...hiperdinoProducts,
                 ...bonpreuProducts,
               ]);
@@ -112,7 +112,7 @@ export class ProductState extends SignalService<initialProductState> {
         : of([]),
       selected['eroski'] ? this.productRepository.getEroskiData(query) : of([]),
       selected['lidl'] ? this.productRepository.getLidlData(query) : of([]),
-      selected['condis'] ? this.productRepository.getCondisData(query) : of([]),
+      // selected['condis'] ? this.productRepository.getCondisData(query) : of([]),
       selected['hiperdino']
         ? this.productRepository.getHiperdinoData(query)
         : of([]),
