@@ -271,6 +271,7 @@ export class ProductRepository {
       catchError(() => of('')),
 
       switchMap(() => this.http.get(url, { responseType: 'text' })),
+      first(),
       map((data: any) => {
         const formatted = this.extractEroskiDataFromHTML(data);
 
@@ -309,6 +310,21 @@ export class ProductRepository {
 
   getCondisData(query?: string): Observable<ExternalProduct[]> {
     const url = `${this.basesURL.condisApi}?term=${query}&source=directSearch&originSearch=search_box`;
+
+    return this.http.get('/apiInitCondis').pipe(
+      first(),
+      catchError(() => of('')),
+
+      switchMap(() => this.http.get(url, { responseType: 'text' })),
+      first(),
+      map((data: any) => {
+        const formatted = this.extractCondisDataFromHTML(data);
+        return formatted.map((hit: any) =>
+          ProductMapper.toDomain(hit, 'CONDIS')
+        );
+      })
+    );
+
     return this.http.get(url, { responseType: 'text' }).pipe(
       first(),
       catchError(() => of('')),
