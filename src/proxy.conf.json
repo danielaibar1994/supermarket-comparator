@@ -90,7 +90,7 @@
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/apiInitEroski": ""
+      "^/apiInitCondis": ""
     }
   },
 
