@@ -75,6 +75,14 @@
       "^/apiHiperdino": "/c9504_mi/search/"
     }
   },
+  "/apiInitCondis": {
+    "target": "https://www.condisline.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiInitCondis": ""
+    }
+  },
 
   "/apiCondis": {
     "target": "https://www.condisline.com",
@@ -82,15 +90,6 @@
     "changeOrigin": true,
     "pathRewrite": {
       "^/apiCondis": "/searching"
-    }
-  },
-
-  "/apiInitCondis": {
-    "target": "https://www.condisline.com",
-    "secure": true,
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/apiInitCondis": ""
     }
   },
 

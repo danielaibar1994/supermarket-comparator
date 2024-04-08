@@ -309,7 +309,7 @@ export class ProductRepository {
   }
 
   getCondisData(query?: string): Observable<ExternalProduct[]> {
-    const url = `${this.basesURL.condisApi}?term=${query}&source=directSearch&originSearch=search_box`;
+    const url = `${this.basesURL.condisApi}?term=${query}`;
 
     return this.http.get('/apiInitCondis').pipe(
       first(),
