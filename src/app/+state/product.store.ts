@@ -44,6 +44,9 @@ export class ProductState extends SignalService<initialProductState> {
               hipercorProducts,
               eroskiProducts,
               lidlProducts,
+              // condisProducts,
+              hiperdinoProducts,
+              bonpreuProducts,
             ]) => {
               this.setExternalProductReducer([
                 ...consumProducts,
@@ -58,6 +61,9 @@ export class ProductState extends SignalService<initialProductState> {
                 ...hipercorProducts,
                 ...eroskiProducts,
                 ...lidlProducts,
+                // ...condisProducts,
+                ...hiperdinoProducts,
+                ...bonpreuProducts,
               ]);
             }
           )
@@ -106,6 +112,13 @@ export class ProductState extends SignalService<initialProductState> {
         : of([]),
       selected['eroski'] ? this.productRepository.getEroskiData(query) : of([]),
       selected['lidl'] ? this.productRepository.getLidlData(query) : of([]),
+      // selected['condis'] ? this.productRepository.getCondisData(query) : of([]),
+      selected['hiperdino']
+        ? this.productRepository.getHiperdinoData(query)
+        : of([]),
+      selected['bonpreu']
+        ? this.productRepository.getBonpreuData(query)
+        : of([]),
     ];
   }
 

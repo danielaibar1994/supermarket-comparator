@@ -32,7 +32,7 @@ export const SUPERMARKETS_LIST = [
     name: 'masymas',
     icon: '../../../../assets/images/masymas-logo.png',
     style: 'border-radius: 8px',
-    sector: 3,
+    sector: 2,
   },
   {
     name: 'alcampo',
@@ -57,7 +57,7 @@ export const SUPERMARKETS_LIST = [
     name: 'eroski',
     icon: '../../../../assets/images/eroski-logo.svg',
     style: 'border-radius: 8px',
-    sector: 3,
+    sector: 1,
   },
 
   {
@@ -65,5 +65,26 @@ export const SUPERMARKETS_LIST = [
     icon: '../../../../assets/images/lidl-logo.svg',
     style: 'border-radius: 8px',
     sector: 1,
+  },
+
+  {
+    name: 'hiperdino',
+    icon: '../../../../assets/images/hiperdino-logo.png',
+    style: 'border-radius: 8px',
+    sector: 3,
+  },
+
+  // {
+  //   name: 'condis',
+  //   icon: '../../../../assets/images/condis-logo.jpeg',
+  //   style: 'border-radius: 8px',
+  //   sector: 2,
+  // },
+
+  {
+    name: 'bonpreu',
+    icon: '../../../../assets/images/bonpreu-logo.png',
+    style: 'border-radius: 8px',
+    sector: 3,
   },
 ];
