@@ -71,6 +71,9 @@ export class ProductMapper {
       case 'HIPERDINO':
         return entity.thumbnail;
 
+      case 'AHORRAMAS':
+        return entity.thumbnail;
+
       default:
         return '';
     }
@@ -113,6 +116,9 @@ export class ProductMapper {
 
       case 'HIPERDINO':
         return entity.displayName;
+
+      case 'AHORRAMAS':
+        return entity.displayName;
       default:
         return '';
     }
@@ -148,6 +154,9 @@ export class ProductMapper {
       case 'EROSKI':
       case 'LIDL':
         return this.extraerPalabrasMayusculas(entity.displayName);
+
+      case 'AHORRAMAS':
+        return entity.brand;
 
       default:
         return '';
@@ -195,6 +204,7 @@ export class ProductMapper {
       case 'LIDL':
       case 'CONDIS':
       case 'HIPERDINO':
+      case 'AHORRAMAS':
         return entity.unit_price;
 
       default:
@@ -246,6 +256,9 @@ export class ProductMapper {
       case 'ECI':
       case 'HIPERCOR':
         return entity.price.seo_original_price;
+
+      case 'AHORRAMAS':
+        return entity.unit_price_old;
 
       default:
         return undefined;
@@ -300,6 +313,9 @@ export class ProductMapper {
 
       case 'CONDIS':
         return 'https://www.condisline.com/' + entity.href;
+
+      case 'AHORRAMAS':
+        return 'https://www.ahorramas.com/' + entity.href;
 
       default:
         return '';
@@ -358,6 +374,9 @@ export class ProductMapper {
         return '../../../../assets/images/condis-logo.jpeg';
       case 'HIPERDINO':
         return '../../../../assets/images/hiperdino-logo.png';
+
+      case 'AHORRAMAS':
+        return '../../../../assets/images/ahorramas-logo.png';
 
       default:
         return '';

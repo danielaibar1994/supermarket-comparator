@@ -38,6 +38,7 @@ export class ProductRepository {
     hiperdinoApi: '/apiHiperdino',
     condisApi: '/apiCondis',
     bonpreuApi: '/apiBonpreu',
+    ahorramasApi: '/apiAhorramas',
   };
 
   constructor(private http: HttpClient) {}
@@ -353,6 +354,20 @@ export class ProductRepository {
     );
   }
 
+  getAhorramasData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.ahorramasApi}?q=${query}`;
+    return this.http.get(url, { responseType: 'text' }).pipe(
+      first(),
+      catchError(() => of('')),
+      map((data: any) => {
+        const formatted = this.extractAhorramasDataFromHTML(data);
+        return formatted.map((hit: any) =>
+          ProductMapper.toDomain(hit, 'AHORRAMAS')
+        );
+      })
+    );
+  }
+
   private logger = {
     error: (message: string, error: any) => {
       console.error(message, error);
@@ -594,6 +609,77 @@ export class ProductRepository {
         if (unit_price) {
           childData.unit_price =
             unit_price.textContent?.replace('€', '').trim() || '';
+        }
+
+        // Object
+        childrenJson.push(childData);
+      });
+    }
+
+    return childrenJson;
+  }
+
+  private extractAhorramasDataFromHTML(html: string): any {
+    const childrenJson: any[] = [];
+
+    const parser = new DOMParser();
+    const tempDiv = parser.parseFromString(html, 'text/html');
+
+    // Encontrar el div con el atributo data-container-type="zone" y id="grid-item-container"
+    const productListZone = tempDiv.querySelector('div.product-grid');
+
+    if (productListZone) {
+      // Obtener todos los hijos del div productListZone
+      const children = Array.from(productListZone.children);
+
+      // Iterar sobre cada hijo y extraer la información deseada como JSON
+      children.forEach((child) => {
+        const childData: any = {};
+
+        if (child.tagName.toLowerCase() === 'span') {
+          return;
+        }
+
+        if (child.className.toLowerCase() === 'col-12 grid-footer') {
+          return;
+        }
+
+        // HREF
+        const productUrl = child.querySelector(
+          'div.pdp-link a.product-pdp-link'
+        );
+
+        if (productUrl) {
+          childData.href = productUrl.getAttribute('href') || '';
+        }
+
+        // Image
+        const productImage = child.querySelector('img.tile-image');
+
+        if (productImage) {
+          childData.thumbnail = productImage.getAttribute('src') || '';
+        }
+
+        // Display Name
+        const displayName = child.querySelector('h2.product-name-gtm');
+
+        if (displayName) {
+          childData.displayName = displayName.textContent?.trim() || '';
+          childData.brand = displayName.getAttribute('data-brand') || '';
+        }
+
+        // unit_price
+        const unit_price = child.querySelector('span.sales span.value');
+
+        const unit_old_price = child.querySelector(
+          'span.sales del span.strike-through span.value'
+        );
+
+        if (unit_price) {
+          childData.unit_price = unit_price.getAttribute('content') || '';
+
+          childData.unit_price_old =
+            unit_old_price?.getAttribute('content') || '';
         }
 
         // Object

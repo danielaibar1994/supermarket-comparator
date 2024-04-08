@@ -169,4 +169,15 @@ export const SUPERMARKETS: any = [
     opened: false,
     filter: 'OFF',
   },
+  {
+    id: 16,
+    name: 'AHORRAMAS',
+    title: 'AHORRAMAS',
+    src: '../../../assets/images/ahorramas-logo.png',
+    srcWidth: '',
+    variable: 'ahorramasProducts',
+    background: '#f6c046',
+    opened: false,
+    filter: 'OFF',
+  },
 ];
