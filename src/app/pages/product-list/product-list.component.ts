@@ -127,9 +127,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
         hipercor: false,
         eroski: false,
         lidl: false,
-        condis: false,
+        // condis: false,
         hiperdino: false,
         bonpreu: false,
+        ahorramas: false,
       };
     } else {
       const parsed = JSON.parse(selected);
@@ -149,9 +150,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
           hipercor: false,
           eroski: false,
           lidl: false,
-          condis: false,
+          // condis: false,
           hiperdino: false,
           bonpreu: false,
+          ahorramas: false,
         };
       } else {
         this.supermarketsSelected = parsed;

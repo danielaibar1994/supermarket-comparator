@@ -100,5 +100,14 @@
     "pathRewrite": {
       "^/apiBonpreu": "/api/v5/products/search"
     }
+  },
+
+  "/apiAhorramas": {
+    "target": "https://www.ahorramas.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiAhorramas": "/buscador"
+    }
   }
 }

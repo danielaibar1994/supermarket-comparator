@@ -87,4 +87,11 @@ export const SUPERMARKETS_LIST = [
     style: 'border-radius: 8px',
     sector: 3,
   },
+
+  {
+    name: 'ahorramas',
+    icon: '../../../../assets/images/ahorramas-logo.png',
+    style: 'border-radius: 8px; background-color: white;',
+    sector: 3,
+  },
 ];
