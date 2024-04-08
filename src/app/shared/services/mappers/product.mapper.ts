@@ -43,6 +43,9 @@ export class ProductMapper {
       case 'ALCAMPO':
         return entity.image.src;
 
+      case 'BONPREU':
+        return entity.image.src;
+
       case 'GADIS':
         return (
           'https://www.gadisline.com/' +
@@ -61,6 +64,12 @@ export class ProductMapper {
 
       case 'LIDL':
         return 'https://www.lidl.es/' + entity.thumbnail;
+
+      case 'CONDIS':
+        return 'https:' + entity.thumbnail;
+
+      case 'HIPERDINO':
+        return entity.thumbnail;
 
       default:
         return '';
@@ -85,6 +94,9 @@ export class ProductMapper {
       case 'ALCAMPO':
         return entity.name;
 
+      case 'BONPREU':
+        return entity.name;
+
       case 'GADIS':
         return entity.descripcionLarga;
 
@@ -94,6 +106,12 @@ export class ProductMapper {
 
       case 'EROSKI':
       case 'LIDL':
+        return entity.displayName;
+
+      case 'CONDIS':
+        return entity.displayName;
+
+      case 'HIPERDINO':
         return entity.displayName;
       default:
         return '';
@@ -118,6 +136,8 @@ export class ProductMapper {
       case 'ALCAMPO':
         return entity.brand;
 
+      case 'BONPREU':
+        return entity.brand;
       case 'GADIS':
         return entity.marca;
 
@@ -161,6 +181,9 @@ export class ProductMapper {
       case 'ALCAMPO':
         return entity.price.current.amount;
 
+      case 'BONPREU':
+        return entity.price.current.amount;
+
       case 'GADIS':
         return entity.precio;
 
@@ -170,6 +193,8 @@ export class ProductMapper {
 
       case 'EROSKI':
       case 'LIDL':
+      case 'CONDIS':
+      case 'HIPERDINO':
         return entity.unit_price;
 
       default:
@@ -206,12 +231,17 @@ export class ProductMapper {
       case 'ALCAMPO':
         return undefined;
 
+      case 'BONPREU':
+        return undefined;
+
       case 'GADIS':
         return undefined;
 
       case 'EROSKI':
       case 'LIDL':
-        return undefined;
+
+      case 'CONDIS':
+        return entity.unit_price_old;
 
       case 'ECI':
       case 'HIPERCOR':
@@ -248,6 +278,9 @@ export class ProductMapper {
           entity.retailerProductId
         );
 
+      case 'BONPREU':
+        return '';
+
       case 'GADIS':
         return (
           'https://www.gadisline.com/producto/?productID=' + entity.productoId
@@ -264,6 +297,9 @@ export class ProductMapper {
 
       case 'LIDL':
         return 'https://www.lidl.es/' + entity.href;
+
+      case 'CONDIS':
+        return 'https://www.condisline.com/' + entity.href;
 
       default:
         return '';
@@ -314,6 +350,14 @@ export class ProductMapper {
 
       case 'LIDL':
         return '../../../../assets/images/lidl-logo.svg';
+
+      case 'BONPREU':
+        return '../../../../assets/images/bonpreu-logo.png';
+
+      case 'CONDIS':
+        return '../../../../assets/images/condis-logo.jpeg';
+      case 'HIPERDINO':
+        return '../../../../assets/images/hiperdino-logo.png';
 
       default:
         return '';

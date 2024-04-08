@@ -35,6 +35,9 @@ export class ProductRepository {
 
     eroskirUrl: '/apiEroski',
     lidlApi: '/apiLidl',
+    hiperdinoApi: '/apiHiperdino',
+    condisApi: '/apiCondis',
+    bonpreuApi: '/apiBonpreu',
   };
 
   constructor(private http: HttpClient) {}
@@ -290,6 +293,50 @@ export class ProductRepository {
     );
   }
 
+  getHiperdinoData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.hiperdinoApi}?q=${query}`;
+    return this.http.get(url, { responseType: 'text' }).pipe(
+      first(),
+      catchError(() => of('')),
+      map((data: any) => {
+        const formatted = this.extractHiperdinoDataFromHTML(data);
+        return formatted.map((hit: any) =>
+          ProductMapper.toDomain(hit, 'HIPERDINO')
+        );
+      })
+    );
+  }
+
+  getCondisData(query?: string): Observable<ExternalProduct[]> {
+    const url = `${this.basesURL.condisApi}?term=${query}&source=directSearch&originSearch=search_box`;
+    return this.http.get(url, { responseType: 'text' }).pipe(
+      first(),
+      catchError(() => of('')),
+      map((data: any) => {
+        const formatted = this.extractCondisDataFromHTML(data);
+        return formatted.map((hit: any) =>
+          ProductMapper.toDomain(hit, 'CONDIS')
+        );
+      })
+    );
+  }
+
+  getBonpreuData(query?: string): Observable<ExternalProduct[]> {
+    // https://www.compraonline.bonpreuesclat.cat/api/v5/products/search
+    const url = `${this.basesURL.bonpreuApi}?limit=50&offset=0&term=${query}`;
+    return this.http.get(url).pipe(
+      first(),
+      catchError(() => of({ content: { docs: [] } })),
+      map((data: any) =>
+        data.entities?.product && Object.keys(data.entities?.product).length
+          ? Object.keys(data.entities?.product).map((hit: any) =>
+              ProductMapper.toDomain(data.entities.product[hit], 'BONPREU')
+            )
+          : []
+      )
+    );
+  }
+
   private logger = {
     error: (message: string, error: any) => {
       console.error(message, error);
@@ -299,18 +346,12 @@ export class ProductRepository {
   private extractEroskiDataFromHTML(html: string): any {
     const childrenJson: any[] = [];
 
-    // Crear un elemento div temporal para analizar el HTML
-    // const tempDiv = document.createElement('div');
-    // tempDiv.innerHTML = html;
-
     // Crear un nuevo documento HTML usando DOMParser
     const parser = new DOMParser();
     const tempDiv = parser.parseFromString(html, 'text/html');
 
     // Encontrar el div con el atributo data-container-type="zone" y id="productListZone"
     const productListZone = tempDiv.querySelector('div[id="productListZone"]');
-
-    // console.warn(productListZone);
 
     if (productListZone) {
       // Obtener todos los hijos del div productListZone
@@ -324,29 +365,26 @@ export class ProductRepository {
           return;
         }
 
-        // childData.tagName = child.tagName.toLowerCase();
-        // childData.textContent = child.textContent ?? ''.trim();
-
         // Image
         const productImage = child.querySelector('img.product-img');
 
         if (productImage) {
-          childData.thumbnail = productImage.getAttribute('src') || ''; // Obtener la URL de la imagen
+          childData.thumbnail = productImage.getAttribute('src') || '';
         }
 
         // Display Name & href
         const displayName = child.querySelector('h2.product-title a');
 
         if (displayName) {
-          childData.displayName = displayName.textContent?.trim() || ''; // Obtener la URL de la imagen
-          childData.href = displayName.getAttribute('href') || ''; // Obtener la URL de la imagen
+          childData.displayName = displayName.textContent?.trim() || '';
+          childData.href = displayName.getAttribute('href') || '';
         }
 
         // unit_price
         const unit_price = child.querySelector('span.price-offer-now');
 
         if (unit_price) {
-          childData.unit_price = unit_price.textContent?.trim() || ''; // Obtener la URL de la imagen
+          childData.unit_price = unit_price.textContent?.trim() || '';
         }
 
         // OBject
@@ -385,7 +423,7 @@ export class ProductRepository {
         );
 
         if (productUrl) {
-          childData.href = productUrl.getAttribute('href') || ''; // Obtener la URL de la imagen
+          childData.href = productUrl.getAttribute('href') || '';
         }
 
         // Image
@@ -394,7 +432,7 @@ export class ProductRepository {
         );
 
         if (productImage) {
-          childData.thumbnail = productImage.getAttribute('src') || ''; // Obtener la URL de la imagen
+          childData.thumbnail = productImage.getAttribute('src') || '';
         }
 
         // Display Name
@@ -403,23 +441,164 @@ export class ProductRepository {
         );
 
         if (displayName) {
-          childData.displayName = displayName.textContent?.trim() || ''; // Obtener la URL de la imagen
+          childData.displayName = displayName.textContent?.trim() || '';
         }
 
         // unit_price
         const unit_price = child.querySelector('div.price-pill__price');
 
         if (unit_price) {
-          childData.unit_price = unit_price.textContent?.trim() || ''; // Obtener la URL de la imagen
+          childData.unit_price = unit_price.textContent?.trim() || '';
         }
 
-        // OBject
-
+        // Object
         childrenJson.push(childData);
       });
     }
 
     return childrenJson;
+  }
+
+  private extractCondisDataFromHTML(html: string): any {
+    const childrenJson: any[] = [];
+
+    const parser = new DOMParser();
+    const tempDiv = parser.parseFromString(html, 'text/html');
+
+    // Encontrar el div con el atributo data-container-type="zone" y id="grid-item-container"
+    const productListZone = tempDiv.querySelector('ul.articles_list');
+
+    if (productListZone) {
+      // Obtener todos los hijos del div productListZone
+      const children = Array.from(productListZone.children);
+
+      // Iterar sobre cada hijo y extraer la información deseada como JSON
+      children.forEach((child) => {
+        const childData: any = {};
+
+        if (child.tagName.toLowerCase() === 'span') {
+          return;
+        }
+
+        // HREF
+        const productUrl = child.querySelector('a.article_name');
+
+        if (productUrl) {
+          childData.href = productUrl.getAttribute('href') || '';
+        }
+
+        // Image
+        const productImage = child.querySelector('img.article_image');
+
+        if (productImage) {
+          childData.thumbnail = productImage.getAttribute('src') || '';
+        }
+
+        // Display Name
+        const displayName = child.querySelector(
+          'a.article_name span#description_text'
+        );
+
+        if (displayName) {
+          childData.displayName = displayName.textContent?.trim() || '';
+        }
+
+        // unit_price
+        const unit_price = child.querySelector(
+          'div.article_price_container script'
+        );
+
+        if (unit_price) {
+          const offer =
+            this.parseText(unit_price.textContent?.trim() ?? '').offer || '';
+          const price =
+            this.parseText(unit_price.textContent?.trim() ?? '').price || '';
+
+          childData.unit_price =
+            offer?.length > 0 ? offer : price?.length > 0 ? price : '';
+
+          childData.unit_price_old = offer?.length > 0 ? price : undefined;
+        }
+
+        // Object
+        childrenJson.push(childData);
+      });
+    }
+
+    return childrenJson;
+  }
+
+  private extractHiperdinoDataFromHTML(html: string): any {
+    const childrenJson: any[] = [];
+
+    const parser = new DOMParser();
+    const tempDiv = parser.parseFromString(html, 'text/html');
+
+    // Encontrar el div con el atributo data-container-type="zone" y id="grid-item-container"
+    const productListZone = tempDiv.querySelector('ul.products-list');
+
+    if (productListZone) {
+      // Obtener todos los hijos del div productListZone
+      const children = Array.from(productListZone.children);
+
+      // Iterar sobre cada hijo y extraer la información deseada como JSON
+      children.forEach((child) => {
+        const childData: any = {};
+
+        if (child.tagName.toLowerCase() === 'span') {
+          return;
+        }
+
+        // HREF
+        const productUrl = child.querySelector('a.article_name');
+
+        if (productUrl) {
+          childData.href = productUrl.getAttribute('href') || '';
+        }
+
+        // Image
+        const productImage = child.querySelector('div.product__image img');
+
+        if (productImage) {
+          childData.thumbnail = productImage.getAttribute('data-src') || '';
+        }
+
+        // Display Name
+        const displayName = child.querySelector('div.description__text');
+
+        if (displayName) {
+          childData.displayName = displayName.textContent?.trim() || '';
+        }
+
+        // unit_price
+        const unit_price = child.querySelector(
+          'div.price__left div.price__text'
+        );
+
+        if (unit_price) {
+          childData.unit_price =
+            unit_price.textContent?.replace('€', '').trim() || '';
+        }
+
+        // Object
+        childrenJson.push(childData);
+      });
+    }
+
+    return childrenJson;
+  }
+
+  private parseText(text: string): { price: string; offer: string } {
+    const priceRegex = /formatNumber\('(\d+\.\d+)', 'list_price_\d+'\);/;
+    const offerRegex = /formatNumber\('(\d+\.\d+)', 'sale_price_\d+'\);/;
+
+    const priceMatch = text.match(priceRegex);
+    const offerMatch = text.match(offerRegex);
+
+    const price = priceMatch ? priceMatch[1] : '';
+    const offer = offerMatch ? offerMatch[1] : '';
+
+    return { price, offer };
   }
 
   //

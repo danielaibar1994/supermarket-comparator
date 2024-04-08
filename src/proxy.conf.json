@@ -65,5 +65,32 @@
     "pathRewrite": {
       "^/apiLidl": "/es/search"
     }
+  },
+
+  "/apiHiperdino": {
+    "target": "https://www.hiperdino.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiHiperdino": "/c9504_mi/search/"
+    }
+  },
+
+  "/apiCondis": {
+    "target": "https://www.condisline.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiCondis": "/searching"
+    }
+  },
+
+  "/apiBonpreu": {
+    "target": "https://www.compraonline.bonpreuesclat.cat",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiBonpreu": "/api/v5/products/search"
+    }
   }
 }

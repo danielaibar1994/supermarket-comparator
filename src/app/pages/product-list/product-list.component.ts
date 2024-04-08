@@ -127,11 +127,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
         hipercor: false,
         eroski: false,
         lidl: false,
+        condis: false,
+        hiperdino: false,
+        bonpreu: false,
       };
     } else {
       const parsed = JSON.parse(selected);
 
-      if (Object.keys(parsed).length < 12) {
+      if (Object.keys(parsed).length < 15) {
         // New markets added, so need to restore localstorage
         this.supermarketsSelected = {
           consum: true,
@@ -146,6 +149,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
           hipercor: false,
           eroski: false,
           lidl: false,
+          condis: false,
+          hiperdino: false,
+          bonpreu: false,
         };
       } else {
         this.supermarketsSelected = parsed;
