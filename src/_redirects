@@ -11,5 +11,6 @@
 /apiCondis/*  https://www.condisline.com/searching/:splat 200
 /apiBonpreu/*  https://www.compraonline.bonpreuesclat.cat/api/v5/products/search:splat 200
 /apiAhorramas/*  https://www.ahorramas.com/buscador:splat 200
+/bonareaApi/*  https://www.bonarea-online.com/es/shop/search:splat 200
 /*  /index.html 200
 

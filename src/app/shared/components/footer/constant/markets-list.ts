@@ -94,4 +94,11 @@ export const SUPERMARKETS_LIST = [
     style: 'border-radius: 8px; background-color: white;',
     sector: 3,
   },
+
+  {
+    name: 'bonarea',
+    icon: '../../../../assets/images/bonarea-logo.png',
+    style: 'border-radius: 8px',
+    sector: 3,
+  },
 ];

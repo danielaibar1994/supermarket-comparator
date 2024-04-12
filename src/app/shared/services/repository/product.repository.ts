@@ -39,6 +39,7 @@ export class ProductRepository {
     condisApi: '/apiCondis',
     bonpreuApi: '/apiBonpreu',
     ahorramasApi: '/apiAhorramas',
+    bonareaApi: '/bonareaApi',
   };
 
   constructor(private http: HttpClient) {}
@@ -366,6 +367,25 @@ export class ProductRepository {
         );
       })
     );
+  }
+
+  getBonareaData(query?: string): Observable<ExternalProduct[]> {
+    // https://www.bonarea-online.com/es/shop/search
+    const url = `${this.basesURL.bonareaApi}`;
+    return this.http
+      .post(url, {
+        strQuery: query,
+        limit: 50,
+      })
+      .pipe(
+        first(),
+        catchError(() => of({ articles: [] })),
+        map((data: any) => {
+          return data.articles
+            .slice(0, 50)
+            ?.map((hit: any) => ProductMapper.toDomain(hit, 'BONAREA'));
+        })
+      );
   }
 
   private logger = {
