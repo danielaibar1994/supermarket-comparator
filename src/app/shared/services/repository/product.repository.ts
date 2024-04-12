@@ -39,7 +39,7 @@ export class ProductRepository {
     condisApi: '/apiCondis',
     bonpreuApi: '/apiBonpreu',
     ahorramasApi: '/apiAhorramas',
-    bonareaApi: '/apiBonarea',
+    bonareaApi: '/apiInitBonarea',
   };
 
   constructor(private http: HttpClient) {}
@@ -341,7 +341,7 @@ export class ProductRepository {
 
   getBonpreuData(query?: string): Observable<ExternalProduct[]> {
     // https://www.compraonline.bonpreuesclat.cat/api/v5/products/search
-    const url = `${this.basesURL.bonpreuApi}?limit=50&offset=0&term=${query}`;
+    const url = `${'/apiInitBonarea'}?limit=50&offset=0&term=${query}`;
     return this.http.get(url).pipe(
       first(),
       catchError(() => of({ content: { docs: [] } })),

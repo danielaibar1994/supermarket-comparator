@@ -111,12 +111,12 @@
     }
   },
 
-  "/apiBonarea": {
+  "/apiInitBonarea": {
     "target": "https://www.bonarea-online.com",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/apiBonarea": "/es/shop/search"
+      "^/apiInitBonarea": "/es/shop/search"
     }
   }
 }
