@@ -373,10 +373,17 @@ export class ProductRepository {
     // https://www.bonarea-online.com/es/shop/search
     const url = `${this.basesURL.bonareaApi}`;
     return this.http
-      .post(url, {
-        strQuery: query,
-        limit: 50,
-      })
+      .post(
+        url,
+        {
+          strQuery: query,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+        }
+      )
       .pipe(
         first(),
         catchError(() => of({ articles: [] })),
