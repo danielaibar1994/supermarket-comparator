@@ -39,7 +39,7 @@ export class ProductRepository {
     condisApi: '/apiCondis',
     bonpreuApi: '/apiBonpreu',
     ahorramasApi: '/apiAhorramas',
-    bonareaApi: '/bonareaApi',
+    bonareaApi: '/apiBonarea',
   };
 
   constructor(private http: HttpClient) {}
