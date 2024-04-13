@@ -371,28 +371,20 @@ export class ProductRepository {
 
   getBonareaData(query?: string): Observable<ExternalProduct[]> {
     // https://www.bonarea-online.com/es/shop/search
-    const url = `${'/apiInitBonarea'}`;
-    return this.http
-      .post(
-        url,
-        {
+    const url = `${'/apiBonarea'}`;
+    return this.http.get('/apiInitBonarea', { responseType: 'text' }).pipe(
+      switchMap(() =>
+        this.http.post(url, {
           strQuery: query,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-        }
-      )
-      .pipe(
-        first(),
-        catchError(() => of({ articles: [] })),
-        map((data: any) => {
-          return data.articles
-            .slice(0, 50)
-            ?.map((hit: any) => ProductMapper.toDomain(hit, 'BONAREA'));
         })
-      );
+      ),
+      catchError(() => of({ articles: [] })),
+      map((data: any) => {
+        return data.articles
+          .slice(0, 50)
+          ?.map((hit: any) => ProductMapper.toDomain(hit, 'BONAREA'));
+      })
+    );
   }
 
   private logger = {
