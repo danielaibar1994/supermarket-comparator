@@ -341,7 +341,7 @@ export class ProductRepository {
 
   getBonpreuData(query?: string): Observable<ExternalProduct[]> {
     // https://www.compraonline.bonpreuesclat.cat/api/v5/products/search
-    const url = `${'/apiInitBonarea'}?limit=50&offset=0&term=${query}`;
+    const url = `${this.basesURL.bonpreuApi}?limit=50&offset=0&term=${query}`;
     return this.http.get(url).pipe(
       first(),
       catchError(() => of({ content: { docs: [] } })),
@@ -371,7 +371,7 @@ export class ProductRepository {
 
   getBonareaData(query?: string): Observable<ExternalProduct[]> {
     // https://www.bonarea-online.com/es/shop/search
-    const url = `${this.basesURL.bonareaApi}`;
+    const url = `${'/apiInitBonarea'}`;
     return this.http
       .post(
         url,
