@@ -27,8 +27,6 @@ import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-// import { ShoppingListState } from 'src/app/+state/shopping-list.store';
-
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -127,16 +125,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
         hipercor: false,
         eroski: false,
         lidl: false,
-        // condis: false,
+        eci: false,
         hiperdino: false,
         bonpreu: false,
         ahorramas: false,
-        bonarea: false,
+        // bonarea: false,
+        // condis: false,
       };
     } else {
       const parsed = JSON.parse(selected);
 
-      if (Object.keys(parsed).length < 16) {
+      if (Object.keys(parsed).length < 15) {
         // New markets added, so need to restore localstorage
         this.supermarketsSelected = {
           consum: true,
@@ -151,11 +150,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
           hipercor: false,
           eroski: false,
           lidl: false,
-          // condis: false,
           hiperdino: false,
           bonpreu: false,
           ahorramas: false,
-          bonarea: false,
+          // bonarea: false,
+          // condis: false,
         };
       } else {
         this.supermarketsSelected = parsed;

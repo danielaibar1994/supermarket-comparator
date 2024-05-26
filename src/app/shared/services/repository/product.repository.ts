@@ -369,35 +369,35 @@ export class ProductRepository {
     );
   }
 
-  getBonareaData(query?: string): Observable<ExternalProduct[]> {
-    // https://www.bonarea-online.com/es/shop/search
+  // getBonareaData(query?: string): Observable<ExternalProduct[]> {
+  //   // https://www.bonarea-online.com/es/shop/search
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    });
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  //   });
 
-    const url = `${'/apiBonarea'}`;
-    return this.http
-      .get('/apiInitBonarea', {
-        headers,
-        withCredentials: true,
-        observe: 'response',
-        responseType: 'text',
-      })
-      .pipe(
-        switchMap(() =>
-          this.http.post(url, {
-            strQuery: query,
-          })
-        ),
-        catchError(() => of({ articles: [] })),
-        map((data: any) => {
-          return data.articles
-            .slice(0, 50)
-            ?.map((hit: any) => ProductMapper.toDomain(hit, 'BONAREA'));
-        })
-      );
-  }
+  //   const url = `${'/apiBonarea'}`;
+  //   return this.http
+  //     .get('/apiInitBonarea', {
+  //       headers,
+  //       withCredentials: true,
+  //       observe: 'response',
+  //       responseType: 'text',
+  //     })
+  //     .pipe(
+  //       switchMap(() =>
+  //         this.http.post(url, {
+  //           strQuery: query,
+  //         })
+  //       ),
+  //       catchError(() => of({ articles: [] })),
+  //       map((data: any) => {
+  //         return data.articles
+  //           .slice(0, 50)
+  //           ?.map((hit: any) => ProductMapper.toDomain(hit, 'BONAREA'));
+  //       })
+  //     );
+  // }
 
   private logger = {
     error: (message: string, error: any) => {

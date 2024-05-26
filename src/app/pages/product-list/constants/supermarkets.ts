@@ -146,17 +146,17 @@ export const SUPERMARKETS: any = [
     filter: 'OFF',
   },
 
-  {
-    id: 14,
-    name: 'CONDIS',
-    title: 'CONDIS',
-    src: '../../../assets/images/condis-logo.jpeg',
-    srcWidth: '',
-    variable: 'condisProducts',
-    background: '#e62b37',
-    opened: false,
-    filter: 'OFF',
-  },
+  // {
+  //   id: 14,
+  //   name: 'CONDIS',
+  //   title: 'CONDIS',
+  //   src: '../../../assets/images/condis-logo.jpeg',
+  //   srcWidth: '',
+  //   variable: 'condisProducts',
+  //   background: '#e62b37',
+  //   opened: false,
+  //   filter: 'OFF',
+  // },
 
   {
     id: 15,
@@ -182,15 +182,15 @@ export const SUPERMARKETS: any = [
     filter: 'OFF',
   },
 
-  {
-    id: 17,
-    name: 'BONAREA',
-    title: 'BONAREA',
-    src: '../../../assets/images/bonarea-logo.png',
-    srcWidth: '',
-    variable: 'bonareaProducts',
-    background: '#ff7900',
-    opened: false,
-    filter: 'OFF',
-  },
+  // {
+  //   id: 17,
+  //   name: 'BONAREA',
+  //   title: 'BONAREA',
+  //   src: '../../../assets/images/bonarea-logo.png',
+  //   srcWidth: '',
+  //   variable: 'bonareaProducts',
+  //   background: '#ff7900',
+  //   opened: false,
+  //   filter: 'OFF',
+  // },
 ];

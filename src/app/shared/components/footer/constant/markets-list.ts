@@ -95,10 +95,10 @@ export const SUPERMARKETS_LIST = [
     sector: 3,
   },
 
-  {
-    name: 'bonarea',
-    icon: '../../../../assets/images/bonarea-logo.png',
-    style: 'border-radius: 8px',
-    sector: 3,
-  },
+  // {
+  //   name: 'bonarea',
+  //   icon: '../../../../assets/images/bonarea-logo.png',
+  //   style: 'border-radius: 8px',
+  //   sector: 3,
+  // },
 ];
