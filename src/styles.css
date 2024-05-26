@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-body, html {
-  font-family: 'Roboto';
+body,
+html {
+  font-family: "Roboto";
   margin: 0;
   padding: 0;
 }
@@ -13,4 +14,12 @@ img {
 .container-products {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.default-color {
+  color: "#155487";
+}
+
+.white-color {
+  color: "white";
 }
