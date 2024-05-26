@@ -109,5 +109,23 @@
     "pathRewrite": {
       "^/apiAhorramas": "/buscador"
     }
+  },
+
+  "/apiInitBonarea": {
+    "target": "https://www.bonarea-online.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiInitBonarea": "/es"
+    }
+  },
+
+  "/apiBonarea": {
+    "target": "https://www.bonarea-online.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiBonarea": "/es/shop/search"
+    }
   }
 }

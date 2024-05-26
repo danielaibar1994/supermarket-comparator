@@ -74,6 +74,9 @@ export class ProductMapper {
       case 'AHORRAMAS':
         return entity.thumbnail;
 
+      case 'BONAREA':
+        return `https://images.bonarea.com/${entity.image[0]}?width=175&height=175}`;
+
       default:
         return '';
     }
@@ -119,6 +122,9 @@ export class ProductMapper {
 
       case 'AHORRAMAS':
         return entity.displayName;
+
+      case 'BONAREA':
+        return entity.description;
       default:
         return '';
     }
@@ -157,6 +163,9 @@ export class ProductMapper {
 
       case 'AHORRAMAS':
         return entity.brand;
+
+      case 'BONAREA':
+        return '';
 
       default:
         return '';
@@ -206,6 +215,9 @@ export class ProductMapper {
       case 'HIPERDINO':
       case 'AHORRAMAS':
         return entity.unit_price;
+
+      case 'BONAREA':
+        return entity.priceToPay;
 
       default:
         return 0;
@@ -259,6 +271,9 @@ export class ProductMapper {
 
       case 'AHORRAMAS':
         return entity.unit_price_old;
+
+      case 'BONAREA':
+        return undefined;
 
       default:
         return undefined;
@@ -316,6 +331,9 @@ export class ProductMapper {
 
       case 'AHORRAMAS':
         return 'https://www.ahorramas.com/' + entity.href;
+
+      case 'BONAREA':
+        return 'https://www.bonarea-online.com/' + entity.urlFriendly;
 
       default:
         return '';
@@ -377,6 +395,9 @@ export class ProductMapper {
 
       case 'AHORRAMAS':
         return '../../../../assets/images/ahorramas-logo.png';
+
+      case 'BONAREA':
+        return '../../../../assets/images/bonarea-logo.png';
 
       default:
         return '';

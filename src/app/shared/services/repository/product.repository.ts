@@ -39,6 +39,7 @@ export class ProductRepository {
     condisApi: '/apiCondis',
     bonpreuApi: '/apiBonpreu',
     ahorramasApi: '/apiAhorramas',
+    bonareaApi: '/apiInitBonarea',
   };
 
   constructor(private http: HttpClient) {}
@@ -326,16 +327,16 @@ export class ProductRepository {
       })
     );
 
-    return this.http.get(url, { responseType: 'text' }).pipe(
-      first(),
-      catchError(() => of('')),
-      map((data: any) => {
-        const formatted = this.extractCondisDataFromHTML(data);
-        return formatted.map((hit: any) =>
-          ProductMapper.toDomain(hit, 'CONDIS')
-        );
-      })
-    );
+    // return this.http.get(url, { responseType: 'text' }).pipe(
+    //   first(),
+    //   catchError(() => of('')),
+    //   map((data: any) => {
+    //     const formatted = this.extractCondisDataFromHTML(data);
+    //     return formatted.map((hit: any) =>
+    //       ProductMapper.toDomain(hit, 'CONDIS')
+    //     );
+    //   })
+    // );
   }
 
   getBonpreuData(query?: string): Observable<ExternalProduct[]> {
@@ -367,6 +368,36 @@ export class ProductRepository {
       })
     );
   }
+
+  // getBonareaData(query?: string): Observable<ExternalProduct[]> {
+  //   // https://www.bonarea-online.com/es/shop/search
+
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  //   });
+
+  //   const url = `${'/apiBonarea'}`;
+  //   return this.http
+  //     .get('/apiInitBonarea', {
+  //       headers,
+  //       withCredentials: true,
+  //       observe: 'response',
+  //       responseType: 'text',
+  //     })
+  //     .pipe(
+  //       switchMap(() =>
+  //         this.http.post(url, {
+  //           strQuery: query,
+  //         })
+  //       ),
+  //       catchError(() => of({ articles: [] })),
+  //       map((data: any) => {
+  //         return data.articles
+  //           .slice(0, 50)
+  //           ?.map((hit: any) => ProductMapper.toDomain(hit, 'BONAREA'));
+  //       })
+  //     );
+  // }
 
   private logger = {
     error: (message: string, error: any) => {
