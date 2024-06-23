@@ -31,7 +31,6 @@
       "^/apiHipercor": "/alimentacion/api/catalog/supermercado/type_ahead/"
     }
   },
-
   "/apiInitEroski": {
     "target": "https://supermercado.eroski.es",
     "secure": true,
@@ -40,7 +39,6 @@
       "^/apiInitEroski": ""
     }
   },
-
   "/apiEroski": {
     "target": "https://supermercado.eroski.es",
     "secure": true,
@@ -66,7 +64,6 @@
       "^/apiLidl": "/es/search"
     }
   },
-
   "/apiHiperdino": {
     "target": "https://www.hiperdino.es",
     "secure": true,
@@ -83,7 +80,6 @@
       "^/apiInitCondis": ""
     }
   },
-
   "/apiCondis": {
     "target": "https://www.condisline.com",
     "secure": true,
@@ -92,7 +88,6 @@
       "^/apiCondis": "/searching"
     }
   },
-
   "/apiBonpreu": {
     "target": "https://www.compraonline.bonpreuesclat.cat",
     "secure": true,
@@ -101,7 +96,6 @@
       "^/apiBonpreu": "/api/v5/products/search"
     }
   },
-
   "/apiAhorramas": {
     "target": "https://www.ahorramas.com",
     "secure": true,
@@ -110,7 +104,6 @@
       "^/apiAhorramas": "/buscador"
     }
   },
-
   "/apiInitBonarea": {
     "target": "https://www.bonarea-online.com",
     "secure": true,
@@ -119,7 +112,6 @@
       "^/apiInitBonarea": "/es"
     }
   },
-
   "/apiBonarea": {
     "target": "https://www.bonarea-online.com",
     "secure": true,
