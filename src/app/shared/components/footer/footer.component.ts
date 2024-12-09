@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SUPERMARKETS_LIST } from './constant/markets-list';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'],
-  standalone: true,
-  imports: [CommonModule],
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.css'],
+    imports: [CommonModule]
 })
 export class FooterComponent {
   @Input() supermarketsSelected!: { [key: string]: boolean };

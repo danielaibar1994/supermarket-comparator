@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { AddButtonComponent } from '../add-button/add-button.component';
-import { IMAGE_CONFIG, NgIf, NgOptimizedImage } from '@angular/common';
+import { IMAGE_CONFIG, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-external-product-view',
   templateUrl: './external-product-view.component.html',
   styleUrls: ['./external-product-view.component.css'],
-  standalone: true,
-  imports: [NgIf, AddButtonComponent, NgOptimizedImage],
+  imports: [NgIf, AddButtonComponent],
   providers: [
     {
       provide: IMAGE_CONFIG,

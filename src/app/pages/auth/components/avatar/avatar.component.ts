@@ -5,11 +5,10 @@ import { SupabaseService } from '../../../../shared/services/supabase.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-avatar',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './avatar.component.html',
-  styleUrl: './avatar.component.css',
+    selector: 'app-avatar',
+    imports: [CommonModule],
+    templateUrl: './avatar.component.html',
+    styleUrl: './avatar.component.css'
 })
 export class AvatarComponent {
   _avatarUrl: SafeResourceUrl | undefined;

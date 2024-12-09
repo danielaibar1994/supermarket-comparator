@@ -21,7 +21,6 @@ import { SupermarketViewComponent } from '../../shared/components/supermarket-vi
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgClass, NgIf, NgOptimizedImage } from '@angular/common';
-import { AccessModalComponent } from 'src/app/shared/components/access-modal/access-modal.component';
 import { AccessModalService } from 'src/app/shared/components/access-modal/service/access-modal.service';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -31,7 +30,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
-  standalone: true,
   imports: [
     CommonModule,
     NgClass,
@@ -40,8 +38,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
     NgIf,
     SupermarketViewComponent,
     PriceComparatorComponent,
-    NgOptimizedImage,
-    AccessModalComponent,
     FontAwesomeModule,
   ],
 })
@@ -116,7 +112,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.supermarketsSelected = {
         consum: true,
         mercadona: true,
-        carrefour: true,
+        // carrefour: true,
         aldi: true,
         dia: true,
         masymas: true,
@@ -140,7 +136,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.supermarketsSelected = {
           consum: true,
           mercadona: true,
-          carrefour: true,
+          // carrefour: true,
           aldi: true,
           dia: true,
           masymas: true,

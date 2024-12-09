@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { FormComponent } from '../../components/form/form.component';
 import { SupabaseService } from 'src/app/shared/services/supabase.service';
 import { Router } from '@angular/router';
 
@@ -12,14 +11,7 @@ export type SectionProfile = null | 'PROFILE' | 'PRIVACY' | 'HELP';
 
 @Component({
   selector: 'app-help',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormComponent,
-    SignInComponent,
-    FontAwesomeModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './help.component.html',
   styleUrl: './help.component.css',
 })

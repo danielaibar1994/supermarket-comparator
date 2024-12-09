@@ -8,11 +8,10 @@ import {
 import { ACTIONS } from 'src/app/shared/constants/constants';
 
 @Component({
-  selector: 'app-sign-in',
-  standalone: true,
-  imports: [LoginFormComponent, CommonModule],
-  template: `<app-login-form [options]="options"></app-login-form>`,
-  styleUrls: ['./sign-in.component.scss'],
+    selector: 'app-sign-in',
+    imports: [LoginFormComponent, CommonModule],
+    template: `<app-login-form [options]="options"></app-login-form>`,
+    styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
   options: OptionsForm = {

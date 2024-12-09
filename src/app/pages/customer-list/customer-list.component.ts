@@ -10,11 +10,10 @@ import { EventsStorageService } from 'src/app/shared/services/old/events-storage
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-customer-list',
-  standalone: true,
-  imports: [CommonModule, SupermarketViewComponent, FontAwesomeModule],
-  templateUrl: './customer-list.component.html',
-  styleUrl: './customer-list.component.css',
+    selector: 'app-customer-list',
+    imports: [CommonModule, SupermarketViewComponent, FontAwesomeModule],
+    templateUrl: './customer-list.component.html',
+    styleUrl: './customer-list.component.css'
 })
 export class CustomerListComponent implements OnInit {
   supermarkets = SUPERMARKETS;

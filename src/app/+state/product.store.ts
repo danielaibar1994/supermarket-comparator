@@ -34,7 +34,7 @@ export class ProductState extends SignalService<initialProductState> {
             ([
               consumProducts,
               mercadonaProducts,
-              carrefourProducts,
+              // carrefourProducts,
               aldiProducts,
               diaProducts,
               masymasProducts,
@@ -53,7 +53,7 @@ export class ProductState extends SignalService<initialProductState> {
               this.setExternalProductReducer([
                 ...consumProducts,
                 ...mercadonaProducts,
-                ...carrefourProducts,
+                // ...carrefourProducts,
                 ...aldiProducts,
                 ...diaProducts,
                 ...masymasProducts,
@@ -94,9 +94,9 @@ export class ProductState extends SignalService<initialProductState> {
       selected['mercadona']
         ? this.productRepository.getExternalData(query)
         : of([]),
-      selected['carrefour']
-        ? this.productRepository.getCarrefourData(query)
-        : of([]),
+      // selected['carrefour']
+      //   ? of([]) // this.productRepository.getCarrefourData(query)
+      //   : of([]),
       selected['aldi'] ? this.productRepository.getAldiData(query) : of([]),
       selected['dia'] ? this.productRepository.getDiaData(query) : of([]),
       selected['masymas']
