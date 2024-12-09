@@ -9,7 +9,6 @@ import { ACTIONS } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-change-password',
-  standalone: true,
   imports: [LoginFormComponent, CommonModule],
   template: `<app-login-form [options]="options"></app-login-form>`,
   styleUrls: ['./recovery.component.scss'],

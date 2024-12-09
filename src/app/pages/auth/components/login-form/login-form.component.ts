@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -24,15 +24,14 @@ interface UserResponse extends User, AuthError {}
 
 @Component({
   selector: 'app-login-form',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterLink,
-    RouterLinkActive,
     FontAwesomeModule,
+    RouterLink,
   ],
+  standalone: true,
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
 })
@@ -46,10 +45,11 @@ export class LoginFormComponent {
 
   @Input() options!: OptionsForm;
 
+  private router = inject(Router);
+
   constructor(
     private readonly authSvc: SupabaseService,
     private readonly fb: FormBuilder,
-    private readonly router: Router,
     private readonly toastSvc: ToastrService
   ) {}
 

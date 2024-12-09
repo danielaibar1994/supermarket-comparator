@@ -7,8 +7,7 @@ import { NgIf } from '@angular/common';
     templateUrl: './loader.component.html',
     styleUrls: ['./loader.component.css'],
     encapsulation: ViewEncapsulation.ShadowDom,
-    standalone: true,
-    imports: [NgIf],
+    imports: [NgIf]
 })
 export class LoaderComponent {
   constructor(public loader: LoaderService) {}

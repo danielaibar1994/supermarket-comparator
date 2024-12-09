@@ -7,11 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 // import { ShoppingListState } from 'src/app/+state/shopping-list.store';
 
 @Component({
-  selector: 'app-add-button',
-  templateUrl: './add-button.component.html',
-  styleUrl: './add-button.component.css',
-  standalone: true,
-  imports: [NgClass],
+    selector: 'app-add-button',
+    templateUrl: './add-button.component.html',
+    styleUrl: './add-button.component.css',
+    imports: [NgClass]
 })
 export class AddButtonComponent {
   @Input() product!: ExternalProduct;

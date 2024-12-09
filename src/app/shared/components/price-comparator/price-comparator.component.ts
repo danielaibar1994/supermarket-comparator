@@ -4,11 +4,10 @@ import { ExternalProductViewComponent } from '../product-view/external-product-v
 import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-price-comparator',
-  templateUrl: './price-comparator.component.html',
-  styleUrls: ['./price-comparator.component.css'],
-  standalone: true,
-  imports: [NgFor, ExternalProductViewComponent],
+    selector: 'app-price-comparator',
+    templateUrl: './price-comparator.component.html',
+    styleUrls: ['./price-comparator.component.css'],
+    imports: [NgFor, ExternalProductViewComponent]
 })
 export class PriceComparatorComponent {
   @Input() externalProducts!: ExternalProduct[];

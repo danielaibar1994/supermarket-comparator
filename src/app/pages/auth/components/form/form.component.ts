@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   Profile,
   SupabaseService,
@@ -13,8 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AvatarComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
@@ -39,10 +38,11 @@ export class FormComponent {
     confirmPassword: '',
   });
 
+  private router = inject(Router);
+
   constructor(
     private readonly supabase: SupabaseService,
     private formBuilder: FormBuilder,
-    private router: Router,
     private readonly loader: LoaderService
   ) {}
 

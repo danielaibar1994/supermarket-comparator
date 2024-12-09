@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SignInComponent } from '../sign-in/sign-in.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUserGear } from '@fortawesome/free-solid-svg-icons';
 import { FormComponent } from '../../components/form/form.component';
@@ -11,12 +10,10 @@ export type SectionProfile = null | 'PROFILE' | 'PRIVACY' | 'HELP';
 
 @Component({
   selector: 'app-profile-edit',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormComponent,
-    SignInComponent,
     FontAwesomeModule,
   ],
   templateUrl: './profile-edit.component.html',

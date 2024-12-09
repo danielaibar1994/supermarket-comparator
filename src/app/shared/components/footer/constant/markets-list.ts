@@ -2,7 +2,7 @@ export const SUPERMARKETS_LIST = [
   {
     name: 'consum',
     icon: '../../../../assets/images/logo-peque-consum.png',
-    sector: 3,
+    sector: 1,
   },
   {
     name: 'mercadona',
@@ -10,11 +10,11 @@ export const SUPERMARKETS_LIST = [
     style: 'border-radius: 25px',
     sector: 1,
   },
-  {
-    name: 'carrefour',
-    icon: '../../../../assets/images/carre-logo.png',
-    sector: 1,
-  },
+  // {
+  //   name: 'carrefour',
+  //   icon: '../../../../assets/images/carre-logo.png',
+  //   sector: 1,
+  // },
   {
     name: 'dia',
     icon: '../../../../assets/images/logo-dia.png',

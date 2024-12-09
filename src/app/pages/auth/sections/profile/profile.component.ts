@@ -1,7 +1,6 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SignInComponent } from '../sign-in/sign-in.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faCircleInfo,
@@ -18,14 +17,7 @@ export type SectionProfile = null | 'PROFILE-EDIT' | 'PRIVACY' | 'HELP';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormComponent,
-    SignInComponent,
-    FontAwesomeModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
