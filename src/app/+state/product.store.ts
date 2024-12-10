@@ -103,6 +103,20 @@ export class ProductState extends SignalService<initialProductState> {
         )
         .subscribe();
     } else {
+      this.marketQuery = {
+        consum: '',
+        mercadona: '',
+        aldi: '',
+        dia: '',
+        masymas: '',
+        alcampo: '',
+        gadis: '',
+        eroski: '',
+        lidl: '',
+        hiperdino: '',
+        bonpreu: '',
+        ahorramas: '',
+      };
       this.setExternalProductReducer([]);
     }
   }
