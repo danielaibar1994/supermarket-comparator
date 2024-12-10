@@ -40,8 +40,8 @@ export class ProductState extends SignalService<initialProductState> {
               masymasProducts,
               alcampoProducts,
               gadisProducts,
-              eciProducts,
-              hipercorProducts,
+              // eciProducts,
+              // hipercorProducts,
               eroskiProducts,
               lidlProducts,
               // condisProducts,
@@ -59,8 +59,8 @@ export class ProductState extends SignalService<initialProductState> {
                 ...masymasProducts,
                 ...alcampoProducts,
                 ...gadisProducts,
-                ...eciProducts,
-                ...hipercorProducts,
+                // ...eciProducts,
+                // ...hipercorProducts,
                 ...eroskiProducts,
                 ...lidlProducts,
                 // ...condisProducts,
@@ -110,10 +110,10 @@ export class ProductState extends SignalService<initialProductState> {
         ? this.productRepository.getGadisSession(query)
         : of([]),
 
-      selected['eci'] ? this.productRepository.getECIData(query) : of([]),
-      selected['hipercor']
-        ? this.productRepository.getHipercorData(query)
-        : of([]),
+      // selected['eci'] ? this.productRepository.getECIData(query) : of([]),
+      // selected['hipercor']
+      //   ? this.productRepository.getHipercorData(query)
+      //   : of([]),
       selected['eroski'] ? this.productRepository.getEroskiData(query) : of([]),
       selected['lidl'] ? this.productRepository.getLidlData(query) : of([]),
       // selected['condis'] ? this.productRepository.getCondisData(query) : of([]),

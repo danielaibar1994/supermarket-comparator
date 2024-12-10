@@ -21,12 +21,12 @@ export const SUPERMARKETS_LIST = [
     style: 'border-radius: 8px',
     sector: 1,
   },
-  {
-    name: 'eci',
-    icon: '../../../../assets/images/eci-logo.png',
-    style: '',
-    sector: 2,
-  },
+  // {
+  //   name: 'eci',
+  //   icon: '../../../../assets/images/eci-logo.png',
+  //   style: '',
+  //   sector: 2,
+  // },
   { name: 'aldi', icon: '../../../../assets/images/logo-aldi.svg', sector: 2 },
   {
     name: 'masymas',
@@ -39,13 +39,13 @@ export const SUPERMARKETS_LIST = [
     icon: '../../../../assets/images/alcampo-logo.png',
     sector: 2,
   },
-  {
-    name: 'hipercor',
-    icon: '../../../../assets/images/hipercor-logo.png',
-    style:
-      'background-color: white; padding: 12px 0px 10px 4px; border-radius: 8px; ',
-    sector: 2,
-  },
+  // {
+  //   name: 'hipercor',
+  //   icon: '../../../../assets/images/hipercor-logo.png',
+  //   style:
+  //     'background-color: white; padding: 12px 0px 10px 4px; border-radius: 8px; ',
+  //   sector: 2,
+  // },
   {
     name: 'gadis',
     icon: '../../../../assets/images/gadis-logo.jpeg',
@@ -85,7 +85,7 @@ export const SUPERMARKETS_LIST = [
     name: 'bonpreu',
     icon: '../../../../assets/images/bonpreu-logo.png',
     style: 'border-radius: 8px',
-    sector: 3,
+    sector: 2,
   },
 
   {

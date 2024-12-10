@@ -277,9 +277,9 @@ export class ProductRepository {
       map((data: any) => {
         const formatted = this.extractEroskiDataFromHTML(data);
 
-        return formatted.map((hit: any) =>
-          ProductMapper.toDomain(hit, 'EROSKI')
-        );
+        return formatted
+          .filter((data: any) => Object.keys(data).length > 0)
+          .map((hit: any) => ProductMapper.toDomain(hit, 'EROSKI'));
       })
     );
   }
