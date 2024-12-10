@@ -118,8 +118,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
         masymas: true,
         alcampo: false,
         gadis: false,
-        hipercor: false,
-        eroski: false,
+        // hipercor: false,
+        // eroski: false,
         lidl: false,
         eci: false,
         hiperdino: false,
@@ -131,7 +131,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     } else {
       const parsed = JSON.parse(selected);
 
-      if (Object.keys(parsed).length < 15) {
+      if (Object.keys(parsed).length < 12 || Object.keys(parsed).length >= 15) {
         // New markets added, so need to restore localstorage
         this.supermarketsSelected = {
           consum: true,
@@ -143,8 +143,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
           alcampo: false,
           gadis: false,
           eci: false,
-          hipercor: false,
-          eroski: false,
+          // hipercor: false,
+          // eroski: false,
           lidl: false,
           hiperdino: false,
           bonpreu: false,
