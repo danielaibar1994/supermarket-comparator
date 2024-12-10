@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { getLocaleDayPeriods } from '@angular/common';
+import { Injectable, linkedSignal } from '@angular/core';
 import { Observable, catchError, combineLatest, forkJoin, of, tap } from 'rxjs';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { ProductRepository } from 'src/app/shared/services/repository/product.repository';
@@ -24,6 +25,34 @@ export class ProductState extends SignalService<initialProductState> {
   constructor(private readonly productRepository: ProductRepository) {
     super(initialState);
   }
+
+  private marketQuery: {
+    consum: string;
+    mercadona: string;
+    aldi: string;
+    dia: string;
+    masymas: string;
+    alcampo: string;
+    gadis: string;
+    eroski: string;
+    lidl: string;
+    hiperdino: string;
+    bonpreu: string;
+    ahorramas: string;
+  } = {
+    consum: '',
+    mercadona: '',
+    aldi: '',
+    dia: '',
+    masymas: '',
+    alcampo: '',
+    gadis: '',
+    eroski: '',
+    lidl: '',
+    hiperdino: '',
+    bonpreu: '',
+    ahorramas: '',
+  };
 
   // Actions - public
   loadSupermarkets(selected: { [key: string]: boolean }, query?: string) {
@@ -89,43 +118,99 @@ export class ProductState extends SignalService<initialProductState> {
   ): Observable<any[]>[] {
     return [
       selected['consum']
-        ? this.productRepository.getData(undefined, query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'consum',
+            this.productRepository.getData(undefined, query)
+          )
+        : this.emptySelected(query, 'consum'),
       selected['mercadona']
-        ? this.productRepository.getExternalData(query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'mercadona',
+            this.productRepository.getExternalData(query)
+          )
+        : this.emptySelected(query, 'mercadona'),
       // selected['carrefour']
       //   ? of([]) // this.productRepository.getCarrefourData(query)
-      //   : of([]),
-      selected['aldi'] ? this.productRepository.getAldiData(query) : of([]),
-      selected['dia'] ? this.productRepository.getDiaData(query) : of([]),
+      //   : this.emptySelected(query, 'market'))
+      selected['aldi']
+        ? this.processCache(
+            query,
+            'aldi',
+            this.productRepository.getAldiData(query)
+          )
+        : this.emptySelected(query, 'aldi'),
+      selected['dia']
+        ? this.processCache(
+            query,
+            'dia',
+            this.productRepository.getDiaData(query)
+          )
+        : this.emptySelected(query, 'dia'),
       selected['masymas']
-        ? this.productRepository.getMasymasData(query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'masymas',
+            this.productRepository.getMasymasData(query)
+          )
+        : this.emptySelected(query, 'masymas'),
       selected['alcampo']
-        ? this.productRepository.getAlcampoData(query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'alcampo',
+            this.productRepository.getAlcampoData(query)
+          )
+        : this.emptySelected(query, 'alcampo'),
 
       selected['gadis']
-        ? this.productRepository.getGadisSession(query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'gadis',
+            this.productRepository.getGadisSession(query)
+          )
+        : this.emptySelected(query, 'gadis'),
 
-      // selected['eci'] ? this.productRepository.getECIData(query) : of([]),
+      // selected['eci'] ? this.productRepository.getECIData(query) : this.emptySelected(query, 'market'))
       // selected['hipercor']
       //   ? this.productRepository.getHipercorData(query)
-      //   : of([]),
-      selected['eroski'] ? this.productRepository.getEroskiData(query) : of([]),
-      selected['lidl'] ? this.productRepository.getLidlData(query) : of([]),
-      // selected['condis'] ? this.productRepository.getCondisData(query) : of([]),
+      //   : this.emptySelected(query, 'market'))
+      selected['eroski']
+        ? this.processCache(
+            query,
+            'eroski',
+            this.productRepository.getEroskiData(query)
+          )
+        : this.emptySelected(query, 'eroski'),
+      selected['lidl']
+        ? this.processCache(
+            query,
+            'lidl',
+            this.productRepository.getLidlData(query)
+          )
+        : this.emptySelected(query, 'lidl'),
+      // selected['condis'] ? this.productRepository.getCondisData(query) : this.emptySelected(query, 'market'))
       selected['hiperdino']
-        ? this.productRepository.getHiperdinoData(query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'hiperdino',
+            this.productRepository.getHiperdinoData(query)
+          )
+        : this.emptySelected(query, 'hiperdino'),
       selected['bonpreu']
-        ? this.productRepository.getBonpreuData(query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'bonpreu',
+            this.productRepository.getBonpreuData(query)
+          )
+        : this.emptySelected(query, 'bonpreu'),
       selected['ahorramas']
-        ? this.productRepository.getAhorramasData(query)
-        : of([]),
+        ? this.processCache(
+            query,
+            'ahorramas',
+            this.productRepository.getAhorramasData(query)
+          )
+        : this.emptySelected(query, 'ahorramas'),
 
       // selected['bonarea']
       //   ? this.productRepository.getBonareaData(query)
@@ -141,5 +226,26 @@ export class ProductState extends SignalService<initialProductState> {
 
   private clearProductReducer() {
     this.setState({ externalProducts: [] });
+  }
+
+  private processCache(
+    query: string,
+    market: string,
+    call: Observable<ExternalProduct[]>
+  ) {
+    if ((this.marketQuery as any)[market] === query) {
+      return of([
+        ...this.state.externalProducts.filter((product) => {
+          return product.type.toUpperCase() === market.toUpperCase();
+        }),
+      ]);
+    }
+    (this.marketQuery as any)[market] = query;
+    return call;
+  }
+
+  private emptySelected(query: string, market: string) {
+    (this.marketQuery as any)[market] = '';
+    return of([]);
   }
 }
