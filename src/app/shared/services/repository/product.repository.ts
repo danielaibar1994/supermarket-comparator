@@ -19,7 +19,7 @@ export class ProductRepository {
   limitCount = 100;
 
   private basesURL = {
-    consumUrl: 'https://tienda.consum.es/api/rest/V1.0/catalog/product',
+    consumUrl: '/apiConsum',
     mercadonaUrl:
       'https://7uzjkl1dj0-dsn.algolia.net/1/indexes/products_prod_4315_es/query?x-algolia-application-id=7UZJKL1DJ0&x-algolia-api-key=9d8f2e39e90df472b4f2e559a116fe17',
     carrefourUrl: '/apiCarrefour',
@@ -55,8 +55,8 @@ export class ProductRepository {
       first(),
       catchError(() => of({ products: [] })),
       map((data: any) =>
-        data.products.map((hit: any) => ProductMapper.toDomain(hit, 'CONSUM'))
-      )
+        data.products.map((hit: any) => ProductMapper.toDomain(hit, 'CONSUM')),
+      ),
     );
   }
 
@@ -69,8 +69,8 @@ export class ProductRepository {
         first(),
         catchError(() => of({ hits: [] })),
         map((data: any) =>
-          data.hits.map((hit: any) => ProductMapper.toDomain(hit, 'MERCADONA'))
-        )
+          data.hits.map((hit: any) => ProductMapper.toDomain(hit, 'MERCADONA')),
+        ),
       );
   }
 
@@ -81,9 +81,9 @@ export class ProductRepository {
       catchError(() => of({ content: { docs: [] } })),
       map((data: any) =>
         data.content.docs.map((hit: any) =>
-          ProductMapper.toDomain(hit, 'CARREFOUR')
-        )
-      )
+          ProductMapper.toDomain(hit, 'CARREFOUR'),
+        ),
+      ),
     );
   }
 
@@ -95,7 +95,7 @@ export class ProductRepository {
           query +
           '&tagFilters="},{"indexName":"prod_es_es_es_assortment","params":"clickAnalytics=true&facets=%5B%5D&highlightPostTag=%3C%2Fais-highlight-0000000000%3E&highlightPreTag=%3Cais-highlight-0000000000%3E&hitsPerPage=12&page=0&query=' +
           query +
-          '&tagFilters="}]}'
+          '&tagFilters="}]}',
       )
       .pipe(
         first(),
@@ -105,12 +105,12 @@ export class ProductRepository {
           data.results.map((result: any) =>
             elements.push(
               ...result.hits.map((hit: any) =>
-                ProductMapper.toDomain(hit, 'ALDI')
-              )
-            )
+                ProductMapper.toDomain(hit, 'ALDI'),
+              ),
+            ),
           );
           return elements;
-        })
+        }),
       );
   }
 
@@ -120,8 +120,8 @@ export class ProductRepository {
       first(),
       catchError(() => of({ search_items: [] })),
       map((data: any) =>
-        data.search_items.map((hit: any) => ProductMapper.toDomain(hit, 'DIA'))
-      )
+        data.search_items.map((hit: any) => ProductMapper.toDomain(hit, 'DIA')),
+      ),
     );
   }
 
@@ -131,8 +131,8 @@ export class ProductRepository {
       first(),
       catchError(() => of({ products: [] })),
       map((data: any) =>
-        data.products.map((hit: any) => ProductMapper.toDomain(hit, 'MASYMAS'))
-      )
+        data.products.map((hit: any) => ProductMapper.toDomain(hit, 'MASYMAS')),
+      ),
     );
   }
 
@@ -148,10 +148,10 @@ export class ProductRepository {
         map((data: any) =>
           data.entities?.product && Object.keys(data.entities?.product).length
             ? Object.keys(data.entities?.product).map((hit: any) =>
-                ProductMapper.toDomain(data.entities.product[hit], 'ALCAMPO')
+                ProductMapper.toDomain(data.entities.product[hit], 'ALCAMPO'),
               )
-            : []
-        )
+            : [],
+        ),
       );
   }
 
@@ -168,13 +168,13 @@ export class ProductRepository {
       .pipe(
         first(),
         catchError(() =>
-          of({ catalog_result: { products_list: { items: [] } } })
+          of({ catalog_result: { products_list: { items: [] } } }),
         ),
         map((data: any) =>
           data.catalog_result.products_list.items?.map((hit: any) =>
-            ProductMapper.toDomain(hit.product, 'ECI')
-          )
-        )
+            ProductMapper.toDomain(hit.product, 'ECI'),
+          ),
+        ),
       );
   }
 
@@ -191,13 +191,13 @@ export class ProductRepository {
       .pipe(
         first(),
         catchError(() =>
-          of({ catalog_result: { products_list: { items: [] } } })
+          of({ catalog_result: { products_list: { items: [] } } }),
         ),
         map((data: any) =>
           data.catalog_result.products_list.items?.map((hit: any) =>
-            ProductMapper.toDomain(hit.product, 'HIPERCOR')
-          )
-        )
+            ProductMapper.toDomain(hit.product, 'HIPERCOR'),
+          ),
+        ),
       );
   }
 
@@ -210,7 +210,7 @@ export class ProductRepository {
   getGadisSession(query?: string): Observable<any> {
     const now: Date = new Date();
     const diff: number = Math.abs(
-      (now.getTime() - this.lastSessionDate.getTime()) / (1000 * 60)
+      (now.getTime() - this.lastSessionDate.getTime()) / (1000 * 60),
     );
 
     const requestBody = 'resource=postalCode&cl_lang=es&cl_postal_code=15001';
@@ -237,7 +237,7 @@ export class ProductRepository {
           this.iSessionId = sessionId;
           this.lastSessionDate = new Date();
           return this.getGadisData(query);
-        })
+        }),
       );
   }
 
@@ -252,16 +252,16 @@ export class ProductRepository {
         'resource=productsListInfiniteScroll&lang=es&currentPostalCode=15010&currentUserId=&checksBrandsFilter=&checksPropertiesFilters' +
           '=&productsListFilterSearch=&productsPage=0&orderProducts=&templateName=&isSearch=true&searchData=' +
           query,
-        { headers }
+        { headers },
       )
       .pipe(
         first(),
         catchError(() => of({ dato: { productos: [] } })),
         map((data: any) => {
           return data.dato.productos.map((hit: any) =>
-            ProductMapper.toDomain(hit, 'GADIS')
+            ProductMapper.toDomain(hit, 'GADIS'),
           );
-        })
+        }),
       );
   }
 
@@ -280,7 +280,7 @@ export class ProductRepository {
         return formatted
           .filter((data: any) => Object.keys(data).length > 0)
           .map((hit: any) => ProductMapper.toDomain(hit, 'EROSKI'));
-      })
+      }),
     );
   }
 
@@ -292,7 +292,7 @@ export class ProductRepository {
       map((data: any) => {
         const formatted = this.extractLidlDataFromHTML(data);
         return formatted.map((hit: any) => ProductMapper.toDomain(hit, 'LIDL'));
-      })
+      }),
     );
   }
 
@@ -304,9 +304,9 @@ export class ProductRepository {
       map((data: any) => {
         const formatted = this.extractHiperdinoDataFromHTML(data);
         return formatted.map((hit: any) =>
-          ProductMapper.toDomain(hit, 'HIPERDINO')
+          ProductMapper.toDomain(hit, 'HIPERDINO'),
         );
-      })
+      }),
     );
   }
 
@@ -322,9 +322,9 @@ export class ProductRepository {
       map((data: any) => {
         const formatted = this.extractCondisDataFromHTML(data);
         return formatted.map((hit: any) =>
-          ProductMapper.toDomain(hit, 'CONDIS')
+          ProductMapper.toDomain(hit, 'CONDIS'),
         );
-      })
+      }),
     );
 
     // return this.http.get(url, { responseType: 'text' }).pipe(
@@ -348,10 +348,10 @@ export class ProductRepository {
       map((data: any) =>
         data.entities?.product && Object.keys(data.entities?.product).length
           ? Object.keys(data.entities?.product).map((hit: any) =>
-              ProductMapper.toDomain(data.entities.product[hit], 'BONPREU')
+              ProductMapper.toDomain(data.entities.product[hit], 'BONPREU'),
             )
-          : []
-      )
+          : [],
+      ),
     );
   }
 
@@ -363,9 +363,9 @@ export class ProductRepository {
       map((data: any) => {
         const formatted = this.extractAhorramasDataFromHTML(data);
         return formatted.map((hit: any) =>
-          ProductMapper.toDomain(hit, 'AHORRAMAS')
+          ProductMapper.toDomain(hit, 'AHORRAMAS'),
         );
-      })
+      }),
     );
   }
 
@@ -481,7 +481,7 @@ export class ProductRepository {
 
         // HREF
         const productUrl = child.querySelector(
-          'div.plp-product-grid-box-tile__wrapper a'
+          'div.plp-product-grid-box-tile__wrapper a',
         );
 
         if (productUrl) {
@@ -490,7 +490,7 @@ export class ProductRepository {
 
         // Image
         const productImage = child.querySelector(
-          'div.plp-product-grid-box-tile__wrapper a img'
+          'div.plp-product-grid-box-tile__wrapper a img',
         );
 
         if (productImage) {
@@ -499,7 +499,7 @@ export class ProductRepository {
 
         // Display Name
         const displayName = child.querySelector(
-          'div.plp-product-grid-box-tile__title strong'
+          'div.plp-product-grid-box-tile__title strong',
         );
 
         if (displayName) {
@@ -558,7 +558,7 @@ export class ProductRepository {
 
         // Display Name
         const displayName = child.querySelector(
-          'a.article_name span#description_text'
+          'a.article_name span#description_text',
         );
 
         if (displayName) {
@@ -567,7 +567,7 @@ export class ProductRepository {
 
         // unit_price
         const unit_price = child.querySelector(
-          'div.article_price_container script'
+          'div.article_price_container script',
         );
 
         if (unit_price) {
@@ -634,7 +634,7 @@ export class ProductRepository {
 
         // unit_price
         const unit_price = child.querySelector(
-          'div.price__left div.price__text'
+          'div.price__left div.price__text',
         );
 
         if (unit_price) {
@@ -677,7 +677,7 @@ export class ProductRepository {
 
         // HREF
         const productUrl = child.querySelector(
-          'div.pdp-link a.product-pdp-link'
+          'div.pdp-link a.product-pdp-link',
         );
 
         if (productUrl) {
@@ -703,7 +703,7 @@ export class ProductRepository {
         const unit_price = child.querySelector('span.sales span.value');
 
         const unit_old_price = child.querySelector(
-          'span.sales del span.strike-through span.value'
+          'span.sales del span.strike-through span.value',
         );
 
         if (unit_price) {
@@ -752,7 +752,7 @@ export class ProductRepository {
     combineLatest(apiCalls)
       .pipe(
         mergeMap((responses) => responses),
-        tap((r) => console.log(r))
+        tap((r) => console.log(r)),
       )
       .subscribe();
   }

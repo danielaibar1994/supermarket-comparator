@@ -47,6 +47,14 @@
       "^/apiEroski": "/es/search/results/"
     }
   },
+  "/apiConsum": {
+    "target": "https://tienda.consum.es",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/apiConsum": "/api/rest/V1.0/catalog/product"
+    }
+  },
   "/apiCarrefour": {
     "target": "https://www.carrefour.es",
     "secure": true,
