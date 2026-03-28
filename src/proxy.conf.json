@@ -4,7 +4,7 @@
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/apiAlcampo": "/api/v5/products/search"
+      "^/apiAlcampo": "/api/webproductpagews/v6/product-pages/search"
     }
   },
   "/apiGadis": {
@@ -69,7 +69,7 @@
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/apiLidl": "/es/search"
+      "^/apiLidl": "/q/search"
     }
   },
   "/apiHiperdino": {
@@ -101,8 +101,9 @@
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/apiBonpreu": "/api/v5/products/search"
+      "^/apiBonpreu": "/api/webproductpagews/v6/product-pages/search"
     }
+
   },
   "/apiAhorramas": {
     "target": "https://www.ahorramas.com",

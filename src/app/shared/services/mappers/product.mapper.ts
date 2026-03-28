@@ -41,10 +41,10 @@ export class ProductMapper {
           : entity.productData.imageURL;
 
       case 'ALCAMPO':
-        return entity.image.src;
+         case 'BONPREU':
+        return entity.images[0].src;
 
-      case 'BONPREU':
-        return entity.image.src;
+    
 
       case 'GADIS':
         return (
@@ -98,10 +98,10 @@ export class ProductMapper {
         return entity.productData.description;
 
       case 'ALCAMPO':
+          case 'BONPREU':
         return entity.name;
 
-      case 'BONPREU':
-        return entity.name;
+    
 
       case 'GADIS':
         return entity.descripcionLarga;
@@ -146,10 +146,10 @@ export class ProductMapper {
         return entity.productData.brand.name;
 
       case 'ALCAMPO':
-        return entity.brand;
-
       case 'BONPREU':
         return entity.brand;
+
+    
       case 'GADIS':
         return entity.marca;
 
@@ -197,10 +197,10 @@ export class ProductMapper {
           : entity.priceData.prices[0].value.centAmount;
 
       case 'ALCAMPO':
-        return entity.price.current.amount;
+        return entity.unitPrice.price.amount;
 
       case 'BONPREU':
-        return entity.price.current.amount;
+         return entity.unitPrice.price.amount;
 
       case 'GADIS':
         return entity.precio;

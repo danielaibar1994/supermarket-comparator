@@ -137,18 +137,18 @@ export class ProductRepository {
   }
 
   getAlcampoData(query?: string): Observable<ExternalProduct[]> {
-    const url = `${this.basesURL.alcampoUrl}?limit=40&offset=0&term=${query}`;
+    const url = `${this.basesURL.alcampoUrl}?includeAdditionalPageInfo=false&maxPageSize=50&maxProductsToDecorate=50&q=${query}&tag=web`;
     return this.http
       .get(url, {
         headers: {},
       })
       .pipe(
         first(),
-        catchError(() => of({ entities: { product: {} } })),
+        catchError(() => of({ productGroups: [] })),
         map((data: any) =>
-          data.entities?.product && Object.keys(data.entities?.product).length
-            ? Object.keys(data.entities?.product).map((hit: any) =>
-                ProductMapper.toDomain(data.entities.product[hit], 'ALCAMPO'),
+          data.productGroups[2]?.decoratedProducts && data.productGroups[2]?.decoratedProducts.length
+            ? data.productGroups[2]?.decoratedProducts.map((hit: any) =>
+                ProductMapper.toDomain(hit, 'ALCAMPO'),
               )
             : [],
         ),
@@ -285,7 +285,7 @@ export class ProductRepository {
   }
 
   getLidlData(query?: string): Observable<ExternalProduct[]> {
-    const url = `${this.basesURL.lidlApi}?query=${query}`;
+    const url = `${this.basesURL.lidlApi}?q=${query}`;
     return this.http.get(url, { responseType: 'text' }).pipe(
       first(),
       catchError(() => of('')),
@@ -341,17 +341,17 @@ export class ProductRepository {
 
   getBonpreuData(query?: string): Observable<ExternalProduct[]> {
     // https://www.compraonline.bonpreuesclat.cat/api/v5/products/search
-    const url = `${this.basesURL.bonpreuApi}?limit=50&offset=0&term=${query}`;
+    const url = `${this.basesURL.bonpreuApi}?includeAdditionalPageInfo=true&maxPageSize=300&maxProductsToDecorate=30&q=${query}&tag=web`;
     return this.http.get(url).pipe(
       first(),
-      catchError(() => of({ content: { docs: [] } })),
-      map((data: any) =>
-        data.entities?.product && Object.keys(data.entities?.product).length
-          ? Object.keys(data.entities?.product).map((hit: any) =>
-              ProductMapper.toDomain(data.entities.product[hit], 'BONPREU'),
-            )
-          : [],
-      ),
+     catchError(() => of({ productGroups: [] })),
+        map((data: any) =>
+          data.productGroups[2]?.decoratedProducts && data.productGroups[2]?.decoratedProducts.length
+            ? data.productGroups[2]?.decoratedProducts.map((hit: any) =>
+                ProductMapper.toDomain(hit, 'BONPREU'),
+              )
+            : [],
+        ),
     );
   }
 
