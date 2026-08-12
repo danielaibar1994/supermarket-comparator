@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, ChangeDetectionStrategy } from '@angular/core';
 import {
   Profile,
   SupabaseService,
@@ -15,6 +15,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'app-form',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './form.component.css',
 })
 export class FormComponent {

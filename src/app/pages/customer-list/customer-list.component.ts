@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SupermarketViewComponent } from 'src/app/shared/components/supermarket-view/supermarket-view.component';
 
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
     selector: 'app-customer-list',
     imports: [CommonModule, SupermarketViewComponent, FontAwesomeModule],
     templateUrl: './customer-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './customer-list.component.css'
 })
 export class CustomerListComponent implements OnInit {

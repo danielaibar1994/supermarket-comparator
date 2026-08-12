@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { AddButtonComponent } from '../add-button/add-button.component';
 import { IMAGE_CONFIG } from '@angular/common';
@@ -8,6 +8,7 @@ import { IMAGE_CONFIG } from '@angular/common';
   templateUrl: './external-product-view.component.html',
   styleUrls: ['./external-product-view.component.css'],
   imports: [AddButtonComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: IMAGE_CONFIG,

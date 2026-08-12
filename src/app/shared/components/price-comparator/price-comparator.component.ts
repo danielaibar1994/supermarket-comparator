@@ -1,4 +1,4 @@
-import { Component, Input, TrackByFunction } from '@angular/core';
+import { Component, Input, TrackByFunction, ChangeDetectionStrategy } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { ExternalProductViewComponent } from '../product-view/external-product-view.component';
 
@@ -7,6 +7,7 @@ import { ExternalProductViewComponent } from '../product-view/external-product-v
     selector: 'app-price-comparator',
     templateUrl: './price-comparator.component.html',
     styleUrls: ['./price-comparator.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ExternalProductViewComponent]
 })
 export class PriceComparatorComponent {

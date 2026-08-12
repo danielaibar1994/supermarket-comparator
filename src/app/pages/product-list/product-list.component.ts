@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   Subject,
@@ -30,6 +31,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     NgClass,
@@ -74,7 +76,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private readonly router: Router
   ) {}
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   checkScroll() {
     this.isSticky = window.scrollY >= 600;
   }

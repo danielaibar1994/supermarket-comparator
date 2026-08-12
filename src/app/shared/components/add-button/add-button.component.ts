@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { NgClass } from '@angular/common';
 import { EventsStorageService } from '../../services/old/events-storage.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'ngx-toastr-notifier';
 // import { AccessModalService } from '../access-modal/service/access-modal.service';
 // import { ShoppingListState } from 'src/app/+state/shopping-list.store';
 
@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
     selector: 'app-add-button',
     templateUrl: './add-button.component.html',
     styleUrl: './add-button.component.css',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgClass]
 })
 export class AddButtonComponent {
@@ -24,7 +25,7 @@ export class AddButtonComponent {
   // }
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToastService,
     private readonly store: EventsStorageService // private readonly accessModalService: AccessModalService
   ) {}
 
@@ -42,12 +43,10 @@ export class AddButtonComponent {
     });
 
     this.toastr.success('Producto añadido a tu lista', undefined, {
-      timeOut: 2000,
-      tapToDismiss: true,
+      duration: 2000,
+      showClose: true,
       progressBar: true,
-      newestOnTop: true,
-      closeButton: true,
-      positionClass: 'toast-top-full-width',
+     
     });
     // } else {
     //   this.accessModalService.setLoading(true);

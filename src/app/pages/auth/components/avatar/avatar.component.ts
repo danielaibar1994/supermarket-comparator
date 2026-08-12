@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { SupabaseService } from '../../../../shared/services/supabase.service';
@@ -8,6 +8,7 @@ import { SupabaseService } from '../../../../shared/services/supabase.service';
     selector: 'app-avatar',
     imports: [],
     templateUrl: './avatar.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './avatar.component.css'
 })
 export class AvatarComponent {

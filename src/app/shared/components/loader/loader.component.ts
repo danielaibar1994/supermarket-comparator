@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { LoaderService } from './service/loader.service';
 
 
@@ -7,6 +7,7 @@ import { LoaderService } from './service/loader.service';
     templateUrl: './loader.component.html',
     styleUrls: ['./loader.component.css'],
     encapsulation: ViewEncapsulation.ShadowDom,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: []
 })
 export class LoaderComponent {

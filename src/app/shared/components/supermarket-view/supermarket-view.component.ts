@@ -1,4 +1,4 @@
-import { Component, Input, TrackByFunction } from '@angular/core';
+import { Component, Input, TrackByFunction, ChangeDetectionStrategy } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { ExternalProductViewComponent } from '../product-view/external-product-view.component';
 import { NgClass } from '@angular/common';
@@ -7,6 +7,7 @@ import { NgClass } from '@angular/common';
     selector: 'app-supermarket-view',
     templateUrl: './supermarket-view.component.html',
     styleUrls: ['./supermarket-view.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgClass, ExternalProductViewComponent]
 })
 export class SupermarketViewComponent {
