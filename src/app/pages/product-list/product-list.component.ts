@@ -20,7 +20,7 @@ import { PriceComparatorComponent } from '../../shared/components/price-comparat
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { CommonModule, NgClass, NgIf, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
 import { AccessModalService } from 'src/app/shared/components/access-modal/service/access-modal.service';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -35,11 +35,10 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
     NgClass,
     FormsModule,
     FooterComponent,
-    NgIf,
     SupermarketViewComponent,
     PriceComparatorComponent,
-    FontAwesomeModule,
-  ],
+    FontAwesomeModule
+],
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('editor') editor!: ElementRef;

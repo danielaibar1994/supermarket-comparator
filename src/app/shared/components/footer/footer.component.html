@@ -3,7 +3,7 @@
     <span class="market-support">Selecciona tus supermercados:</span>
   </div>
   <div class="brand-logos">
-    <ng-container *ngFor="let market of SUPERMARKETS_LIST">
+    @for (market of SUPERMARKETS_LIST; track market) {
       <img
         (click)="clickSupermarket(market.name)"
         [ngClass]="{
@@ -12,39 +12,41 @@
         [src]="market.icon"
         [alt]="market.name"
         [style]="market.style ?? ''"
-      />
-    </ng-container>
-  </div>
+        />
+      }
+    </div>
 
-  <div class="brand-logos">
-    <ng-container *ngFor="let market of SUPERMARKETS_LIST_SECOND">
-      <img
-        (click)="clickSupermarket(market.name)"
+    <div class="brand-logos">
+      @for (market of SUPERMARKETS_LIST_SECOND; track market) {
+        <img
+          (click)="clickSupermarket(market.name)"
         [ngClass]="{
           'market-no-selected': !supermarketsSelected[market.name.toString()]
         }"
-        [src]="market.icon"
-        [alt]="market.name"
-        [style]="market.style ?? ''"
-      />
-    </ng-container>
-  </div>
+          [src]="market.icon"
+          [alt]="market.name"
+          [style]="market.style ?? ''"
+          />
+        }
+      </div>
 
-  <div class="brand-logos">
-    <ng-container *ngFor="let market of SUPERMARKETS_LIST_THIRD">
-      <img
-        (click)="clickSupermarket(market.name)"
+      <div class="brand-logos">
+        @for (market of SUPERMARKETS_LIST_THIRD; track market) {
+          <img
+            (click)="clickSupermarket(market.name)"
         [ngClass]="{
           'market-no-selected': !supermarketsSelected[market.name.toString()]
         }"
-        [src]="market.icon"
-        [alt]="market.name"
-        [style]="market.style ?? ''"
-      />
-    </ng-container>
-  </div>
+            [src]="market.icon"
+            [alt]="market.name"
+            [style]="market.style ?? ''"
+            />
+          }
+        </div>
 
-  <div *ngIf="supermarketsSelected['gadis']" class="message-info-footer">
-    * Gadis puede demorar la visualizacion de la lista.
-  </div>
-</div>
+        @if (supermarketsSelected['gadis']) {
+          <div class="message-info-footer">
+            * Gadis puede demorar la visualizacion de la lista.
+          </div>
+        }
+      </div>

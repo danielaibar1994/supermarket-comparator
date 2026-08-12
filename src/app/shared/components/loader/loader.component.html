@@ -1,3 +1,5 @@
-<div *ngIf="this.loader.getLoading()" class="spinner-overlay">
-  <div class="spinner"></div>
-</div>
+@if (this.loader.getLoading()) {
+  <div class="spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+}
