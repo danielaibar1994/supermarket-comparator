@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { NgClass } from '@angular/common';
 import { EventsStorageService } from '../../services/old/events-storage.service';
-import { ToastService } from 'ngx-toastr-notifier';
+import { ToastService } from '../toast/toast.service';
 // import { AccessModalService } from '../access-modal/service/access-modal.service';
 // import { ShoppingListState } from 'src/app/+state/shopping-list.store';
 

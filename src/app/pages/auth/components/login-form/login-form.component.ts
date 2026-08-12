@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthError, User } from '@supabase/supabase-js';
 
-import { ToastService } from 'ngx-toastr-notifier';
+import { ToastService } from '../../../../shared/components/toast/toast.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';

@@ -1,0 +1,35 @@
+<div class="toast-container" aria-live="polite" aria-atomic="true">
+  @for (toast of toastSvc.toasts(); track toast.id) {
+    <div
+      class="toast"
+      [class.toast--success]="toast.type === 'success'"
+      [class.toast--error]="toast.type === 'error'"
+      [class.toast--info]="toast.type === 'info'"
+      [class.toast--warning]="toast.type === 'warning'"
+      role="status"
+    >
+      @if (toast.title) {
+        <strong class="toast__title">{{ toast.title }}</strong>
+      }
+      <span class="toast__message">{{ toast.message }}</span>
+
+      @if (toast.showClose) {
+        <button
+          type="button"
+          class="toast__close"
+          aria-label="Close"
+          (click)="dismiss(toast.id)"
+        >
+          &times;
+        </button>
+      }
+
+      @if (toast.progressBar) {
+        <div
+          class="toast__progress"
+          [style.animation-duration.ms]="toast.duration"
+        ></div>
+      }
+    </div>
+  }
+</div>

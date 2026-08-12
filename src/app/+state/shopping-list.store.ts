@@ -6,7 +6,7 @@ import {
 import { SignalService } from 'src/app/shared/services/state.service';
 import { SupabaseService } from '../shared/services/supabase.service';
 import { LoaderService } from '../shared/components/loader/service/loader.service';
-import { ToastService } from 'ngx-toastr-notifier';
+import { ToastService } from '../shared/components/toast/toast.service';
 
 export const initialState: initialShoppingListState = {
   shoppingList: [],
