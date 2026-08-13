@@ -162,11 +162,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   clickSupermarket(name: string): void {
     this.supermarketsSelected[name] = !this.supermarketsSelected[name];
+    this.persistSelection();
+    this.loadSupermarkets();
+  }
+
+  onBulkSelection(action: 'select' | 'clear'): void {
+    Object.keys(this.supermarketsSelected).forEach((key) => {
+      this.supermarketsSelected[key] = action === 'select';
+    });
+    this.persistSelection();
+    this.loadSupermarkets();
+  }
+
+  private persistSelection(): void {
     localStorage.setItem(
       'supermarketsSelected',
       JSON.stringify(this.supermarketsSelected)
     );
-    this.loadSupermarkets();
   }
 
   setType(type: 'SUPERMARKET' | 'PRICE'): void {

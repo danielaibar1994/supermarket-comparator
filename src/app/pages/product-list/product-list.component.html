@@ -50,6 +50,7 @@
   <app-footer
     [supermarketsSelected]="supermarketsSelected"
     (supermarketChange)="clickSupermarket($event)"
+    (bulkSelectionChange)="onBulkSelection($event)"
   ></app-footer>
 
   <div class="container-products">

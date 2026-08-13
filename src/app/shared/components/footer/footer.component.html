@@ -1,52 +1,109 @@
 <div class="footer">
-  <p class="footer-title">Selecciona tus supermercados</p>
+  <header class="footer__header">
+    <h2 class="footer__title">¿Dónde quieres comparar?</h2>
+    <p class="footer__subtitle">
+      Toca los supermercados que quieres incluir en la búsqueda
+    </p>
 
-  <div class="brand-chips">
+    <div class="footer__actions">
+      <button
+        type="button"
+        class="footer__action footer__action--select"
+        (click)="selectAll()"
+      >
+        Seleccionar todo
+      </button>
+      <button
+        type="button"
+        class="footer__action footer__action--clear"
+        (click)="clearAll()"
+      >
+        Limpiar
+      </button>
+    </div>
+  </header>
+
+  <div class="brand-grid">
     @for (market of SUPERMARKETS_LIST; track market) {
       <button
         type="button"
-        class="chip"
-        [class.chip--off]="!supermarketsSelected[market.name.toString()]"
+        class="market-card"
+        [class.market-card--off]="!supermarketsSelected[market.name.toString()]"
         [attr.aria-pressed]="supermarketsSelected[market.name.toString()]"
         (click)="clickSupermarket(market.name)"
       >
-        <img [src]="market.icon" [alt]="market.name" />
-        <span>{{ market.name }}</span>
+        <span class="market-card__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12.5 L10 17.5 L19 7.5"
+                  stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+
+        <div class="market-card__logo-wrap">
+          <img class="market-card__logo" [src]="market.icon" [alt]="market.name" />
+        </div>
+
+        <span class="market-card__name">{{ market.name }}</span>
       </button>
     }
   </div>
 
-  <div class="brand-chips">
+  <div class="brand-grid">
     @for (market of SUPERMARKETS_LIST_SECOND; track market) {
       <button
         type="button"
-        class="chip"
-        [class.chip--off]="!supermarketsSelected[market.name.toString()]"
+        class="market-card"
+        [class.market-card--off]="!supermarketsSelected[market.name.toString()]"
         [attr.aria-pressed]="supermarketsSelected[market.name.toString()]"
         (click)="clickSupermarket(market.name)"
       >
-        <img [src]="market.icon" [alt]="market.name" />
-        <span>{{ market.name }}</span>
+        <span class="market-card__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12.5 L10 17.5 L19 7.5"
+                  stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+
+        <div class="market-card__logo-wrap">
+          <img class="market-card__logo" [src]="market.icon" [alt]="market.name" />
+        </div>
+
+        <span class="market-card__name">{{ market.name }}</span>
       </button>
     }
   </div>
 
-  <div class="brand-chips">
+  <div class="brand-grid">
     @for (market of SUPERMARKETS_LIST_THIRD; track market) {
       <button
         type="button"
-        class="chip"
-        [class.chip--off]="!supermarketsSelected[market.name.toString()]"
+        class="market-card"
+        [class.market-card--off]="!supermarketsSelected[market.name.toString()]"
         [attr.aria-pressed]="supermarketsSelected[market.name.toString()]"
         (click)="clickSupermarket(market.name)"
       >
-        <img [src]="market.icon" [alt]="market.name" />
-        <span>{{ market.name }}</span>
+        <span class="market-card__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12.5 L10 17.5 L19 7.5"
+                  stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+
+        <div class="market-card__logo-wrap">
+          <img class="market-card__logo" [src]="market.icon" [alt]="market.name" />
+        </div>
+
+        <span class="market-card__name">{{ market.name }}</span>
       </button>
     }
   </div>
 
   @if (supermarketsSelected['gadis']) {
-    <p class="footer-note">* Gadis puede demorar la visualización de la lista.</p>
+    <p class="footer__note">
+      * Gadis puede demorar la visualización de la lista.
+    </p>
   }
 </div>
