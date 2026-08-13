@@ -6,7 +6,7 @@ import {
 import { SignalService } from 'src/app/shared/services/state.service';
 import { SupabaseService } from '../shared/services/supabase.service';
 import { LoaderService } from '../shared/components/loader/service/loader.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from '../shared/components/toast/toast.service';
 
 export const initialState: initialShoppingListState = {
   shoppingList: [],
@@ -47,14 +47,14 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
     }
 
     return eventsData.some(
-      (p: ExternalProduct) => product.thumbnail === p.thumbnail
+      (p: ExternalProduct) => product.thumbnail === p.thumbnail,
     );
   }
 
   constructor(
     private readonly supabase: SupabaseService,
     private readonly loader: LoaderService,
-    private toastr: ToastrService
+    private toastr: ToastService,
   ) {
     super(initialState);
   }
@@ -145,7 +145,7 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
 
     let { data, error } = await this.supabase.addShoppingList(
       this.state.listId.toString(),
-      [...this.state.shoppingList]
+      [...this.state.shoppingList],
     );
     if (error) {
       console.error('error', error.message);
@@ -161,7 +161,7 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
 
     let { data, error } = await this.supabase.removeShoppingList(
       this.state.listId.toString(),
-      [...this.state.shoppingList]
+      [...this.state.shoppingList],
     );
     if (error) {
       console.error('error', error.message);
@@ -189,7 +189,7 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
   private removeItemReducer(item: ExternalProduct) {
     this.setState({
       shoppingList: this.state.shoppingList.filter(
-        (i) => i.thumbnail !== item.thumbnail
+        (i) => i.thumbnail !== item.thumbnail,
       ),
     });
   }
@@ -202,23 +202,17 @@ export class ShoppingListState extends SignalService<initialShoppingListState> {
 
   private successMessage(message: string) {
     this.toastr.success(message, undefined, {
-      timeOut: 2000,
-      tapToDismiss: true,
+      duration: 2000,
+      showClose: true,
       progressBar: true,
-      newestOnTop: true,
-      closeButton: true,
-      positionClass: 'toast-top-full-width',
     });
   }
 
   private errorMessage(message: string) {
     this.toastr.error('Producto añadido a tu lista', undefined, {
-      timeOut: 2000,
-      tapToDismiss: true,
+      duration: 2000,
+      showClose: true,
       progressBar: true,
-      newestOnTop: true,
-      closeButton: true,
-      positionClass: 'toast-top-full-width',
     });
   }
 }

@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthError, User } from '@supabase/supabase-js';
 
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from '../../../../shared/components/toast/toast.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
@@ -50,7 +50,7 @@ export class LoginFormComponent {
   constructor(
     private readonly authSvc: SupabaseService,
     private readonly fb: FormBuilder,
-    private readonly toastSvc: ToastrService
+    private readonly toastSvc: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -78,12 +78,10 @@ export class LoginFormComponent {
             'Please check your emails for further instructions!',
             'Info',
             {
-              timeOut: 2000,
-              tapToDismiss: true,
+              duration: 2000,
+              showClose: true,
               progressBar: true,
-              newestOnTop: true,
-              closeButton: true,
-              positionClass: 'toast-top-full-width',
+            
             }
           );
         } else {
@@ -93,12 +91,10 @@ export class LoginFormComponent {
         }
       } else {
         this.toastSvc.info(result.message, 'Info', {
-          timeOut: 2000,
-          tapToDismiss: true,
+          duration: 2000,
+          showClose: true,
           progressBar: true,
-          newestOnTop: true,
-          closeButton: true,
-          positionClass: 'toast-top-full-width',
+          
         });
       }
     } catch (error) {

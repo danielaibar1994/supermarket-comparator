@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   Subject,
@@ -20,7 +21,7 @@ import { PriceComparatorComponent } from '../../shared/components/price-comparat
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { CommonModule, NgClass, NgIf, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { AccessModalService } from 'src/app/shared/components/access-modal/service/access-modal.service';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -30,12 +31,11 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
-    NgClass,
     FormsModule,
     FooterComponent,
-    NgIf,
     SupermarketViewComponent,
     PriceComparatorComponent,
     FontAwesomeModule,
@@ -43,6 +43,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('editor') editor!: ElementRef;
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   get empty(): boolean {
     return !this.externalProducts.length;
@@ -57,25 +58,26 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   filterByType: 'SUPERMARKET' | 'PRICE' = 'SUPERMARKET';
   searchSubscription!: Subscription;
-  isSticky: boolean = false;
+  immediateSearchSubscription!: Subscription;
+  isSticky = false;
   inputSearch = '';
-  year: number = new Date().getFullYear();
+  year = new Date().getFullYear();
 
+  /** Emite mientras el usuario escribe — pasa por debounce 300ms. */
   private readonly searchSubject = new Subject<string | undefined>();
+  /** Emite en Enter o click en el botón — bypass del debounce. */
+  private readonly immediateSearchSubject = new Subject<string | undefined>();
 
-  // private userIdShoppingList = '';
-  modalOpen: boolean = this.accessModalService.getLoading();
-
+  modalOpen = this.accessModalService.getLoading();
   faSearch = faSearch;
 
-  // private readonly listStore: ShoppingListState,
   constructor(
     private readonly store: ProductState,
     readonly accessModalService: AccessModalService,
     private readonly router: Router
   ) {}
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   checkScroll() {
     this.isSticky = window.scrollY >= 600;
   }
@@ -83,7 +85,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchSubscription = this.searchSubject
       .pipe(
-        debounceTime(100),
+        debounceTime(1000),
         distinctUntilChanged(),
         tap((searchQuery) => {
           this.loadSupermarkets(searchQuery);
@@ -91,105 +93,98 @@ export class ProductListComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    // this.supabase.authChanges((_, session) => {
-    //   if (session?.user && session.user.id !== this.userIdShoppingList) {
-    //     this.userIdShoppingList = session.user.id;
-    //     this.fetchShoppingList();
-    //   }
-    // });
+    this.immediateSearchSubscription = this.immediateSearchSubject
+      .pipe(
+        tap((searchQuery) => {
+          this.loadSupermarkets(searchQuery);
+        })
+      )
+      .subscribe();
 
     this.getSelectedMarkets();
   }
 
-  // fetchShoppingList() {
-  //   this.listStore.getShoppingList('HOME');
-  // }
-
   getSelectedMarkets(): void {
-    let selected = localStorage.getItem('supermarketsSelected');
+    const selected = localStorage.getItem('supermarketsSelected');
+    const defaultSelection: { [key: string]: boolean } = {
+      consum: true,
+      mercadona: true,
+      aldi: true,
+      dia: true,
+      masymas: true,
+      alcampo: false,
+      gadis: false,
+      eci: false,
+      lidl: false,
+      hiperdino: false,
+      bonpreu: false,
+      ahorramas: false,
+    };
 
     if (!selected) {
-      this.supermarketsSelected = {
-        consum: true,
-        mercadona: true,
-        // carrefour: true,
-        aldi: true,
-        dia: true,
-        masymas: true,
-        alcampo: false,
-        gadis: false,
-        // hipercor: false,
-        // eroski: false,
-        lidl: false,
-        eci: false,
-        hiperdino: false,
-        bonpreu: false,
-        ahorramas: false,
-        // bonarea: false,
-        // condis: false,
-      };
+      this.supermarketsSelected = { ...defaultSelection };
+      return;
+    }
+
+    const parsed = JSON.parse(selected);
+    const keys = Object.keys(parsed);
+
+    if (keys.length < 12 || keys.length >= 15) {
+      this.supermarketsSelected = { ...defaultSelection };
     } else {
-      const parsed = JSON.parse(selected);
-
-      if (Object.keys(parsed).length < 12 || Object.keys(parsed).length >= 15) {
-        // New markets added, so need to restore localstorage
-        this.supermarketsSelected = {
-          consum: true,
-          mercadona: true,
-          // carrefour: true,
-          aldi: true,
-          dia: true,
-          masymas: true,
-          alcampo: false,
-          gadis: false,
-          eci: false,
-          // hipercor: false,
-          // eroski: false,
-          lidl: false,
-          hiperdino: false,
-          bonpreu: false,
-          ahorramas: false,
-          // bonarea: false,
-          // condis: false,
-        };
-      } else {
-        this.supermarketsSelected = parsed;
-      }
+      this.supermarketsSelected = parsed;
     }
   }
 
+  /** Llamado por el evento (input) — typing normal, va con debounce. */
   onSearchQueryInputKeyUp(event: Event): void {
-    const searchQuery = (event.target as HTMLInputElement).value;
-
-    if (!searchQuery.length) {
-      this.searchSubject.next(searchQuery?.trim());
-    }
-  }
-
-  onSearchQueryInput(event: Event): void {
     const searchQuery = (event.target as HTMLInputElement).value;
     this.searchSubject.next(searchQuery?.trim());
   }
 
+  /** Llamado por Enter o click en el botón — busca YA, sin esperar al debounce. */
+  onSearchQueryInput(event?: Event): void {
+    let searchQuery: string | undefined;
+
+    if (event?.target) {
+      searchQuery = (event.target as HTMLInputElement).value;
+    } else if (this.searchInput?.nativeElement) {
+      searchQuery = this.searchInput.nativeElement.value;
+    }
+
+    this.immediateSearchSubject.next(searchQuery?.trim());
+  }
+
   clearInput(): void {
     this.inputSearch = '';
-    this.searchSubject.next('');
+    this.immediateSearchSubject.next('');
   }
 
   clickSupermarket(name: string): void {
     this.supermarketsSelected[name] = !this.supermarketsSelected[name];
+    this.persistSelection();
+    this.loadSupermarkets();
+  }
+
+  onBulkSelection(action: 'select' | 'clear'): void {
+    Object.keys(this.supermarketsSelected).forEach((key) => {
+      this.supermarketsSelected[key] = action === 'select';
+    });
+    this.persistSelection();
+    this.loadSupermarkets();
+  }
+
+  private persistSelection(): void {
     localStorage.setItem(
       'supermarketsSelected',
       JSON.stringify(this.supermarketsSelected)
     );
-    this.loadSupermarkets();
   }
 
   setType(type: 'SUPERMARKET' | 'PRICE'): void {
     this.filterByType = type;
   }
 
-  // Modal
   openModal(): void {
     this.accessModalService.setLoading(false);
   }
@@ -205,6 +200,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.store.clear();
+    this.searchSubscription?.unsubscribe();
+    this.immediateSearchSubscription?.unsubscribe();
   }
 
   private loadSupermarkets(searchQuery?: string): void {
@@ -215,7 +212,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     );
   }
 
-  private closeAllSupermarketsContainer() {
+  private closeAllSupermarketsContainer(): void {
     this.supermarkets.map((s: any) => (s.opened = false));
   }
 }

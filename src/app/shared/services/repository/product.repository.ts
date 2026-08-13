@@ -146,8 +146,8 @@ export class ProductRepository {
         first(),
         catchError(() => of({ productGroups: [] })),
         map((data: any) =>
-          data.productGroups[2]?.decoratedProducts && data.productGroups[2]?.decoratedProducts.length
-            ? data.productGroups[2]?.decoratedProducts.map((hit: any) =>
+          data.productGroups[data.productGroups.length - 1]?.decoratedProducts && data.productGroups[data.productGroups.length - 1]?.decoratedProducts.length
+            ? data.productGroups[data.productGroups.length - 1]?.decoratedProducts.map((hit: any) =>
                 ProductMapper.toDomain(hit, 'ALCAMPO'),
               )
             : [],

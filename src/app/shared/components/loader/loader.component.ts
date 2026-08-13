@@ -1,13 +1,14 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { LoaderService } from './service/loader.service';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-loader',
     templateUrl: './loader.component.html',
     styleUrls: ['./loader.component.css'],
     encapsulation: ViewEncapsulation.ShadowDom,
-    imports: [NgIf]
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: []
 })
 export class LoaderComponent {
   constructor(public loader: LoaderService) {}
