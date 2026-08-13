@@ -1,17 +1,42 @@
+/* ==========================================================================
+   Add button — Quiet confidence
+   ========================================================================== */
+
 .add-button {
-  width: 20px;
-  background: #addcff;
-  text-align: center;
-  border-radius: 25px;
-  color: #155487;
-  padding: 4px 6px;
-  position: absolute;
-  left: 1rem;
-  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--r-pill);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
   cursor: pointer;
+  transition: background-color 150ms ease, transform 150ms ease,
+    box-shadow 150ms ease;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
 }
 
-.selected {
-  background: #fc9c18;
-  color: #8d5b00;
+.add-button:hover {
+  background: var(--accent-strong);
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45);
+}
+
+.add-button:active {
+  transform: scale(0.94);
+}
+
+.add-button.selected {
+  background: var(--ink);
+  box-shadow: var(--shadow-md);
+}
+
+.add-button.selected:hover {
+  background: #000;
 }

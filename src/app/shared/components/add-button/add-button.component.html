@@ -1,8 +1,11 @@
-<div
+<button
+  type="button"
   class="add-button"
-  [ngClass]="{ selected: isAdded }"
+  [class.selected]="isAdded"
   (click)="addProductInStore()"
-  title="Añadir a mi lista"
+  [attr.aria-label]="isAdded ? 'Quitar de mi lista' : 'Añadir a mi lista'"
+  [attr.aria-pressed]="isAdded"
+  [title]="isAdded ? 'Quitar de mi lista' : 'Añadir a mi lista'"
 >
-  <span>{{ isAdded ? "-" : "+" }}</span>
-</div>
+  <span aria-hidden="true">{{ isAdded ? '−' : '+' }}</span>
+</button>

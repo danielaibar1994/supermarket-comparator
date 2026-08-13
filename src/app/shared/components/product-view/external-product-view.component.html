@@ -1,113 +1,59 @@
-<div class="mini-grid__widget-prod">
-  <div
-    class="widget-prod d-flex flex-column align-items-center widget-prod__not_highlighted"
-    >
-    <div class="d-flex flex-column flex-grow-1 w-100 widget-prod__body">
-      <div class="u-pointer">
-        <div class="widget-prod__boximage">
-          @if (product.offers && product.offers[0]) {
-            <div
-              id="infoproduct-content--offers"
-              >
-              <div id="infoproduct-content--offers" class="pictos">
-                <div class="product-detail__pictos--offer">
-                  <div
-                    class="m-categoria m-inmediata m-oferta mindescription_img pictos__item"
-                    >
-                    <img
-                      class="image-component__image"
-                      alt="picto oferta"
-                      src="{{ product.offers[0].image }}"
-                      [loading]="'lazy'"
-                      />
-                    </div>
-                  </div>
-                  @if (product.offers[0].amount) {
-                    <div
-                      id="infoproduct-offers--chequecrece"
-                      class="pannel--check pannel--check__deferred u-width--50"
-                      >
-                      @if (!product.offers[0].minDescription.includes('Ahora')) {
-                        <div
-                          class="discount"
-                          >
-                          <span class="u-size--11"
-                            >+&nbsp;{{ product.offers[0].amount }}&nbsp;€</span
-                            >
-                          </div>
-                        }
-                      </div>
-                    }
-                  </div>
-                </div>
-              }
+<article class="card">
+  <div class="card__media">
+    @if (product.offers && product.offers[0]) {
+      <div class="card__offer">
+        <img
+          alt="picto oferta"
+          [src]="product.offers[0].image"
+          loading="lazy"
+        />
+      </div>
 
-              @if (viewSupermarketIcon) {
-                <div class="supermarket-icon-container">
-                  <img class="image-component__image" src="{{ product.icon }}" />
-                </div>
-              }
-              <div class="widget-prod__boximage--size">
-                <a class="" href="{{ product.href }}" target="_blank">
-                  <picture class="image-component"
-                    ><img
-                    loading="lazy"
-                    class="image-component__image productImage"
-                    alt="{{ product.display_name }}"
-                    src="{{ product.thumbnail }}"
-                    [loading]="'lazy'"
-                  /></picture>
-                </a>
-              </div>
-              <div
-                id="widget-prod--infoPictograms"
-                class="widget-prod__boximage-pictos"
-              ></div>
-            </div>
-          </div>
-          <div class="widget-prod__info u-pointer">
-            <div class="widget-prod__info-brand u-text--truncate-1">
-              <a class="u-no-link" href="{{ product.href }}"
-                ><span id="grid-widget--brand" class="">{{
-                product.brand
-              }}</span></a
-              >
-            </div>
-            <h3 class="widget-prod__info-description u-text--truncate-2">
-              <a
-                id="grid-widget--descr"
-                class="u-no-link"
-                target="_blank"
-                href="{{ product.href }}"
-                >{{ product.display_name }}</a
-                >
-              </h3>
-            </div>
-            <div
-              class="widget-prod__price d-flex flex-column flex-nowrap justify-content-end"
-              >
-              <div
-                class="widget-prod__price--with-offer d-flex justify-content-end widget-prod__price--row"
-                >
-                <app-add-button [product]="product"></app-add-button>
-                @if (product.unit_price_old) {
-                  <span
-                    id="grid-widget--offerprice"
-                    class="widget-prod__price--line-through u-danger u-size--16 u-line--through-diagonal"
-                    >{{ product.unit_price_old }}&nbsp;€</span
-                    >
-                }
+      @if (product.offers[0].amount && !product.offers[0].minDescription.includes('Ahora')) {
+        <span class="card__offer-badge">+&nbsp;{{ product.offers[0].amount }}&nbsp;€</span>
+      }
+    }
 
-                <span id="grid-widget--price" class="widget-prod__price--bold"
-                  >{{ product.unit_price }}&nbsp;€
-                  @if (type === 'MERCA') {
-                    <span class="packaging">{{
-                      product.packaging?.includes("Pack") ? " /pack" : " /ud"
-                    }}</span>
-                    }</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    @if (viewSupermarketIcon) {
+      <div class="card__supermarket">
+        <img [src]="product.icon" alt="" />
+      </div>
+    }
+
+    <a class="card__image-link" [href]="product.href" target="_blank">
+      <img
+        class="card__image"
+        [alt]="product.display_name"
+        [src]="product.thumbnail"
+        loading="lazy"
+      />
+    </a>
+  </div>
+
+  <div class="card__body">
+    <a class="card__brand" [href]="product.href" target="_blank">
+      {{ product.brand }}
+    </a>
+
+    <a class="card__name" [href]="product.href" target="_blank">
+      {{ product.display_name }}
+    </a>
+
+    <div class="card__price-row">
+      @if (product.unit_price_old) {
+        <span class="card__price-old">{{ product.unit_price_old }}&nbsp;€</span>
+      }
+
+      <span class="card__price">
+        {{ product.unit_price | number:'1.2-2' }}&nbsp;€
+        @if (type === 'MERCA') {
+          <span class="card__price-unit">
+            {{ product.packaging?.includes('Pack') ? '/pack' : '/ud' }}
+          </span>
+        }
+      </span>
+
+      <app-add-button [product]="product"></app-add-button>
+    </div>
+  </div>
+</article>

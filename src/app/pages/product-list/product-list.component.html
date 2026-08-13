@@ -1,128 +1,96 @@
 <div
   class="home-container"
-  [ngClass]="{ 'empty-data': !externalProducts.length }"
-  >
-  <div class="header-container">
-    <img src="../../../assets/images/carro2.png" alt="Logo Super mas barato" />
-    <h3>Comparador de precios entre los supermercados más habituales.</h3>
-  </div>
-  <div class="">
-    <div class="search-container">
+  [class.empty-data]="!externalProducts.length"
+  [class.sticky-active-offset]="isSticky"
+>
+  <header class="header-container">
+    <div class="header-logo-wrap">
+      <img src="../../../assets/images/carro2.png" alt="Logo Super más barato" />
+    </div>
+
+    <h2 class="header-title">Comparador de precios</h2>
+    <h3 class="header-subtitle">entre los supermercados más habituales.</h3>
+  </header>
+
+  <div class="search-container" [class.is-sticky]="isSticky">
+    <div class="search-input-wrap">
       <input
+        #searchInput
         type="text"
         autocapitalize="none"
-        placeholder="Buscar..."
+        class="search-input"
         [(ngModel)]="inputSearch"
         (input)="onSearchQueryInputKeyUp($event)"
         (keyup.enter)="onSearchQueryInput($event)"
-        placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
-        />
+        placeholder="Busque su producto: leche, lentejas…"
+      />
 
-        <div class="ng-fa-icon-container" (click)="onSearchQueryInput($event)">
-          <!-- <span>Buscar</span> -->
-          <fa-icon
-            [icon]="faSearch"
-            size="lg"
-            [className]="'default-color'"
-          ></fa-icon>
+      @if (inputSearch) {
+        <button
+          type="button"
+          class="search-clear-btn"
+          aria-label="Limpiar búsqueda"
+          (click)="clearInput()"
+        >
+          &times;
+        </button>
+      }
+
+      <button
+        type="button"
+        class="search-icon-btn"
+        aria-label="Buscar"
+        (click)="onSearchQueryInput()"
+      >
+        <fa-icon [icon]="faSearch"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <app-footer
+    [supermarketsSelected]="supermarketsSelected"
+    (supermarketChange)="clickSupermarket($event)"
+  ></app-footer>
+
+  <div class="container-products">
+    @if (!empty) {
+      <div class="container-types">
+        <h2 class="results-title">Resultados</h2>
+
+        <div class="types-buttons">
+          <span
+            class="type-button"
+            [class.selectedType]="filterByType === 'SUPERMARKET'"
+            (click)="setType('SUPERMARKET')"
+          >
+            Supermercados
+          </span>
+          <span
+            class="type-button"
+            [class.selectedType]="filterByType === 'PRICE'"
+            (click)="setType('PRICE')"
+          >
+            Más barato
+          </span>
         </div>
       </div>
+    }
+
+    @if (filterByType === 'SUPERMARKET') {
+      <app-supermarket-view
+        [externalProducts]="externalProducts"
+        [supermarkets]="supermarkets"
+      ></app-supermarket-view>
+    }
+
+    @if (filterByType === 'PRICE') {
+      <app-price-comparator
+        [externalProducts]="externalProducts"
+      ></app-price-comparator>
+    }
+
+    <div class="copyright-container">
+      <span>{{ year }} · Super más barato · Desarrollada por Daniel Aibar</span>
     </div>
-
-    @if (isSticky) {
-      <div
-        class="container-sticky"
-        [ngClass]="{ sticky: isSticky }"
-        >
-        <div class="search-container">
-          <input
-            type="text"
-            autocapitalize="none"
-            placeholder="Buscar..."
-            [(ngModel)]="inputSearch"
-            (input)="onSearchQueryInputKeyUp($event)"
-            (keyup.enter)="onSearchQueryInput($event)"
-            placeholder="{{ 'Busque su producto: leche, lentejas...' }}"
-            />
-            <div class="ng-fa-icon-container" (click)="onSearchQueryInput($event)">
-              <!-- <span>Buscar</span> -->
-              <fa-icon
-                [icon]="faSearch"
-                size="lg"
-                [className]="'default-color'"
-              ></fa-icon>
-            </div>
-          </div>
-        </div>
-      }
-      <app-footer
-        [supermarketsSelected]="supermarketsSelected"
-        (supermarketChange)="clickSupermarket($event)"
-      ></app-footer>
-    </div>
-
-    <div class="container-products">
-      @if (!empty) {
-        <div class="container-types">
-          <div class="results-title-container">
-            <h2 class="results-title">Resultados:</h2>
-          </div>
-          <div class="types-buttons">
-            <div class="types-buttons-container">
-              <span
-                class="type-button"
-                [ngClass]="{ selectedType: filterByType === 'SUPERMARKET' }"
-                (click)="setType('SUPERMARKET')"
-                >Supermercados</span
-                >
-              </div>
-              <div class="types-buttons-container">
-                <span
-                  class="type-button"
-                  [ngClass]="{ selectedType: filterByType === 'PRICE' }"
-                  (click)="setType('PRICE')"
-                  >Más Barato</span
-                  >
-                </div>
-              </div>
-            </div>
-          }
-
-          @if (filterByType === 'SUPERMARKET') {
-            <app-supermarket-view
-              [externalProducts]="externalProducts"
-              [supermarkets]="supermarkets"
-            ></app-supermarket-view>
-          }
-
-          @if (filterByType === 'PRICE') {
-            <app-price-comparator
-              [externalProducts]="externalProducts"
-            ></app-price-comparator>
-          }
-
-          <ng-container>
-            <div class="copyright-container">
-              <span>{{ year }} - Super más barato - Desarrollada por Daniel Aibar</span>
-            </div>
-          </ng-container>
-        </div>
-
-        <!-- <app-access-modal
-        [showModal]="this.accessModalService.getLoading()"
-        (closeModal)="closeModal()"
-        >
-        <div>
-          <h2>¡Regístrate para Acceder a Características Exclusivas!</h2>
-          <p>
-            Estamos emocionados de ofrecerte características exclusivas que mejorarán
-            tu experiencia. Para acceder a ellas, te invitamos a registrarte. ¡Únete a
-            nuestra comunidad hoy y descubre todo lo que tenemos preparado para ti!
-          </p>
-          <div>
-            <button class="register" (click)="redirectToRegistration()">
-              Registrarse
-            </button>
-          </div>
-        </div>
-      </app-access-modal> -->
+  </div>
+</div>

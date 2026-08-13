@@ -1,61 +1,67 @@
-@for (item of supermarkets; track item; let i = $index) {
+@for (item of supermarkets; track item.id; let i = $index) {
   @if (filterProductsByType(item.name, i).slice(0, 50); as market) {
     @if (market.length) {
-      <div
-        class="list-container"
-        [ngClass]="{ 'container-closed': !item.opened }"
-        >
-        <div
-          class="sticky-brand external"
-          [ngClass]="{ 'sticky-fixed': isStickyMarket }"
-          [style.background-color]="item.background"
+      <section
+        class="section"
+        [class.section--closed]="!item.opened"
+        [style.--brand]="item.background"
+      >
+        <header
+          class="section-header"
           (click)="visibilityContainer(i)"
-          >
+        >
           <img
-            class="logo-image"
-            src="{{ item.src }}"
-            alt="{{ item.name }}"
+            class="section-logo"
+            [src]="item.src"
+            [alt]="item.name"
             [style.width]="item.srcWidth"
-            />
-            <span class="element-content">
-              {{ item.title }}
+          />
+
+          <div class="section-title">
+            {{ item.title || item.name }}
+            <span class="section-count">
               ({{ filterProductsByType(item.name, i).slice(0, 50).length }})
             </span>
-            <span class="closed-icon">{{ item.opened ? "-" : "+" }}</span>
           </div>
-          <div class="mini-grid__container" [ngClass]="{ closed: !item.opened }">
-            <div class="filter-container">
-              @if (item.filter === 'DES') {
-                <div
-                  class="filter-icon"
-                  [ngClass]="{ active: item.filter === 'DES' }"
-                  (click)="setFilterPrice(i)"
-                  >
-                  <img src="../../../assets/images/sort-price-a.png" alt="" />
-                </div>
-              }
-              @if (item.filter === 'ASC' || item.filter === 'OFF') {
-                <div
-                  class="filter-icon"
-                  [ngClass]="{ active: item.filter === 'ASC' }"
-                  (click)="setFilterPrice(i)"
-                  >
-                  <img src="../../../assets/images/sort-price-b.png" alt="" />
-                </div>
-              }
-            </div>
-            @if (item.opened) {
-              @for (
-                product of filterProductsByType(item.name, i).slice(0, 50); track
-                product) {
-                <app-external-product-view
-                  [type]="item.name"
-                  [product]="product"
-                ></app-external-product-view>
-              }
+
+          <div
+            class="filter-icon"
+            [class.active]="item.filter === 'ASC'"
+            (click)="setFilterPrice(i); $event.stopPropagation()"
+            role="button"
+            tabindex="0"
+            [attr.aria-label]="'Ordenar por precio'"
+          >
+            @if (item.filter === 'DES') {
+              <img src="../../../assets/images/sort-price-a.png" alt="" />
+            } @else {
+              <img src="../../../assets/images/sort-price-b.png" alt="" />
             }
           </div>
-        </div>
-      }
+
+          <span class="section-toggle" aria-hidden="true">
+            @if (item.opened) {
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            } @else {
+              <fa-icon [icon]="faChevronRight"></fa-icon>
+            }
+          </span>
+        </header>
+
+        @if (item.opened) {
+          <div class="section-body">
+            @for (
+              product of filterProductsByType(item.name, i).slice(0, 50);
+              track product.thumbnail
+            ) {
+              <app-external-product-view
+                [type]="item.name"
+                [product]="product"
+              ></app-external-product-view>
+            }
+          </div>
+        }
+      </section>
     }
   }
+}

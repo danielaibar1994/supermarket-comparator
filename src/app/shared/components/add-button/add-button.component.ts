@@ -11,7 +11,7 @@ import { ToastService } from '../toast/toast.service';
     templateUrl: './add-button.component.html',
     styleUrl: './add-button.component.css',
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [NgClass]
+    imports: []
 })
 export class AddButtonComponent {
   @Input() product!: ExternalProduct;

@@ -1,44 +1,33 @@
 <div>
-  <div class="customer-list-title">
-    <div class="customer-icon-container">
-      <fa-icon
-        [icon]="faListCheck"
-        size="3x"
-        [className]="'white-color'"
-      ></fa-icon>
-    </div>
+  <header class="customer-header">
+    <span class="customer-icon" aria-hidden="true">
+      <fa-icon [icon]="faListCheck" size="lg"></fa-icon>
+    </span>
+    <h2 class="customer-title">Mi lista de la compra</h2>
+    <p class="customer-subtitle">
+      * Los precios pueden ser diferentes si ha transcurrido mucho tiempo
+      desde que se guardó en tu lista.
+    </p>
+  </header>
 
-    <h2 class="customer-title">MI LISTA DE LA COMPRA</h2>
-    <span
-      >* Los precios pueden ser diferentes si ha transcurrido mucho tiempo desde
-      que se guardó en tu lista.</span
-      >
-    </div>
+  <div class="container-products">
+    @if (!!((products$ | async) ?? []).length) {
+      <h3 class="results-title">Mis supermercados</h3>
+    }
 
-    <div class="container-products">
-      @if (!!((products$ | async) ?? []).length) {
-        <div>
-          <h3 class="results-title">Mis supermercados:</h3>
-        </div>
-      }
+    <app-supermarket-view
+      [externalProducts]="(products$ | async) ?? []"
+      [supermarkets]="supermarkets"
+      [isStickyMarket]="false"
+    ></app-supermarket-view>
 
-      <app-supermarket-view
-        [externalProducts]="(products$ | async) ?? []"
-        [supermarkets]="supermarkets"
-        [isStickyMarket]="false"
-      ></app-supermarket-view>
-
-      @if (!((products$ | async) ?? []).length) {
-        <div
-          class="empty-customer-list"
-          >
-          <fa-icon
-            [icon]="faCartShopping"
-            size="3x"
-            [className]="'default-color'"
-          ></fa-icon>
-          <p>Añade desde la pestaña de Precios tus productos favoritos.</p>
-        </div>
-      }
-    </div>
+    @if (!((products$ | async) ?? []).length) {
+      <div class="empty-state">
+        <span class="empty-state__icon" aria-hidden="true">
+          <fa-icon [icon]="faCartShopping" size="lg"></fa-icon>
+        </span>
+        <p>Añade desde la pestaña de Precios tus productos favoritos.</p>
+      </div>
+    }
   </div>
+</div>

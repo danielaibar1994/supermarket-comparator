@@ -1,19 +1,27 @@
 import { Component, Input, TrackByFunction, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faChevronDown,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { ExternalProduct } from '../../interfaces/products.interface';
 import { ExternalProductViewComponent } from '../product-view/external-product-view.component';
-import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-supermarket-view',
     templateUrl: './supermarket-view.component.html',
     styleUrls: ['./supermarket-view.component.css'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [NgClass, ExternalProductViewComponent]
+    imports: [CommonModule, FontAwesomeModule, ExternalProductViewComponent]
 })
 export class SupermarketViewComponent {
   @Input() supermarkets!: any;
   @Input() externalProducts!: ExternalProduct[];
   @Input() isStickyMarket: boolean = true;
+
+  readonly faChevronDown = faChevronDown;
+  readonly faChevronRight = faChevronRight;
 
   trackById: TrackByFunction<ExternalProduct> = (index, p) => p.thumbnail;
 

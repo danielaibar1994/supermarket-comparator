@@ -1,38 +1,76 @@
+/* ==========================================================================
+   Footer (supermarket selector) — chips
+   ========================================================================== */
+
 .footer {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem 2rem;
   text-align: center;
-}
-
-.brand-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  flex-flow: wrap;
-}
-
-.brand-logos img {
-  width: 46px;
-  margin: 0 8px 14px 8px;
-  cursor: pointer;
-  object-fit: contain;
+  background: var(--bg-base);
 }
 
 .footer-title {
-  text-align: center;
+  margin: 0 0 0.75rem;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
-.market-no-selected {
-  -webkit-filter: grayscale(1) invert(0);
-  filter: grayscale(1) invert(0);
+.brand-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-.market-support {
-  font-size: 1.2rem;
-  color: #10436d;
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.4rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: var(--r-pill);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: border-color 150ms ease, background-color 150ms ease,
+    opacity 150ms ease, transform 150ms ease,
+    box-shadow 150ms ease;
+  box-shadow: var(--shadow-sm);
 }
 
-.message-info-footer {
-  color: #10436d;
-  font-size: 14px;
+.chip img {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--r-pill);
+  object-fit: contain;
+  background: var(--surface);
+}
+
+.chip:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+.chip--off {
+  opacity: 0.45;
+  background: var(--surface-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-faint);
+}
+
+.chip--off:hover {
+  opacity: 0.75;
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.footer-note {
+  margin: 0.5rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.8rem;
 }

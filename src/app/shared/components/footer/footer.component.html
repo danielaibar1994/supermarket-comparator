@@ -1,52 +1,52 @@
 <div class="footer">
-  <div class="footer-title">
-    <span class="market-support">Selecciona tus supermercados:</span>
-  </div>
-  <div class="brand-logos">
+  <p class="footer-title">Selecciona tus supermercados</p>
+
+  <div class="brand-chips">
     @for (market of SUPERMARKETS_LIST; track market) {
-      <img
+      <button
+        type="button"
+        class="chip"
+        [class.chip--off]="!supermarketsSelected[market.name.toString()]"
+        [attr.aria-pressed]="supermarketsSelected[market.name.toString()]"
         (click)="clickSupermarket(market.name)"
-        [ngClass]="{
-          'market-no-selected': !supermarketsSelected[market.name.toString()]
-        }"
-        [src]="market.icon"
-        [alt]="market.name"
-        [style]="market.style ?? ''"
-        />
-      }
-    </div>
+      >
+        <img [src]="market.icon" [alt]="market.name" />
+        <span>{{ market.name }}</span>
+      </button>
+    }
+  </div>
 
-    <div class="brand-logos">
-      @for (market of SUPERMARKETS_LIST_SECOND; track market) {
-        <img
-          (click)="clickSupermarket(market.name)"
-        [ngClass]="{
-          'market-no-selected': !supermarketsSelected[market.name.toString()]
-        }"
-          [src]="market.icon"
-          [alt]="market.name"
-          [style]="market.style ?? ''"
-          />
-        }
-      </div>
+  <div class="brand-chips">
+    @for (market of SUPERMARKETS_LIST_SECOND; track market) {
+      <button
+        type="button"
+        class="chip"
+        [class.chip--off]="!supermarketsSelected[market.name.toString()]"
+        [attr.aria-pressed]="supermarketsSelected[market.name.toString()]"
+        (click)="clickSupermarket(market.name)"
+      >
+        <img [src]="market.icon" [alt]="market.name" />
+        <span>{{ market.name }}</span>
+      </button>
+    }
+  </div>
 
-      <div class="brand-logos">
-        @for (market of SUPERMARKETS_LIST_THIRD; track market) {
-          <img
-            (click)="clickSupermarket(market.name)"
-        [ngClass]="{
-          'market-no-selected': !supermarketsSelected[market.name.toString()]
-        }"
-            [src]="market.icon"
-            [alt]="market.name"
-            [style]="market.style ?? ''"
-            />
-          }
-        </div>
+  <div class="brand-chips">
+    @for (market of SUPERMARKETS_LIST_THIRD; track market) {
+      <button
+        type="button"
+        class="chip"
+        [class.chip--off]="!supermarketsSelected[market.name.toString()]"
+        [attr.aria-pressed]="supermarketsSelected[market.name.toString()]"
+        (click)="clickSupermarket(market.name)"
+      >
+        <img [src]="market.icon" [alt]="market.name" />
+        <span>{{ market.name }}</span>
+      </button>
+    }
+  </div>
 
-        @if (supermarketsSelected['gadis']) {
-          <div class="message-info-footer">
-            * Gadis puede demorar la visualizacion de la lista.
-          </div>
-        }
-      </div>
+  @if (supermarketsSelected['gadis']) {
+    <p class="footer-note">* Gadis puede demorar la visualización de la lista.</p>
+  }
+</div>

@@ -1,5 +1,5 @@
-<div class="mini-grid__container">
-  @for (product of filterProductsByPrice().slice(0, 50); track product) {
+<div class="price-grid">
+  @for (product of filterProductsByPrice().slice(0, 50); track product.thumbnail) {
     <app-external-product-view
       [type]="product.type"
       [product]="product"
