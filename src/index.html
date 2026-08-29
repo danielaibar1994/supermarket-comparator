@@ -2,13 +2,29 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Super más barato</title>
+    <title>Super más barato - Comparador de precios</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Comparador de precios entre los supermercados más habituales"
+      content="Compara precios de supermercados en segundos. Encuentra la opción más barata en Consum, Mercadona, Carrefour, Dia, Lidl y mucho más."
     />
+    <meta name="keywords" content="comparador precios, supermercados, ofertas, consum, mercadona, carrefour, lidl, dia, ahorro" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Daniel Aibar" />
+
+    <!-- Open Graph (al compartir en redes) -->
+    <meta property="og:title" content="Super más barato - Comparador de precios" />
+    <meta property="og:description" content="Encuentra los precios más baratos entre supermercados." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://supermasbarato.es" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Super más barato - Comparador de precios" />
+    <meta name="twitter:description" content="Encuentra los precios más baratos entre supermercados." />
+
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,12 +33,26 @@
       rel="stylesheet"
     />
 
-    <link
-      rel="apple-touch-icon"
-      href="../../../../assets/images/apple-icon.png"
-    />
+    <link rel="apple-touch-icon" href="assets/images/apple-icon.png" />
     <meta name="theme-color" content="#fafaf7" />
     <meta content="#fafaf7" name="theme-color" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.webmanifest" />
+
+    <!--
+      AdSense: el meta tag de verificación lo añade Google cuando te apruebe.
+      <meta name="google-adsense-account" content="ca-pub-XXXXXXXX">
+
+      Mientras tanto, el AdsService carga el script bajo consentimiento (ver
+      src/app/shared/components/ad-slot/ads.service.ts).
+    -->
+
+    <!--
+      IMPORTANTE: NO precargues el script de AdSense aquí.
+      Debe cargarse SOLO tras consentimiento (ConsentService).
+      Si lo precargas, Google puede penalizar tu cuenta.
+    -->
   </head>
   <body>
     <app-root></app-root>

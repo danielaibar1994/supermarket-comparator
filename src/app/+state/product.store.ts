@@ -1,6 +1,5 @@
-import { getLocaleDayPeriods } from '@angular/common';
-import { Injectable, linkedSignal } from '@angular/core';
-import { Observable, catchError, combineLatest, forkJoin, of, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, forkJoin, of, tap } from 'rxjs';
 import { ExternalProduct } from 'src/app/shared/interfaces/products.interface';
 import { ProductRepository } from 'src/app/shared/services/repository/product.repository';
 import { SignalService } from 'src/app/shared/services/state.service';

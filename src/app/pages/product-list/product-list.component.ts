@@ -20,10 +20,11 @@ import { SUPERMARKETS } from './constants/supermarkets';
 import { PriceComparatorComponent } from '../../shared/components/price-comparator/price-comparator.component';
 import { SupermarketViewComponent } from '../../shared/components/supermarket-view/supermarket-view.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { AdSlotComponent } from '../../shared/components/ad-slot/ad-slot.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgClass } from '@angular/common';
 import { AccessModalService } from 'src/app/shared/components/access-modal/service/access-modal.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -38,6 +39,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
     FooterComponent,
     SupermarketViewComponent,
     PriceComparatorComponent,
+    AdSlotComponent,
     FontAwesomeModule,
   ],
 })

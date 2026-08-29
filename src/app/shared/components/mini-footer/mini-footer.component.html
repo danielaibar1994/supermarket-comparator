@@ -1,0 +1,19 @@
+<footer class="mini-footer">
+  <div class="mini-footer__row">
+    <p class="mini-footer__copy">
+      © {{ year }} <strong>{{ owner.name }}</strong> ·
+      <a href="mailto:{{ owner.email }}">{{ owner.email }}</a>
+    </p>
+  </div>
+  <nav class="mini-footer__nav" aria-label="Enlaces secundarios">
+    <a routerLink="/guias">Guías</a>
+    <span class="mini-footer__sep" aria-hidden="true">·</span>
+    <a routerLink="/sobre-mi">Sobre mí</a>
+    <span class="mini-footer__sep" aria-hidden="true">·</span>
+    <a routerLink="/contacto">Contacto</a>
+    <span class="mini-footer__sep" aria-hidden="true">·</span>
+    <a routerLink="/privacy">Privacidad</a>
+    <span class="mini-footer__sep" aria-hidden="true">·</span>
+    <a routerLink="/cookies">Cookies</a>
+  </nav>
+</footer>

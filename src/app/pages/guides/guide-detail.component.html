@@ -1,0 +1,94 @@
+@if (guide(); as g) {
+  <article class="legal">
+    <a routerLink="/guias" class="legal__back">← Todas las guías</a>
+
+    <header class="legal__header">
+      <span class="legal__eyebrow">{{ g.category }}</span>
+      <h1 class="legal__title">{{ g.title }}</h1>
+      <p class="legal__updated">
+        {{ g.readingTime }} min de lectura · Actualizado el {{ g.updatedAt }}
+      </p>
+    </header>
+
+    <div class="legal__body">
+      <p style="font-size: 1.05rem; color: var(--ink); font-weight: 500;">
+        {{ g.description }}
+      </p>
+
+      @for (block of g.blocks; track $index) {
+        @switch (block.type) {
+          @case ('paragraph') {
+            <p>{{ block.text }}</p>
+          }
+          @case ('heading') {
+            @if (block.level === 2) {
+              <h2>{{ block.text }}</h2>
+            } @else {
+              <h3>{{ block.text }}</h3>
+            }
+          }
+          @case ('list') {
+            <ul>
+              @for (item of block.items; track $index) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          }
+          @case ('callout') {
+            <div class="callout callout--{{ block.tone }}">
+              <strong>{{ block.tone === 'tip' ? '💡' : block.tone === 'warning' ? '⚠️' : 'ℹ️' }}</strong>
+              {{ block.text }}
+            </div>
+          }
+          @case ('quote') {
+            <blockquote class="legal-quote">
+              "{{ block.text }}"
+              @if (block.source) {
+                <cite>— {{ block.source }}</cite>
+              }
+            </blockquote>
+          }
+        }
+      }
+
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--line);" />
+
+      <p style="color: var(--ink-faint); font-size: 0.85rem;">
+        <strong>Tags:</strong>
+        @for (tag of g.tags; track tag; let last = $last) {
+          <span>{{ tag }}</span>@if (!last) {<span>, </span>}
+        }
+      </p>
+
+      @if (related().length) {
+        <h2>También te puede interesar</h2>
+        <ul class="guides-list">
+          @for (r of related(); track r.slug) {
+            <li class="guides-list__item">
+              <a [routerLink]="['/guias', r.slug]" class="guides-list__link">
+                <span class="guides-list__title">{{ r.title }}</span>
+                <span class="guides-list__desc">{{ r.description }}</span>
+                <span class="guides-list__meta">
+                  {{ r.readingTime }} min lectura ·
+                  {{ r.updatedAt }}
+                </span>
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </article>
+} @else {
+  <section class="legal">
+    <a routerLink="/" class="legal__back">← Volver</a>
+    <header class="legal__header">
+      <span class="legal__eyebrow">404</span>
+      <h1 class="legal__title">Guía no encontrada</h1>
+    </header>
+    <div class="legal__body">
+      <p>La guía que buscas no existe o ha sido retirada.</p>
+      <p><a routerLink="/guias">← Ver todas las guías</a></p>
+    </div>
+  </section>
+}

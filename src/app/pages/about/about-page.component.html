@@ -1,0 +1,82 @@
+<section class="legal">
+  <a routerLink="/" class="legal__back">← Volver</a>
+
+  <header class="legal__header">
+    <span class="legal__eyebrow">Sobre mí</span>
+    <h1 class="legal__title">Quién está detrás de Super más barato</h1>
+    <p class="legal__updated">Última actualización: {{ lastUpdated }}</p>
+  </header>
+
+  <div class="legal__body">
+    <h2>Hola, soy {{ owner.name }}</h2>
+    <p>
+      Soy el desarrollador de <strong>Super más barato</strong>, un
+      comparador de precios de supermercados que nació en {{ owner.founded }}
+      de una necesidad muy concreta: saber de un vistazo en qué supermercado
+      me convenía comprar la compra de la semana.
+    </p>
+
+    <p>
+      La aplicación consulta en tiempo real las fichas de producto de los
+      supermercados compatibles (Consum, Mercadona, Lidl, Dia, Aldi, Eroski,
+      Masymas, Alcampo, Gadis, Hiperdino, Bonpreu y Ahorramas) y te los
+      presenta ordenados por precio. Sin registro, sin instalar nada, desde
+      el navegador.
+    </p>
+
+    <h2>¿Por qué?</h2>
+    <p>
+      Las grandes superficies cambian sus precios a una velocidad que hace
+      imposible seguir el ritmo "a mano". Yo quería una herramienta que me
+      dijera, en el momento de planificar la lista, cuál era la opción más
+      barata para cada producto. Y como no encontré nada que se ajustase a
+      lo que buscaba, decidí construirla.
+    </p>
+
+    <h2>Lo que NO hace</h2>
+    <ul>
+      <li>
+        <strong>No vende productos.</strong> Solo muestra precios. La compra
+        la haces en la web del supermercado donde prefieras.
+      </li>
+      <li>
+        <strong>No guarda cuentas de usuario.</strong> Tu lista y tus
+        supermercados seleccionados viven en tu navegador. Si borras los datos
+        de navegación, se pierden.
+      </li>
+      <li>
+        <strong>No muestra precios históricos.</strong> Cada consulta es
+        puntual. Para ver la evolución necesitarías un histórico, y eso
+        requiere guardarlo en un servidor (con el coste de RGPD que eso
+        implica).
+      </li>
+    </ul>
+
+    <h2>Modelo de negocio</h2>
+    <p>
+      La aplicación se mantiene con <strong>anuncios</strong> de Google
+      AdSense. Si los aceptas, verás anuncios contextuales. Si los rechazas,
+      la aplicación sigue funcionando igual de bien y no cobra un céntimo
+      por ello.
+    </p>
+
+    <h2>Datos del titular</h2>
+    <p>
+      <strong>Titular:</strong> {{ owner.name }}<br />
+      <strong>Email:</strong> <code>{{ owner.email }}</code><br />
+      <strong>NIF:</strong> <code>{{ owner.nif }}</code><br />
+      <strong>Dirección:</strong> {{ owner.address }}
+    </p>
+    <p>
+      <em>(Estos datos son un placeholder — edítalos con los reales antes de
+      publicar la web en producción. Es obligatorio por la LSSI.)</em>
+    </p>
+
+    <h2>Contacto</h2>
+    <p>
+      ¿Tienes una sugerencia, has visto un precio mal o quieres que añada
+      algún supermercado? Escríbeme a
+      <a href="mailto:{{ owner.email }}">{{ owner.email }}</a>.
+    </p>
+  </div>
+</section>

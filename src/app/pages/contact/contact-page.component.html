@@ -1,0 +1,90 @@
+<section class="legal">
+  <a routerLink="/" class="legal__back">← Volver</a>
+
+  <header class="legal__header">
+    <span class="legal__eyebrow">Contacto</span>
+    <h1 class="legal__title">Hablemos</h1>
+    <p class="legal__updated">Tiempo medio de respuesta: {{ owner.responseTime }}</p>
+  </header>
+
+  <div class="legal__body">
+    <p>
+      ¿Quieres reportar un error, sugerir un supermercado nuevo, o preguntar
+      cualquier cosa sobre el proyecto? Rellena el formulario y te respondo
+      a <strong>{{ owner.email }}</strong>.
+    </p>
+
+    <p>
+      <em
+        >(El formulario abre tu cliente de correo — no enviamos nada a
+        ningún servidor. Es para tu comodidad y la mía.)</em
+      >
+    </p>
+
+    <h2>Formulario</h2>
+
+    <form class="contact-form" (submit)="submit($event)">
+      <label class="contact-form__field">
+        <span class="contact-form__label">Tu nombre</span>
+        <input
+          type="text"
+          [ngModel]="name()"
+          (ngModelChange)="name.set($event)"
+          name="name"
+          autocomplete="name"
+          required
+          class="contact-form__input"
+        />
+      </label>
+
+      <label class="contact-form__field">
+        <span class="contact-form__label">Tu email</span>
+        <input
+          type="email"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+          name="email"
+          autocomplete="email"
+          required
+          class="contact-form__input"
+        />
+      </label>
+
+      <label class="contact-form__field">
+        <span class="contact-form__label">Asunto</span>
+        <input
+          type="text"
+          [ngModel]="subject()"
+          (ngModelChange)="subject.set($event)"
+          name="subject"
+          class="contact-form__input"
+        />
+      </label>
+
+      <label class="contact-form__field">
+        <span class="contact-form__label">Mensaje</span>
+        <textarea
+          [ngModel]="message()"
+          (ngModelChange)="message.set($event)"
+          name="message"
+          rows="6"
+          required
+          class="contact-form__input contact-form__textarea"
+        ></textarea>
+      </label>
+
+      <button type="submit" class="contact-form__submit">
+        Abrir mi cliente de correo
+      </button>
+    </form>
+
+    <h2>Otras vías</h2>
+    <ul>
+      <li>
+        <strong>Email directo:</strong>
+        <a href="mailto:{{ owner.email }}">{{ owner.email }}</a>
+      </li>
+      <li><strong>Responsable:</strong> {{ owner.name }}</li>
+    </ul>
+  </div>
+</section>

@@ -9,7 +9,7 @@
   right: 0;
   z-index: 200;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-around;
   height: 60px;
   background: rgba(255, 255, 255, 0.92);
@@ -17,9 +17,10 @@
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-top: 1px solid var(--line);
   padding-bottom: env(safe-area-inset-bottom, 0);
+  user-select: none;
 }
 
-.bottom-bar a {
+.bottom-bar__item {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -29,27 +30,110 @@
   flex: 1;
   height: 100%;
   color: var(--ink-soft);
-  font-size: 0.75rem;
-  font-weight: 500;
-  transition: color 150ms ease;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: color 150ms ease, transform 150ms ease;
 }
 
-.bottom-bar a:hover {
+.bottom-bar__item:hover {
   color: var(--ink);
 }
 
-.bottom-bar a.active-link {
+.bottom-bar__item:active {
+  transform: scale(0.96);
+}
+
+/* Icono contenedor (para posicionar el badge) */
+.bottom-bar__icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 1.2rem;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bottom-bar__item:hover .bottom-bar__icon {
+  transform: translateY(-2px);
+}
+
+/* Label */
+.bottom-bar__label {
+  line-height: 1;
+}
+
+/* Badge sobre el icono de lista */
+.bottom-bar__badge {
+  position: absolute;
+  top: -4px;
+  right: -10px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--r-pill);
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4);
+  animation: badge-pop 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  transform-origin: center;
+}
+
+.bottom-bar__badge--hidden {
+  opacity: 0;
+  transform: scale(0);
+  animation: none;
+}
+
+@keyframes badge-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Estado activo */
+.bottom-bar__item.active-link {
   color: var(--accent-strong);
 }
 
-.bottom-bar a.active-link::before {
+.bottom-bar__item.active-link::before {
   content: '';
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 28px;
+  width: 32px;
   height: 3px;
   background: var(--accent);
   border-radius: 0 0 var(--r-sm) var(--r-sm);
+  animation: indicator-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes indicator-in {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 32px;
+    opacity: 1;
+  }
+}
+
+.bottom-bar__item.active-link .bottom-bar__icon {
+  color: var(--accent-strong);
 }

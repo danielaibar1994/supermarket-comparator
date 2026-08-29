@@ -75,3 +75,39 @@
   max-width: 32ch;
   line-height: 1.5;
 }
+
+.copyright-container {
+  text-align: center;
+  padding: 2rem 1rem 6rem;
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legal-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.legal-links a {
+  color: var(--ink-faint);
+  text-decoration: none;
+  transition: color 150ms ease;
+  padding: 0.15rem 0.25rem;
+}
+
+.legal-links a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-links__sep {
+  color: var(--ink-faint);
+  opacity: 0.5;
+}

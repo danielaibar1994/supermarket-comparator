@@ -1,22 +1,31 @@
-<footer class="bottom-bar">
+<nav class="bottom-bar" aria-label="Navegación principal">
   <a
     routerLink="/"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
+    class="bottom-bar__item"
   >
-    <fa-icon [icon]="faShop" size="lg"></fa-icon>
-
-    <span> Precios </span>
-  </a>
-  <a routerLink="/list" routerLinkActive="active-link">
-    <fa-icon [icon]="faListCheck" size="lg"></fa-icon>
-
-    <span>Mi Lista</span>
+    <span class="bottom-bar__icon">
+      <fa-icon [icon]="faMagnifyingGlass" size="lg"></fa-icon>
+    </span>
+    <span class="bottom-bar__label">Buscar</span>
   </a>
 
-  <!-- <a routerLink="/profile" routerLinkActive="active-link">
-    <fa-icon class="icon-nav" [icon]="faUser" size="lg"></fa-icon>
-
-    <span>Perfil</span>
-  </a> -->
-</footer>
+  <a
+    routerLink="/list"
+    routerLinkActive="active-link"
+    class="bottom-bar__item"
+  >
+    <span class="bottom-bar__icon">
+      <fa-icon [icon]="faListCheck" size="lg"></fa-icon>
+      <span
+        class="bottom-bar__badge"
+        [class.bottom-bar__badge--hidden]="badgeHidden()"
+        aria-label="Productos en la lista"
+      >
+        {{ badgeText() }}
+      </span>
+    </span>
+    <span class="bottom-bar__label">Mi lista</span>
+  </a>
+</nav>

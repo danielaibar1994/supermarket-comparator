@@ -1,0 +1,46 @@
+<footer class="app-footer">
+  <div class="app-footer__inner">
+    <div class="app-footer__brand">
+      <strong class="app-footer__name">Super más barato</strong>
+      <p class="app-footer__tagline">
+        Comparador de precios entre supermercados.
+      </p>
+    </div>
+
+    <nav class="app-footer__col" aria-label="Enlaces del producto">
+      <h3 class="app-footer__title">Producto</h3>
+      <ul>
+        <li><a routerLink="/">Comparador</a></li>
+        <li><a routerLink="/list">Mi lista</a></li>
+        <li><a routerLink="/guias">Guías de ahorro</a></li>
+      </ul>
+    </nav>
+
+    <nav class="app-footer__col" aria-label="Enlaces de la empresa">
+      <h3 class="app-footer__title">Empresa</h3>
+      <ul>
+        <li><a routerLink="/sobre-mi">Sobre mí</a></li>
+        <li><a routerLink="/contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <nav class="app-footer__col" aria-label="Enlaces legales">
+      <h3 class="app-footer__title">Legal</h3>
+      <ul>
+        <li><a routerLink="/privacy">Política de privacidad</a></li>
+        <li><a routerLink="/cookies">Política de cookies</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="app-footer__legal">
+    <p>
+      © {{ year }} <strong>{{ owner.name }}</strong> ·
+      NIF <code>{{ owner.nif }}</code> ·
+      <a href="mailto:{{ owner.email }}">{{ owner.email }}</a>
+    </p>
+    <p class="app-footer__note">
+      <em>(Datos de identificación — placeholder. Editar antes de publicar.)</em>
+    </p>
+  </div>
+</footer>

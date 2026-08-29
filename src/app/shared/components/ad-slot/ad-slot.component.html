@@ -1,0 +1,20 @@
+<div
+  #slotContainer
+  class="ad-slot"
+  [class.ad-slot--disabled]="!enabled()"
+  [style.min-height.px]="minHeight()"
+  [attr.aria-label]="'Espacio publicitario'"
+  role="complementary"
+>
+  @if (enabled() && ads.canShowAds()) {
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      [attr.data-ad-slot]="adSlot()"
+      [attr.data-ad-format]="format()"
+      data-full-width-responsive="true"
+    ></ins>
+  } @else {
+    <span class="ad-slot__placeholder">Espacio publicitario</span>
+  }
+</div>

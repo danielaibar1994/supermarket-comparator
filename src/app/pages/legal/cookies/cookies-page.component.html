@@ -1,0 +1,95 @@
+<section class="legal">
+  <a routerLink="/" class="legal__back">← Volver</a>
+
+  <header class="legal__header">
+    <span class="legal__eyebrow">Legal</span>
+    <h1 class="legal__title">Política de cookies</h1>
+    <p class="legal__updated">Última actualización: {{ lastUpdated }}</p>
+  </header>
+
+  <div class="legal__body">
+    <p>
+      Una <strong>cookie</strong> es un pequeño archivo de texto que un sitio
+      web almacena en tu dispositivo cuando lo visitas. En esta aplicación
+      utilizamos cookies y tecnologías similares para asegurar su correcto
+      funcionamiento y, con tu consentimiento, para mostrarte publicidad
+      personalizada.
+    </p>
+
+    <h2>1. ¿Qué cookies usamos?</h2>
+
+    <h3>Cookies técnicas (siempre activas)</h3>
+    <p>
+      Necesarias para el funcionamiento básico de la aplicación. No se Pueden
+      desactivar.
+    </p>
+    <ul>
+      <li>
+        <strong>Sesión de autenticación</strong> (Supabase): para mantener
+        tu sesión iniciada si te registras. Caducan al cerrar el navegador.
+      </li>
+      <li>
+        <strong>LocalStorage de configuración</strong>: recuerda tus
+        supermercados seleccionados y la decisión de consentimiento. No
+        contiene datos personales identificables.
+      </li>
+    </ul>
+
+    <h3>Cookies publicitarias (sólo con tu consentimiento)</h3>
+    <p>
+      Si aceptas el banner de cookies, se cargará Google AdSense, que puede
+      instalar las siguientes cookies para mostrar anuncios personalizados y
+      medir su rendimiento:
+    </p>
+    <ul>
+      <li>
+        <strong>IDE</strong>, <strong>NID</strong>, <strong>ANID</strong>:
+        cookies de Google usadas para identificar al usuario y mostrar
+        anuncios relevantes.
+      </li>
+      <li>
+        <strong>_gcl_au</strong>: utilizada por Google AdSense para medir el
+        rendimiento publicitario.
+      </li>
+    </ul>
+    <p>
+      Estas cookies pueden ser instaladas por Google o por sus socios
+      publicitarios. Puedes consultar la lista completa en
+      <a
+        href="https://policies.google.com/technologies/cookies"
+        target="_blank"
+        rel="noopener"
+        >la documentación oficial de Google</a
+      >.
+    </p>
+
+    <h2>2. ¿Cómo puedo gestionar mi consentimiento?</h2>
+    <p>
+      Puedes cambiar tu decisión en cualquier momento haciendo clic en el
+      siguiente botón. Volverá a aparecer el banner para que confirmes tu
+      nueva elección.
+    </p>
+
+    <button
+      type="button"
+      class="legal__back"
+      (click)="resetDecision()"
+      style="cursor: pointer; border: 1px solid var(--line);"
+    >
+      ⚙️ Configurar cookies
+    </button>
+
+    <h2>3. Transferencias internacionales</h2>
+    <p>
+      Google AdSense puede transferir datos a países fuera del Espacio
+      Económico Europeo. Dichas transferencias están amparadas por cláusulas
+      contractuales tipo (SCC) aprobadas por la Comisión Europea.
+    </p>
+
+    <h2>4. Más información</h2>
+    <p>
+      Para más detalles sobre cómo tratamos tus datos personales, consulta
+      nuestra <a routerLink="/privacy">política de privacidad</a>.
+    </p>
+  </div>
+</section>

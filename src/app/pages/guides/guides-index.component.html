@@ -1,0 +1,40 @@
+<section class="legal">
+  <a routerLink="/" class="legal__back">← Volver</a>
+
+  <header class="legal__header">
+    <span class="legal__eyebrow">Guías</span>
+    <h1 class="legal__title">Guías de ahorro y compra inteligente</h1>
+    <p class="legal__updated">
+      {{ guides.length }} guías escritas para ayudarte a ahorrar en la compra.
+    </p>
+  </header>
+
+  <div class="legal__body">
+    <p>
+      Aquí encontrarás todo el conocimiento que he ido acumulando sobre
+      cómo comprar mejor, más barato y más inteligente en el supermercado.
+      Todas las guías se actualizan periódicamente con datos reales.
+    </p>
+
+    @for (group of groupedByCategory(); track group.category) {
+      <h2>
+        {{ categoryEmoji(group.category) }} {{ group.category }}
+      </h2>
+
+      <ul class="guides-list">
+        @for (guide of group.items; track guide.slug) {
+          <li class="guides-list__item">
+            <a [routerLink]="['/guias', guide.slug]" class="guides-list__link">
+              <span class="guides-list__title">{{ guide.title }}</span>
+              <span class="guides-list__desc">{{ guide.description }}</span>
+              <span class="guides-list__meta">
+                {{ guide.readingTime }} min lectura ·
+                {{ guide.updatedAt }}
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</section>

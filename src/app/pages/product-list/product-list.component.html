@@ -55,6 +55,15 @@
 
   <div class="container-products">
     @if (!empty) {
+      <!-- Slot publicitario entre el footer de supermercados y los resultados.
+           El ad-slot-XXXX es el ID que AdSense te asignará. -->
+      <app-ad-slot
+        adSlot="0000000000"
+        format="horizontal"
+        [minHeight]="90"
+        [lazy]="true"
+      ></app-ad-slot>
+
       <div class="container-types">
         <h2 class="results-title">Resultados</h2>
 
@@ -90,8 +99,5 @@
       ></app-price-comparator>
     }
 
-    <div class="copyright-container">
-      <span>{{ year }} · Super más barato · Desarrollada por Daniel Aibar</span>
-    </div>
   </div>
 </div>

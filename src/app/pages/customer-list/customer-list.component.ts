@@ -11,7 +11,11 @@ import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-customer-list',
-    imports: [CommonModule, SupermarketViewComponent, FontAwesomeModule],
+    imports: [
+      CommonModule,
+      SupermarketViewComponent,
+      FontAwesomeModule,
+    ],
     templateUrl: './customer-list.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './customer-list.component.css'

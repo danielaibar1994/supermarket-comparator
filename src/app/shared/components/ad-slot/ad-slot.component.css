@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Ad slot
+   ========================================================================== */
+
+.ad-slot {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: transparent;
+}
+
+.ad-slot--disabled {
+  background: var(--surface-muted);
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-slot__placeholder {
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+/* Contenedor del propio anuncio */
+:host ::ng-deep .adsbygoogle {
+  display: block;
+}

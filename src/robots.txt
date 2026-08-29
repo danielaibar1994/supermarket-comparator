@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /recovery
+
+Sitemap: https://supermasbarato.es/sitemap.xml
